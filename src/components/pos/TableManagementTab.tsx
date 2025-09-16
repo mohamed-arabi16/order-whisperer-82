@@ -160,7 +160,7 @@ export const TableManagementTab: React.FC = () => {
       // We generate QR URL using the table ID (not number) to match PublicMenu expectation
       // For edit, we already have the ID. For create, insert first, then update with QR URL
       if (editingTable) {
-        const qrCodeUrl = `${window.location.origin}/menu/${userTenant.slug}?table=${editingTable.id}`;
+        const qrCodeUrl = `${window.location.origin}/#/menu/${userTenant.slug}?table=${editingTable.id}`;
         const { error: updateError } = await supabase
           .from('restaurant_tables')
           .update({
@@ -188,7 +188,7 @@ export const TableManagementTab: React.FC = () => {
         
         if (insertError) throw insertError;
         
-        const qrCodeUrl = `${window.location.origin}/menu/${userTenant.slug}?table=${inserted.id}`;
+        const qrCodeUrl = `${window.location.origin}/#/menu/${userTenant.slug}?table=${inserted.id}`;
         const { error: qrUpdateError } = await supabase
           .from('restaurant_tables')
           .update({ qr_code_url: qrCodeUrl })
@@ -472,7 +472,7 @@ export const TableManagementTab: React.FC = () => {
                       size="sm"
                       variant="outline"
                       onClick={() => {
-                        const fallbackUrl = tenantSlug ? `${window.location.origin}/menu/${tenantSlug}?table=${table.id}` : null;
+                        const fallbackUrl = tenantSlug ? `${window.location.origin}/#/menu/${tenantSlug}?table=${table.id}` : null;
                         const dataUrl = table.qr_code_url || fallbackUrl;
                         if (dataUrl) {
                           const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&format=png&data=${encodeURIComponent(dataUrl)}`;

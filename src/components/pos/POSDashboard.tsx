@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ export const POSDashboard: React.FC = () => {
   const { user, profile } = useAuth();
   const [orders, setOrders] = useState<POSOrder[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('queue');
+  const [activeTab, setActiveTab] = useState('pending');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [offlineOrders, setOfflineOrders] = useState<POSOrder[]>([]);
   const [tenantId, setTenantId] = useState<string | null>(null);
@@ -101,57 +101,18 @@ export const POSDashboard: React.FC = () => {
     fetchTenant();
   }, [user]);
 
-  // Load orders, tables and subscribe when tenantId is available
-  useEffect(() => {
-    if (!tenantId) return;
-    const unsubscribe = subscribeToOrders();
-    loadOrders();
-    loadTables();
-    return unsubscribe;
-  }, [tenantId]);
-
-  const loadOrders = async () => {
+  const playNotificationSound = useCallback(() => {
     try {
-      if (!tenantId) return;
-      const { data, error } = await supabase
-        .from('pos_orders')
-        .select('*')
-        .eq('tenant_id', tenantId)
-        .order('created_at', { ascending: false })
-        .limit(50);
-
-      if (error) throw error;
-      setOrders((data || []) as POSOrder[]);
+      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIYBjiNz+/OfC0EJXHBzi2');
+      audio.play().catch(() => {
+        // Ignore audio errors in case user hasn't interacted with page
+      });
     } catch (error) {
-      console.error('Error loading orders:', error);
-      toast.error(t('pos.dashboard.loadError'));
-    } finally {
-      setLoading(false);
+      console.log('Could not play notification sound:', error);
     }
-  };
+  }, []);
 
-  const loadTables = async () => {
-    try {
-      if (!tenantId) return;
-      const { data, error } = await supabase
-        .from('restaurant_tables')
-        .select('id, table_number')
-        .eq('tenant_id', tenantId);
-
-      if (error) throw error;
-      
-      const tableMap = (data || []).reduce((acc, table) => {
-        acc[table.id] = { table_number: table.table_number };
-        return acc;
-      }, {} as Record<string, { table_number: string }>);
-      
-      setTablesMap(tableMap);
-    } catch (error) {
-      console.error('Error loading tables:', error);
-    }
-  };
-
-  const fetchAndCacheTable = async (tableId: string) => {
+  const fetchAndCacheTable = useCallback(async (tableId: string) => {
     if (tablesMap[tableId]) return;
 
     try {
@@ -172,9 +133,52 @@ export const POSDashboard: React.FC = () => {
     } catch (error) {
       console.error(`Error fetching and caching table ${tableId}:`, error);
     }
-  };
+  }, [tablesMap]);
 
-  const subscribeToOrders = () => {
+  const loadOrders = useCallback(async () => {
+    try {
+      if (!tenantId) return;
+      const { data, error } = await supabase
+        .from('pos_orders')
+        .select('*')
+        .eq('tenant_id', tenantId)
+        .order('created_at', { ascending: false })
+        .limit(50);
+
+      if (error) throw error;
+      setOrders((data || []) as POSOrder[]);
+    } catch (error) {
+      console.error('Error loading orders:', error);
+      toast.error(t('pos.dashboard.loadError'));
+    } finally {
+      setLoading(false);
+    }
+  }, [tenantId, t]);
+
+  const loadTables = useCallback(async () => {
+    try {
+      if (!tenantId) return;
+      const { data, error } = await supabase
+        .from('restaurant_tables')
+        .select('id, table_number')
+        .eq('tenant_id', tenantId);
+
+      if (error) throw error;
+      
+      const tableMap = (data || []).reduce((acc, table) => {
+        acc[table.id] = { table_number: table.table_number };
+        return acc;
+      }, {} as Record<string, { table_number: string }>);
+      
+      setTablesMap(tableMap);
+    } catch (error) {
+      console.error('Error loading tables:', error);
+    }
+  }, [tenantId]);
+
+  const subscribeToOrders = useCallback(() => {
+    if (!tenantId) return () => {};
+
     const channel = supabase
       .channel('pos-orders-changes')
       .on(
@@ -196,14 +200,12 @@ export const POSDashboard: React.FC = () => {
               fetchAndCacheTable(newOrder.table_id);
             }
             
-            // Show notification for new orders
             toast.success(t('pos.dashboard.newOrderNotification', {
               orderNumber: newOrder.order_number,
               totalAmount: newOrder.total_amount,
               currency: t('common.currency')
             }));
 
-            // Play notification sound if enabled
             playNotificationSound();
           } else if (payload.eventType === 'UPDATE') {
             const updatedOrder = payload.new as POSOrder;
@@ -220,7 +222,17 @@ export const POSDashboard: React.FC = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  };
+  }, [tenantId, t, tablesMap, fetchAndCacheTable, playNotificationSound]);
+
+  // Load orders, tables and subscribe when tenantId is available
+  useEffect(() => {
+    if (tenantId) {
+      loadOrders();
+      loadTables();
+      const unsubscribe = subscribeToOrders();
+      return unsubscribe;
+    }
+  }, [tenantId, loadOrders, loadTables, subscribeToOrders]);
 
   const updateOrderStatus = async (orderId: string, newStatus: POSOrder['status']) => {
     try {
@@ -262,20 +274,12 @@ export const POSDashboard: React.FC = () => {
     }
   };
 
-  const filterOrdersByStatus = (status?: POSOrder['status']) => {
-    if (!status) return orders;
+  const filterOrdersByStatus = (status: POSOrder['status']) => {
     return orders.filter(order => order.status === status);
   };
 
-  const playNotificationSound = () => {
-    try {
-      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGIYBjiNz+/OfC0EJXHBzi2');
-      audio.play().catch(() => {
-        // Ignore audio errors in case user hasn't interacted with page
-      });
-    } catch (error) {
-      console.log('Could not play notification sound:', error);
-    }
+  const filterActiveOrders = () => {
+    return orders.filter(order => order.status !== 'pending_approval' && order.status !== 'completed' && order.status !== 'cancelled');
   };
 
   const syncOfflineOrders = async () => {
@@ -295,6 +299,128 @@ export const POSDashboard: React.FC = () => {
       console.error('Error syncing offline orders:', error);
     }
   };
+
+  const OrderCard: React.FC<{order: POSOrder}> = ({ order }) => (
+    <div key={order.id} className="border rounded-lg p-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 flex-wrap">
+          <Badge className={getStatusColor(order.status)}>
+            {getStatusIcon(order.status)}
+            <span className="mr-1">{t(`pos.status.${order.status}`)}</span>
+          </Badge>
+          <span className="font-medium">#{order.order_number}</span>
+          {order.table_id && tablesMap[order.table_id] && (
+            <Badge variant="outline" className="bg-blue-100 text-blue-800">
+              {t('pos.dashboard.tableBadge', { tableNumber: tablesMap[order.table_id].table_number })}
+            </Badge>
+          )}
+          <Badge variant="secondary">{t(`pos.orderTypes.${order.order_type}`, order.order_type)}</Badge>
+        </div>
+        <div className="text-sm text-muted-foreground">
+          {new Date(order.created_at).toLocaleTimeString(language, {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h4 className="font-medium mb-2">{t('pos.dashboard.orderDetails')}:</h4>
+          <div className="space-y-1 text-sm">
+            {order.items.map((item: any, index: number) => (
+              <div key={index} className="flex justify-between">
+                <span>{item.name} x{item.quantity}</span>
+                <span>{(item.price * item.quantity).toLocaleString()} {t('common.currency')}</span>
+              </div>
+            ))}
+          </div>
+          <div className="border-t pt-2 mt-2 font-medium">
+            {t('common.total')}: {order.total_amount.toLocaleString()} {t('common.currency')}
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          {order.customer_info && (
+            <div>
+              <h4 className="font-medium mb-1">{t('pos.dashboard.customerInfo')}:</h4>
+              <div className="text-sm space-y-1">
+                {order.customer_info.name && (
+                  <div>{t('common.name')}: {order.customer_info.name}</div>
+                )}
+                {order.customer_info.phone && (
+                  <div>{t('common.phone')}: {order.customer_info.phone}</div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {order.notes && (
+            <div>
+              <h4 className="font-medium mb-1">{t('common.notes')}:</h4>
+              <p className="text-sm text-muted-foreground">{order.notes}</p>
+            </div>
+          )}
+
+          <div className="flex gap-2 flex-wrap">
+            {order.status === 'pending_approval' && (
+              <>
+                <Button size="sm" onClick={() => updateOrderStatus(order.id, 'new')}>
+                  {t('pos.actions.approve')}
+                </Button>
+                <Button size="sm" variant="destructive" onClick={() => updateOrderStatus(order.id, 'cancelled')}>
+                  {t('pos.actions.reject')}
+                </Button>
+              </>
+            )}
+            {order.status === 'new' && (
+              <Button size="sm" onClick={() => updateOrderStatus(order.id, 'preparing')}>
+                {t('pos.actions.startPreparing')}
+              </Button>
+            )}
+            {order.status === 'preparing' && (
+              <Button size="sm" variant="outline" onClick={() => updateOrderStatus(order.id, 'ready')}>
+                {t('pos.actions.markReady')}
+              </Button>
+            )}
+            {order.status === 'ready' && (
+              <Button size="sm" variant="default" onClick={() => updateOrderStatus(order.id, 'completed')}>
+                {t('pos.actions.markCompleted')}
+              </Button>
+            )}
+            {(order.status === 'new' || order.status === 'preparing') && (
+              <Button size="sm" variant="destructive" onClick={() => updateOrderStatus(order.id, 'cancelled')}>
+                {t('pos.actions.cancel')}
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const OrderList: React.FC<{
+    orders: POSOrder[];
+    title: string;
+    noOrdersMessage: string;
+  }> = ({ orders, title, noOrdersMessage }) => (
+    <Card>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-3">
+          {orders.length === 0 ? (
+            <div className="text-center py-8 text-muted-foreground">
+              {noOrdersMessage}
+            </div>
+          ) : (
+            orders.map((order) => <OrderCard key={order.id} order={order} />)
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
 
   if (loading) {
     return (
@@ -403,7 +529,16 @@ export const POSDashboard: React.FC = () => {
 
       {/* Main Content */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
-        <TabsList className="grid w-full grid-cols-7">
+        <TabsList className="grid w-full grid-cols-8">
+          <TabsTrigger value="pending" className="flex items-center gap-2">
+            <Bell className="w-4 h-4" />
+            {t('pos.dashboard.pendingApproval')}
+            {filterOrdersByStatus('pending_approval').length > 0 && (
+              <Badge className="ml-2 bg-orange-500 text-white">
+                {filterOrdersByStatus('pending_approval').length}
+              </Badge>
+            )}
+          </TabsTrigger>
           <TabsTrigger value="queue" className="flex items-center gap-2">
             <ShoppingCart className="w-4 h-4" />
             {t('pos.dashboard.orderQueue')}
@@ -434,141 +569,20 @@ export const POSDashboard: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
+        <TabsContent value="pending" className="mt-6">
+          <OrderList
+            orders={filterOrdersByStatus('pending_approval')}
+            title={t('pos.dashboard.pendingApproval')}
+            noOrdersMessage={t('pos.dashboard.noPendingOrders')}
+          />
+        </TabsContent>
+
         <TabsContent value="queue" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('pos.dashboard.orderQueue')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                 {orders.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    {t('pos.dashboard.noOrders')}
-                  </div>
-                ) : (
-                  orders.map((order) => (
-                    <div key={order.id} className="border rounded-lg p-4 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Badge className={getStatusColor(order.status)}>
-                            {getStatusIcon(order.status)}
-                            <span className="mr-1">{t(`pos.status.${order.status}`)}</span>
-                          </Badge>
-                          <span className="font-medium">#{order.order_number}</span>
-                          {order.table_id && tablesMap[order.table_id] && (
-                            <Badge variant="outline" className="bg-blue-100 text-blue-800">
-                              {t('pos.dashboard.tableBadge', { tableNumber: tablesMap[order.table_id].table_number })}
-                            </Badge>
-                          )}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {new Date(order.created_at).toLocaleTimeString(language, {
-                            hour: '2-digit', 
-                            minute: '2-digit' 
-                          })}
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <h4 className="font-medium mb-2">{t('pos.dashboard.orderDetails')}:</h4>
-                          <div className="space-y-1 text-sm">
-                            {order.items.map((item: any, index: number) => (
-                              <div key={index} className="flex justify-between">
-                                <span>{item.name} x{item.quantity}</span>
-                                <span>{(item.price * item.quantity).toLocaleString()} {t('common.currency')}</span>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="border-t pt-2 mt-2 font-medium">
-                            {t('common.total')}: {order.total_amount.toLocaleString()} {t('common.currency')}
-                          </div>
-                        </div>
-
-                        <div className="space-y-3">
-                          {order.customer_info && (
-                            <div>
-                              <h4 className="font-medium mb-1">{t('pos.dashboard.customerInfo')}:</h4>
-                              <div className="text-sm space-y-1">
-                                {order.customer_info.name && (
-                                  <div>{t('common.name')}: {order.customer_info.name}</div>
-                                )}
-                                {order.customer_info.phone && (
-                                  <div>{t('common.phone')}: {order.customer_info.phone}</div>
-                                )}
-                              </div>
-                            </div>
-                          )}
-
-                          {order.notes && (
-                            <div>
-                              <h4 className="font-medium mb-1">{t('common.notes')}:</h4>
-                              <p className="text-sm text-muted-foreground">{order.notes}</p>
-                            </div>
-                          )}
-
-                          <div className="flex gap-2 flex-wrap">
-                            {order.status === 'pending_approval' && (
-                              <>
-                                <Button
-                                  size="sm"
-                                  onClick={() => updateOrderStatus(order.id, 'new')}
-                                >
-                                  {t('pos.actions.approve')}
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="destructive"
-                                  onClick={() => updateOrderStatus(order.id, 'cancelled')}
-                                >
-                                  {t('pos.actions.reject')}
-                                </Button>
-                              </>
-                            )}
-                            {order.status === 'new' && (
-                              <Button
-                                size="sm"
-                                onClick={() => updateOrderStatus(order.id, 'preparing')}
-                              >
-                                {t('pos.actions.startPreparing')}
-                              </Button>
-                            )}
-                            {order.status === 'preparing' && (
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => updateOrderStatus(order.id, 'ready')}
-                              >
-                                {t('pos.actions.markReady')}
-                              </Button>
-                            )}
-                            {order.status === 'ready' && (
-                              <Button
-                                size="sm"
-                                variant="default"
-                                onClick={() => updateOrderStatus(order.id, 'completed')}
-                              >
-                                {t('pos.actions.markCompleted')}
-                              </Button>
-                            )}
-                            {(order.status === 'new' || order.status === 'preparing') && (
-                              <Button
-                                size="sm"
-                                variant="destructive"
-                                onClick={() => updateOrderStatus(order.id, 'cancelled')}
-                              >
-                                {t('pos.actions.cancel')}
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </CardContent>
-          </Card>
+          <OrderList
+            orders={filterActiveOrders()}
+            title={t('pos.dashboard.orderQueue')}
+            noOrdersMessage={t('pos.dashboard.noActiveOrders')}
+          />
         </TabsContent>
 
         <TabsContent value="kitchen" className="mt-6">

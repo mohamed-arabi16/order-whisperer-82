@@ -611,7 +611,8 @@
     "dietary": {
       "vegetarian": "نباتي",
       "spicy": "حار",
-      "gluten-free": "خالي من الغلوتين"
+      "gluten-free": "خالي من الغلوتين",
+      "vegan": "نباتي صرف"
     }
   },
   "cta": {

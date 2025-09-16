@@ -18,11 +18,11 @@ test.describe('Arabic Translation Functionality', () => {
     await expect(brandElement).toBeVisible();
     
     // Check for Arabic features text "المميزات"
-    const featuresLink = await page.getByText('المميزات');
+    const featuresLink = page.getByRole('navigation').getByText('المميزات');
     await expect(featuresLink).toBeVisible();
     
     // Check for Arabic pricing text "الأسعار"
-    const pricingLink = await page.getByText('الأسعار');
+    const pricingLink = page.getByRole('navigation').getByText('الأسعار');
     await expect(pricingLink).toBeVisible();
   });
 
@@ -42,11 +42,11 @@ test.describe('Arabic Translation Functionality', () => {
     await expect(brandElement).toBeVisible();
     
     // Check for English features text
-    const featuresLink = await page.getByText('Features');
+    const featuresLink = page.getByRole('navigation').getByText('Features');
     await expect(featuresLink).toBeVisible();
     
     // Check for English pricing text
-    const pricingLink = await page.getByText('Pricing');
+    const pricingLink = page.getByRole('navigation').getByText('Pricing');
     await expect(pricingLink).toBeVisible();
   });
 
@@ -60,13 +60,13 @@ test.describe('Arabic Translation Functionality', () => {
     await page.waitForLoadState('networkidle');
     
     // Verify Arabic content is displayed
-    await expect(page.getByText('المميزات')).toBeVisible();
+    await expect(page.getByRole('navigation').getByText('المميزات')).toBeVisible();
     
     // Switch back to English
     await page.goto('/?lang=en');
     await page.waitForLoadState('networkidle');
     
     // Verify English content is displayed
-    await expect(page.getByText('Features')).toBeVisible();
+    await expect(page.getByRole('navigation').getByText('Features')).toBeVisible();
   });
 });
