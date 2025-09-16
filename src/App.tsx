@@ -9,6 +9,7 @@ import { TranslationProvider } from "@/hooks/useTranslation";
 import { Suspense, lazy } from "react";
 import Header from "./components/Header";
 import ErrorBoundary from "./components/ErrorBoundary";
+import FloatingLanguageSwitcher from "./components/FloatingLanguageSwitcher";
 
 // Lazy load pages for better code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -44,6 +45,7 @@ const App = (): JSX.Element => (
           <BrowserRouter>
             <ErrorBoundary>
               <Header />
+              <FloatingLanguageSwitcher />
               <Suspense fallback={
                 <div className="min-h-screen flex items-center justify-center">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>

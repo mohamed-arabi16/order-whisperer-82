@@ -344,7 +344,7 @@ const RestaurantDashboard = (): JSX.Element => {
             onClick={() => window.location.href = '/qr-code'}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                window.location.href = '/qr-code';
+                window.location.href = '/qr-code';  
               }
             }}
             role="button"
@@ -399,21 +399,28 @@ const RestaurantDashboard = (): JSX.Element => {
           <Card
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
             onClick={() => {
-              // Get the tenant slug from profile or construct the correct URL
-              const tenantSlug = profile?.tenants?.[0]?.slug;
-              if (tenantSlug) {
-                window.location.href = `/pos-system/${tenantSlug}`;
+              if (tenant?.slug) {
+                window.location.href = `/pos-system/${tenant.slug}`;
               } else {
                 console.error('Unable to access POS system - no tenant slug found');
+                toast({
+                  title: t('common.error.genericTitle'),
+                  description: t('restaurant.toast.noTenantDescription'),
+                  variant: "destructive",
+                });
               }
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                const tenantSlug = profile?.tenants?.[0]?.slug;
-                if (tenantSlug) {
-                  window.location.href = `/pos-system/${tenantSlug}`;
+                if (tenant?.slug) {
+                  window.location.href = `/pos-system/${tenant.slug}`;
                 } else {
                   console.error('Unable to access POS system - no tenant slug found');
+                  toast({
+                    title: t('common.error.genericTitle'),
+                    description: t('restaurant.toast.noTenantDescription'),
+                    variant: "destructive",
+                  });
                 }
               }
             }}

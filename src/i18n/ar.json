@@ -45,14 +45,14 @@
     "error.genericTitle": "حدث خطأ ما",
     "error.genericMessage": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى في وقت لاحق.",
     "callUs": "اتصل بنا",
-    "feedback": "Feedback",
-    "language": "Language",
-    "menu": "Menu",
-    "phone": "Phone",
-    "notes": "Notes",
-    "table": "Table",
-    "processing": "Processing...",
-    "upgrade": "Upgrade"
+    "feedback": "الملاحظات",
+    "language": "اللغة",
+    "menu": "القائمة", 
+    "phone": "الهاتف",
+    "notes": "ملاحظات",
+    "table": "الطاولة",
+    "processing": "جاري المعالجة...",
+    "upgrade": "ترقية"
   },
   "header": {
     "brand": "RestaurantOS",
@@ -110,9 +110,9 @@
       "activityPercentage": "%{{percentage}} نسبة النشاط",
       "analytics": "عرض التحليلات",
       "analyticsDescription": "الغوص في تحليلات المنصة",
-      "activeTenants": "Active Restaurants",
-      "totalRevenue": "Total Revenue",
-      "totalTenants": "Total Restaurants"
+      "activeTenants": "المطاعم النشطة",
+      "totalRevenue": "إجمالي الإيرادات",
+      "totalTenants": "إجمالي المطاعم"
     },
     "tenantsManagement": {
       "title": "إدارة المطاعم",
@@ -142,37 +142,37 @@
       "email": "البريد",
       "registrationDate": "تاريخ التسجيل",
       "viewMenu": "عرض القائمة",
-      "viewPOS": "View POS"
+      "viewPOS": "عرض نقاط البيع"
     },
     "bulkActions": {
-      "title": "Bulk Actions",
-      "selectAll": "Select All ({{count}})",
-      "activate": "Activate Selected",
-      "deactivate": "Deactivate Selected",
-      "delete": "Delete Selected"
+      "title": "إجراءات مجمعة",
+      "selectAll": "تحديد الكل ({{count}})",
+      "activate": "تفعيل المحدد",
+      "deactivate": "إلغاء تفعيل المحدد",
+      "delete": "حذف المحدد"
     },
     "errors": {
-      "fetchTenantsTitle": "Error Fetching Restaurants",
-      "fetchTenantsDescription": "Could not load restaurants list. Please try again.",
-      "bulkActionTitle": "Bulk Action Error",
-      "bulkActionDescription": "Could not perform bulk action. Please try again."
+      "fetchTenantsTitle": "خطأ في جلب المطاعم",
+      "fetchTenantsDescription": "لا يمكن تحميل قائمة المطاعم. يرجى المحاولة مرة أخرى.",
+      "bulkActionTitle": "خطأ في الإجراء المجمع",
+      "bulkActionDescription": "لا يمكن تنفيذ الإجراء المجمع. يرجى المحاولة مرة أخرى."
     },
     "tenants": {
-      "actions": "Actions",
-      "address": "Address",
-      "createdAt": "Created Date",
-      "edit": "Edit",
-      "name": "Restaurant Name",
-      "owner": "Owner",
-      "phone": "Phone",
-      "plan": "Plan",
-      "status": "Status",
-      "title": "Restaurant Management",
-      "view": "View"
+      "actions": "الإجراءات",
+      "address": "العنوان",
+      "createdAt": "تاريخ الإنشاء",
+      "edit": "تعديل",
+      "name": "اسم المطعم",
+      "owner": "المالك",
+      "phone": "الهاتف",
+      "plan": "الخطة",
+      "status": "الحالة",
+      "title": "إدارة المطاعم",
+      "view": "عرض"
     },
     "dashboard": {
-      "description": "Comprehensive management of all restaurants registered on the platform",
-      "title": "Super Admin Dashboard"
+      "description": "الإدارة الشاملة لجميع المطاعم المسجلة على المنصة",
+      "title": "لوحة تحكم المدير العام"
     }
   },
   "restaurant": {
@@ -341,11 +341,11 @@
     "noCategories": "لا توجد فئات",
     "noItems": "لا توجد عناصر",
     "createFirstCategory": "إنشاء أول فئة",
-    "customerReviews": "Customer Reviews",
-    "categoriesReordered": "Categories reordered successfully",
-    "reviews": "reviews",
-    "noReviewsYet": "No reviews yet",
-    "encourageFeedback": "Be the first to review this restaurant!"
+    "customerReviews": "تقييمات العملاء",
+    "categoriesReordered": "تم إعادة ترتيب الفئات بنجاح",
+    "reviews": "تقييمات",
+    "noReviewsYet": "لا توجد تقييمات بعد",
+    "encourageFeedback": "كن أول من يقيم هذا المطعم!"
   },
   "publicMenu": {
     "categories": "الفئات",
@@ -371,14 +371,14 @@
     "errors.phoneNotAvailable": "رقم هاتف المطعم غير متاح للطلبات.",
     "errors.invalidPhone": "رقم هاتف المطعم غير صالح.",
     "errors.orderProcessing": "خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.",
-    "cartItems": "cart items",
-    "cartTitle": "Shopping Cart",
-    "customerReviews": "Customer Reviews",
-    "quantity": "Quantity",
-    "reviews": "reviews",
-    "sendWhatsApp": "Send via WhatsApp",
-    "total": "Total",
-    "welcome": "Welcome to"
+    "cartItems": "عناصر السلة",
+    "cartTitle": "سلة التسوق",
+    "customerReviews": "تقييمات العملاء",
+    "quantity": "الكمية",
+    "reviews": "تقييمات",
+    "sendWhatsApp": "إرسال عبر واتساب",
+    "total": "المجموع",
+    "welcome": "مرحباً بكم في"
   },
   "branding": {
     "title": "العلامة التجارية",
