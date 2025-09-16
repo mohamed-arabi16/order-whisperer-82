@@ -81,4 +81,11 @@ test.describe('i18n Key Parity Verification', () => {
 
     expect(mismatches, `Found ${mismatches.length} placeholder mismatches:\n${mismatches.slice(0, 5).join('\n')}${mismatches.length > 5 ? '\n...' : ''}`).toEqual([]);
   });
+
+  test('superAdmin.welcome key should have consistent greeting', () => {
+    const enWelcome = en.superAdmin.welcome;
+    const arWelcome = ar.superAdmin.welcome;
+    expect(arWelcome).toEqual('مرحباً {{name}}');
+    expect(enWelcome).toEqual('Welcome {{name}}');
+  });
 });
