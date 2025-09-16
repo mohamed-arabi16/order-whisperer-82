@@ -100,7 +100,7 @@
   },
   "superAdmin": {
     "title": "لوحة تحكم المدير العام",
-    "welcome": "مرحباً {{name}} - إدارة المطاعم والحسابات",
+    "welcome": "مرحباً {{name}}",
     "stats": {
       "totalRestaurants": "إجمالي المطاعم",
       "activeCount": "{{count}} نشط",
