@@ -1,0 +1,952 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "search": "بحث",
+    "close": "إغلاق",
+    "open": "فتح",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "submit": "إرسال",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "price": "السعر",
+    "name": "الاسم",
+    "description": "الوصف",
+    "image": "الصورة",
+    "category": "الفئة",
+    "available": "متوفر",
+    "unavailable": "غير متوفر",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "activated": "مفعل",
+    "deactivated": "معطل",
+    "total": "المجموع",
+    "currency": "ل.ل",
+    "required": "مطلوب",
+    "success": "نجح",
+    "error": "خطأ",
+    "genericError": "حدث خطأ، يرجى المحاولة مرة أخرى",
+    "saving": "جاري الحفظ...",
+    "unsavedChanges": "تغييرات غير محفوظة",
+    "unsavedChangesDescription": "لديك تغييرات غير محفوظة. هل أنت متأكد من أنك تريد المغادرة؟",
+    "stay": "البقاء",
+    "leave": "المغادرة",
+    "export": "تصدير",
+    "view": "عرض",
+    "error.genericTitle": "حدث خطأ ما",
+    "error.genericMessage": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى في وقت لاحق.",
+    "callUs": "اتصل بنا",
+    "feedback": "Feedback",
+    "language": "Language",
+    "menu": "Menu",
+    "phone": "Phone",
+    "notes": "Notes",
+    "table": "Table",
+    "processing": "Processing...",
+    "upgrade": "Upgrade"
+  },
+  "header": {
+    "brand": "RestaurantOS",
+    "features": "المميزات",
+    "pricing": "الأسعار",
+    "demo": "عرض تجريبي",
+    "contact": "تواصل",
+    "signIn": "تسجيل الدخول",
+    "getStarted": "ابدأ الآن",
+    "dashboard": "لوحة التحكم",
+    "signOut": "تسجيل الخروج",
+    "switchLanguage": "التبديل إلى الإنجليزية",
+    "languageName": "EN"
+  },
+  "auth": {
+    "signIn": "تسجيل الدخول",
+    "signUp": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "fullName": "الاسم الكامل",
+    "signingIn": "جاري تسجيل الدخول...",
+    "signingUp": "جاري إنشاء الحساب...",
+    "welcomeBack": "مرحباً بعودتك",
+    "createAccount": "إنشاء حساب جديد",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "title": "مرحبا بك في RestaurantOS",
+    "subtitle": "سجل الدخول أو أنشئ حسابًا لإدارة مطعمك",
+    "signInTab": "تسجيل الدخول",
+    "signUpTab": "إنشاء حساب",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "signingInButton": "جاري تسجيل الدخول...",
+    "signInButton": "تسجيل الدخول",
+    "fullNameLabel": "الاسم الكامل",
+    "fullNamePlaceholder": "مثال: جون دو",
+    "signingUpButton": "جاري إنشاء الحساب...",
+    "signUpButton": "إنشاء حساب"
+  },
+  "dashboard": {
+    "welcome": "مرحباً",
+    "superAdmin": "المدير العام",
+    "restaurantOwner": "مالك المطعم",
+    "setupInProgress": "جاري إعداد لوحة التحكم..."
+  },
+  "superAdmin": {
+    "title": "لوحة تحكم المدير العام",
+    "welcome": "مرحباً {{name}} - إدارة المطاعم والحسابات",
+    "stats": {
+      "totalRestaurants": "إجمالي المطاعم",
+      "activeCount": "{{count}} نشط",
+      "paidPlans": "الخطط المدفوعة",
+      "outOfTotal": "من أصل {{total}} مطعم",
+      "activeAccounts": "الحسابات النشطة",
+      "activityPercentage": "%{{percentage}} نسبة النشاط",
+      "analytics": "عرض التحليلات",
+      "analyticsDescription": "الغوص في تحليلات المنصة",
+      "activeTenants": "Active Restaurants",
+      "totalRevenue": "Total Revenue",
+      "totalTenants": "Total Restaurants"
+    },
+    "tenantsManagement": {
+      "title": "إدارة المطاعم",
+      "description": "إنشاء وإدارة حسابات المطاعم على المنصة",
+      "addButton": "إضافة مطعم جديد",
+      "exportAriaLabel": "تصدير بيانات المستأجرين إلى CSV"
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث عن طريق اسم المطعم أو المالك ...",
+      "status": {
+        "placeholder": "تصفية حسب الحالة",
+        "all": "جميع الحالات",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "plan": {
+        "placeholder": "تصفية حسب الخطة",
+        "all": "جميع الخطط"
+      }
+    },
+    "noTenants": {
+      "title": "لا توجد مطاعم مسجلة بعد",
+      "description": "ابدأ بإضافة أول مطعم على المنصة"
+    },
+    "tenant": {
+      "owner": "المالك",
+      "email": "البريد",
+      "registrationDate": "تاريخ التسجيل",
+      "viewMenu": "عرض القائمة",
+      "viewPOS": "View POS"
+    },
+    "bulkActions": {
+      "title": "Bulk Actions",
+      "selectAll": "Select All ({{count}})",
+      "activate": "Activate Selected",
+      "deactivate": "Deactivate Selected",
+      "delete": "Delete Selected"
+    },
+    "errors": {
+      "fetchTenantsTitle": "Error Fetching Restaurants",
+      "fetchTenantsDescription": "Could not load restaurants list. Please try again.",
+      "bulkActionTitle": "Bulk Action Error",
+      "bulkActionDescription": "Could not perform bulk action. Please try again."
+    },
+    "tenants": {
+      "actions": "Actions",
+      "address": "Address",
+      "createdAt": "Created Date",
+      "edit": "Edit",
+      "name": "Restaurant Name",
+      "owner": "Owner",
+      "phone": "Phone",
+      "plan": "Plan",
+      "status": "Status",
+      "title": "Restaurant Management",
+      "view": "View"
+    },
+    "dashboard": {
+      "description": "Comprehensive management of all restaurants registered on the platform",
+      "title": "Super Admin Dashboard"
+    }
+  },
+  "restaurant": {
+    "profile": {
+      "title": "ملف المطعم",
+      "name": "اسم المطعم",
+      "namePlaceholder": "أدخل اسم المطعم",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "+963 xxx xxx xxx",
+      "address": "العنوان",
+      "addressPlaceholder": "أدخل عنوان المطعم",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف مختصر عن مطعمك",
+      "menuSlug": "رابط القائمة",
+      "saveChanges": "حفظ التغييرات",
+      "updateSuccess": "تم تحديث الملف",
+      "updateSuccessDescription": "تم تحديث ملف المطعم بنجاح.",
+      "updateError": "فشل التحديث",
+      "updating": "جاري التحديث...",
+      "currency": "Currency",
+      "selectCurrency": "Select Currency"
+    },
+    "theme": {
+      "title": "تخصيص الألوان",
+      "primaryColor": "اللون الأساسي",
+      "secondaryColor": "اللون الثانوي",
+      "accentColor": "لون التمييز",
+      "resetToDefault": "إعادة تعيين افتراضي",
+      "saveChanges": "حفظ الألوان",
+      "updateSuccess": "تم تحديث الألوان",
+      "updateSuccessDescription": "تم تحديث ألوان المطعم بنجاح.",
+      "updateError": "فشل تحديث الألوان",
+      "updating": "جاري التحديث...",
+      "advancedColors": "Advanced Color Settings",
+      "primaryColorDescription": "Main brand color",
+      "secondaryColorDescription": "Background and secondary elements color",
+      "accentColorDescription": "Accent and interactive elements color",
+      "description": "Customize the primary colors for your restaurant's site."
+    },
+    "dashboardTitle": "{{restaurantName}}'s Dashboard",
+    "feedback": {
+      "description": "Review customer ratings and feedback.",
+      "modal": {
+        "title": "Rate Restaurant",
+        "submit": "Submit Rating",
+        "cancel": "Cancel",
+        "submitting": "Submitting..."
+      },
+      "rating": {
+        "required": "Rating is required"
+      },
+      "comment": "Comment",
+      "commentPlaceholder": "Share your thoughts about the food and service...",
+      "noFeedback": {
+        "description": "Customer feedback will appear here once submitted.",
+        "title": "No Feedback Yet"
+      },
+      "title": "Feedback"
+    },
+    "gettingStarted": {
+      "cta": "Start Building Your Menu Now",
+      "description": "Follow these steps to set up your digital restaurant menu.",
+      "step1": {
+        "description": "Start by adding categories like 'Grills' and 'Appetizers'.",
+        "title": "Create Menu Categories"
+      },
+      "step2": {
+        "description": "Add dishes with prices, photos, and descriptions.",
+        "title": "Add Menu Items"
+      },
+      "step3": {
+        "description": "Upload your restaurant's logo and choose your brand colors.",
+        "title": "Customize Branding"
+      },
+      "step4": {
+        "description": "Generate a QR code and place it on your restaurant tables.",
+        "title": "Print QR Code"
+      },
+      "title": "Quick Start Guide"
+    },
+    "infoCard": {
+      "address": "Address",
+      "name": "Restaurant Name",
+      "phone": "Phone Number",
+      "plan": "Subscription Plan",
+      "title": "Restaurant Information"
+    },
+    "noTenant": {
+      "contactAdmin": "Please contact the super admin to set up your restaurant account.",
+      "description": "No restaurant account is associated with this user.",
+      "welcome": "Welcome, {{name}}"
+    },
+    "quickActions": {
+      "analytics": {
+        "button": "View Analytics",
+        "description": "View reports and sales analytics.",
+        "title": "Analytics"
+      },
+      "branding": {
+        "button": "Customize Branding",
+        "description": "Customize your restaurant's colors and logo.",
+        "title": "Branding & Logo"
+      },
+      "menu": {
+        "button": "Build Menu",
+        "description": "Add and edit menu items and categories.",
+        "title": "Menu Management"
+      },
+      "qr": {
+        "button": "Generate QR Code",
+        "description": "Download and print a QR code for your menu.",
+        "title": "QR Code"
+      },
+      "pos": {
+        "button": "View POS System Plan",
+        "description": "Integrated point of sale system development plan",
+        "title": "POS System"
+      }
+    },
+    "shareableLink": {
+      "description": "Share this link with your customers to display the digital menu.",
+      "title": "Shareable Menu Link",
+      "copyAriaLabel": "Copy link"
+    },
+    "toast": {
+      "copyErrorDescription": "Failed to copy link.",
+      "copyErrorTitle": "Error",
+      "copySuccessDescription": "Link copied to clipboard.",
+      "copySuccessTitle": "Copied",
+      "feedbackErrorDescription": "Could not load feedback. Please try again later.",
+      "feedbackErrorTitle": "Feedback Fetch Error",
+      "noTenantDescription": "There is no restaurant associated with your account.",
+      "noTenantTitle": "Restaurant Not Found"
+    },
+    "welcome": "Welcome, {{userName}} - Restaurant Dashboard"
+  },
+  "menu": {
+    "management": "إدارة القائمة",
+    "categories": "الفئات",
+    "items": "العناصر",
+    "preview": "معاينة",
+    "categoryName": "اسم الفئة",
+    "categoryDescription": "أضف فئة جديدة مثل \"المشاوي\" أو \"المقبلات\" لتنظيم قائمة الطعام",
+    "categoryPlaceholder": "مثال: المشاوي",
+    "editCategoryDescription": "تحديث اسم الفئة",
+    "displayOrder": "ترتيب العرض",
+    "addCategory": "إضافة فئة",
+    "editCategory": "تعديل الفئة",
+    "deleteCategory": "حذف الفئة",
+    "categoryDeleted": "تم حذف الفئة",
+    "categoryCreated": "تم إنشاء الفئة",
+    "categoryUpdated": "تم تحديث الفئة",
+    "itemName": "اسم العنصر",
+    "itemDescription": "وصف العنصر",
+    "itemPrice": "سعر العنصر",
+    "addItem": "إضافة عنصر",
+    "editItem": "تعديل العنصر",
+    "deleteItem": "حذف العنصر",
+    "itemDeleted": "تم حذف العنصر",
+    "itemCreated": "تم إنشاء العنصر",
+    "itemUpdated": "تم تحديث العنصر",
+    "uploadImage": "رفع صورة",
+    "noImage": "لا توجد صورة",
+    "toggleAvailability": "تغيير حالة التوفر",
+    "menuPreview": "معاينة القائمة",
+    "noCategories": "لا توجد فئات",
+    "noItems": "لا توجد عناصر",
+    "createFirstCategory": "إنشاء أول فئة",
+    "customerReviews": "Customer Reviews",
+    "categoriesReordered": "Categories reordered successfully",
+    "reviews": "reviews",
+    "noReviewsYet": "No reviews yet",
+    "encourageFeedback": "Be the first to review this restaurant!"
+  },
+  "publicMenu": {
+    "categories": "الفئات",
+    "orderType": "نوع الطلب",
+    "delivery": "توصيل",
+    "pickup": "استلام",
+    "addToCart": "إضافة للسلة",
+    "removeFromCart": "إزالة من السلة",
+    "cart": "السلة",
+    "sendOrder": "إرسال الطلب عبر واتساب",
+    "emptyCart": "السلة فارغة",
+    "itemsInCart": "عنصر في السلة",
+    "orderSummary": "ملخص الطلب",
+    "restaurantNotFound": "المطعم غير موجود",
+    "menuLoadErrorTitle": "خطأ",
+    "menuLoadErrorDescription": "حدث خطأ في تحميل القائمة",
+    "phoneNotAvailable": "رقم الهاتف غير متوفر",
+    "checkLink": "يرجى التحقق من الرابط والمحاولة مرة أخرى",
+    "restaurantLogo": "شعار المطعم",
+    "menuItemImage": "صورة عنصر القائمة",
+    "orderType.whatsapp": "طلب واتساب",
+    "toast.orderSuccess": "تم إرسال الطلب عبر واتساب!",
+    "errors.phoneNotAvailable": "رقم هاتف المطعم غير متاح للطلبات.",
+    "errors.invalidPhone": "رقم هاتف المطعم غير صالح.",
+    "errors.orderProcessing": "خطأ في معالجة طلبك. يرجى المحاولة مرة أخرى.",
+    "cartItems": "cart items",
+    "cartTitle": "Shopping Cart",
+    "customerReviews": "Customer Reviews",
+    "quantity": "Quantity",
+    "reviews": "reviews",
+    "sendWhatsApp": "Send via WhatsApp",
+    "total": "Total",
+    "welcome": "Welcome to"
+  },
+  "branding": {
+    "title": "العلامة التجارية",
+    "description": "خصص شعار وألوان المطعم",
+    "uploadLogo": "رفع الشعار",
+    "primaryColor": "اللون الأساسي",
+    "secondaryColor": "اللون الثانوي",
+    "restaurantName": "اسم المطعم",
+    "preview": {
+      "title": "معاينة التصميم",
+      "description": "هكذا سيظهر التصميم في القائمة الرقمية",
+      "menuTitle": "قائمة الطعام الرقمية",
+      "category": "المشاوي",
+      "item": {
+        "name": "شيش طاووق",
+        "description": "دجاج مشوي مع الخضار",
+        "price": "٥٠٬٠٠٠ ل.ل",
+        "add": "إضافة +"
+      },
+      "cart": {
+        "empty": "السلة فارغة",
+        "send": "إرسال عبر واتساب"
+      }
+    },
+    "save": "حفظ التغييرات",
+    "saved": "تم حفظ التغييرات",
+    "colors": {
+      "classicBlue": "أزرق كلاسيكي",
+      "naturalGreen": "أخضر طبيعي",
+      "warmOrange": "برتقالي دافئ",
+      "elegantRed": "أحمر أنيق",
+      "royalPurple": "بنفسجي ملكي",
+      "modernPink": "وردي حديث",
+      "luxuryGold": "ذهبي فاخر",
+      "calmTurquoise": "تركوازي هادئ"
+    },
+    "toast": {
+      "tenantNotFoundTitle": "خطأ",
+      "tenantNotFoundDescription": "لم يتم العثور على بيانات المطعم",
+      "invalidImageTitle": "خطأ",
+      "invalidImageDescription": "يرجى اختيار ملف صورة صحيح",
+      "logoUploadErrorTitle": "خطأ",
+      "logoUploadErrorDescription": "حدث خطأ في رفع الشعار",
+      "saveSuccessTitle": "تم بنجاح",
+      "saveSuccessDescription": "تم حفظ تصميم المطعم",
+      "saveErrorTitle": "خطأ",
+      "saveErrorDescription": "حدث خطأ في حفظ التصميم"
+    },
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "tenantNotFound": "لم يتم العثور على بيانات المطعم",
+    "backToDashboard": "العودة للوحة التحكم",
+    "logo": {
+      "title": "شعار المطعم",
+      "description": "ارفع شعار المطعم ليظهر في القائمة الرقمية (يُفضل 200x200 بكسل)",
+      "uploading": "جاري الرفع...",
+      "select": "اختر شعار جديد",
+      "alt": "شعار المطعم"
+    },
+    "color": {
+      "title": "اللون الأساسي",
+      "description": "اختر اللون الأساسي للمطعم",
+      "custom": "أو اختر لون مخصص:",
+      "preview": "المعاينة:"
+    },
+    "saving": "جاري الحفظ...",
+    "logoPosition": {
+      "title": "موضع الشعار",
+      "description": "اختر مكان ظهور الشعار في رأس القائمة.",
+      "left": "يسار",
+      "center": "وسط",
+      "right": "يمين"
+    },
+    "socialMedia": {
+      "title": "روابط التواصل الاجتماعي",
+      "description": "أضف روابط صفحات التواصل الاجتماعي الخاصة بك.",
+      "facebook": "فيسبوك",
+      "instagram": "انستغرام",
+      "twitter": "تويتر"
+    },
+    "contrastWarning": {
+      "title": "تباين ضعيف",
+      "description": "هذا اللون قد يكون صعب القراءة على خلفية بيضاء. نوصي بنسبة تباين لا تقل عن 4.5:1."
+    }
+  },
+  "qr": {
+    "title": "رمز QR للقائمة الرقمية",
+    "description": "إنشاء وتحميل رمز QR للمطعم",
+    "tenantNotFound": "لم يتم العثور على بيانات المطعم",
+    "generationFailed": "فشل إنشاء رمز الاستجابة السريعة",
+    "downloadSuccess": "تم تحميل رمز QR بنجاح",
+    "copySuccess": "تم نسخ الرابط إلى الحافظة",
+    "copyFailed": "لم يتم نسخ الرابط",
+    "card": {
+      "title": "رمز QR",
+      "description": "امسح هذا الرمز للوصول إلى قائمة {{restaurantName}}"
+    },
+    "sizeLabel": "حجم الرمز:",
+    "sizes": {
+      "small": "صغير (150×150)",
+      "medium": "متوسط (200×200)",
+      "large": "كبير (300×300)",
+      "xlarge": "كبير جداً (400×400)"
+    },
+    "actions": {
+      "title": "الإجراءات",
+      "download": "تحميل رمز QR",
+      "print": "طباعة رمز QR",
+      "preview": "معاينة القائمة"
+    },
+    "menuUrl": {
+      "title": "رابط القائمة",
+      "description": "يمكن للعملاء أيضاً الوصول للقائمة مباشرة عبر هذا الرابط"
+    },
+    "instructions": {
+      "title": "كيفية الاستخدام",
+      "step1": {
+        "title": "طباعة الرمز",
+        "description": "احفظ أو اطبع رمز QR بحجم مناسب (يُفضل 5×5 سم على الأقل)"
+      },
+      "step2": {
+        "title": "وضع الرمز",
+        "description": "ضع الرمز على طاولات المطعم أو بالقرب من المدخل"
+      },
+      "step3": {
+        "title": "المسح والطلب",
+        "description": "العملاء يمسحون الرمز بكاميرا هاتفهم ويطلبون عبر واتساب"
+      }
+    },
+    "tips": {
+      "title": "نصائح هامة",
+      "tip1": "تأكد من وضوح الرمز عند الطباعة",
+      "tip2": "ضع الرمز في مكان يسهل وصول العملاء إليه",
+      "tip3": "احفظ نسخة رقمية من الرمز للاستخدام المستقبلي",
+      "tip4": "يمكنك إنشاء أحجام مختلفة للاستخدامات المختلفة"
+    },
+    "print": {
+      "title": "رمز QR",
+      "subtitle": "قائمة الطعام الرقمية",
+      "instructionsLine1": "امسح هذا الرمز بكاميرا هاتفك",
+      "instructionsLine2": "لعرض قائمة الطعام الرقمية"
+    },
+    "customizeColors": "Customize Colors",
+    "download": "Download QR Code",
+    "downloadAll": "Download All Codes",
+    "downloadInstructions": "Click \"Download\" to save the QR code as an image, then print it and place it on the designated table.",
+    "foregroundColor": "Foreground Color",
+    "generateNewCode": "Generate New Code",
+    "howToUse": "How to Use",
+    "qrCodes": "QR Codes",
+    "sampleTable": "Table Number",
+    "tableNumber": "Table Number",
+    "yourMenuLink": "Your Menu Link"
+  },
+  "hero": {
+    "title": "منصة القوائم الرقمية للمطاعم",
+    "subtitle": "حول مطعمك إلى تجربة رقمية متكاملة مع القوائم الذكية والطلبات عبر واتساب",
+    "getStarted": "ابدأ الآن",
+    "watchDemo": "شاهد العرض التجريبي"
+  },
+  "features": {
+    "title": "مميزات المنصة",
+    "subtitle": "كل ما تحتاجه لإدارة مطعمك رقمياً",
+    "digitalMenu": {
+      "title": "قوائم رقمية ذكية",
+      "description": "إنشاء قوائم تفاعلية جميلة مع الصور والأوصاف والأسعار"
+    },
+    "whatsappOrders": {
+      "title": "طلبات واتساب مباشرة",
+      "description": "استقبال الطلبات مباشرة عبر واتساب دون تطبيقات معقدة"
+    },
+    "qrCode": {
+      "title": "رموز QR للطاولات",
+      "description": "رموز QR مخصصة لكل طاولة لتسهيل الوصول للقائمة"
+    },
+    "realTimeUpdates": {
+      "title": "تحديثات فورية",
+      "description": "تحديث القوائم والأسعار في الوقت الفعلي"
+    },
+    "analytics": {
+      "title": "تحليلات مفصلة",
+      "description": "تتبع الطلبات والأصناف الأكثر طلباً"
+    },
+    "multiLanguage": {
+      "title": "دعم متعدد اللغات",
+      "description": "واجهة باللغة العربية والإنجليزية"
+    }
+  },
+  "menuDemo": {
+    "title": "معاينة القائمة الرقمية",
+    "subtitle": "شاهد كيف ستبدو قائمة مطعمك الرقمية للعملاء",
+    "cartTitle": "طلبك",
+    "cartEmpty": "سلتك فارغة",
+    "total": "المجموع",
+    "whatsappButton": "إرسال الطلب عبر واتساب",
+    "currency": "ل.ل",
+    "items": [
+      {
+        "id": 1,
+        "name": "شيش طاووق",
+        "description": "قطع دجاج مشوية مع الخضار والأرز",
+        "price": 45000,
+        "image": "https://images.unsplash.com/photo-1633945274417-b5a8ac5e2a2a?w=300&h=200&fit=crop",
+        "dietary_preferences": [
+          "spicy"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "فتوش",
+        "description": "سلطة لبنانية تقليدية مع الخضار الطازجة",
+        "price": 25000,
+        "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=200&fit=crop",
+        "dietary_preferences": [
+          "vegetarian",
+          "gluten-free"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "حمص بالطحينة",
+        "description": "حمص كريمي مع طحينة وزيت الزيتون",
+        "price": 18000,
+        "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=300&h=200&fit=crop",
+        "dietary_preferences": [
+          "vegetarian"
+        ]
+      }
+    ],
+    "dietary": {
+      "vegetarian": "نباتي",
+      "spicy": "حار",
+      "gluten-free": "خالي من الغلوتين"
+    }
+  },
+  "cta": {
+    "title": "ابدأ مع منصة المطاعم الرقمية",
+    "subtitle": "منصة شاملة لإدارة قوائم المطاعم الرقمية مع التكامل المباشر مع واتساب للطلبات",
+    "restaurantLogin": "تسجيل الدخول للمطاعم",
+    "dashboard": "لوحة التحكم",
+    "infoCard": {
+      "title": "معلومات المطعم",
+      "name": "اسم المطعم",
+      "plan": "الخطة الحالية",
+      "status": "الحالة",
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "shareableLink": {
+      "title": "رابط القائمة القابل للمشاركة",
+      "description": "شارك هذا الرابط مع عملائك لعرض قائمتك",
+      "copy": "نسخ الرابط",
+      "copied": "تم نسخ الرابط!",
+      "qrCode": "كود QR"
+    },
+    "quickStart": {
+      "title": "دليل البداية السريعة",
+      "steps": {
+        "profile": "أكمل ملف مطعمك",
+        "menu": "أضف فئات وأصناف القائمة",
+        "theme": "خصص ألوان موضوعك",
+        "share": "شارك قائمتك مع العملاء"
+      }
+    },
+    "profile": {
+      "title": "ملف المطعم",
+      "name": "اسم المطعم",
+      "namePlaceholder": "أدخل اسم المطعم",
+      "slug": "رابط القائمة",
+      "slugPlaceholder": "أدخل رابط مخصص (اختياري)",
+      "description": "الوصف",
+      "descriptionPlaceholder": "اوصف مطعمك",
+      "address": "العنوان",
+      "addressPlaceholder": "أدخل عنوان المطعم",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "أدخل رقم الهاتف",
+      "deliveryFee": "رسوم التوصيل",
+      "deliveryFeePlaceholder": "أدخل رسوم التوصيل",
+      "save": "حفظ التغييرات",
+      "saving": "جاري الحفظ...",
+      "saved": "تم تحديث الملف بنجاح!",
+      "error": "فشل في تحديث الملف"
+    },
+    "theme": {
+      "title": "تخصيص الموضوع",
+      "primary": "اللون الأساسي",
+      "secondary": "اللون الثانوي",
+      "accent": "لون التمييز",
+      "background": "لون الخلفية",
+      "card": "لون البطاقة",
+      "preview": "معاينة",
+      "reset": "إعادة تعيين إلى الافتراضي",
+      "save": "حفظ الموضوع",
+      "saving": "جاري الحفظ...",
+      "saved": "تم تحديث الموضوع بنجاح!",
+      "error": "فشل في تحديث الموضوع"
+    }
+  },
+  "createTenantDialog": {
+    "title": "إضافة مطعم جديد",
+    "description": "إنشاء حساب مطعم جديد على المنصة مع تحديد خطة الاشتراك",
+    "restaurantNameLabel": "اسم المطعم",
+    "restaurantNamePlaceholder": "مثال: بوابة دمشق",
+    "ownerNameLabel": "اسم المالك",
+    "ownerNamePlaceholder": "الاسم الكامل",
+    "ownerEmailLabel": "البريد الإلكتروني للمالك",
+    "passwordLabel": "كلمة المرور الأولية",
+    "subscriptionPlanLabel": "خطة الاشتراك",
+    "phoneLabel": "رقم الهاتف (اختياري)",
+    "addressLabel": "العنوان (اختياري)",
+    "addressPlaceholder": "عنوان المطعم",
+    "submitButton": "إنشاء المطعم",
+    "successTitle": "تم إنشاء المطعم بنجاح",
+    "successDescription": "تم إنشاء حساب {{restaurantName}} وإرسال بيانات الدخول للمالك",
+    "errorTitle": "خطأ في إنشاء المطعم",
+    "genericError": "حدث خطأ أثناء إنشاء حساب المطعم",
+    "phonePlaceholder": "+1 XXX XXX XXXX"
+  },
+  "editTenantDialog": {
+    "title": "تعديل المطعم",
+    "description": "تحديث بيانات المطعم.",
+    "restaurantNameLabel": "اسم المطعم",
+    "restaurantNamePlaceholder": "مثال: بوابة دمشق",
+    "subscriptionPlanLabel": "خطة الاشتراك",
+    "phoneLabel": "رقم الهاتف (اختياري)",
+    "addressLabel": "العنوان (اختياري)",
+    "addressPlaceholder": "عنوان المطعم",
+    "submitButton": "حفظ التغييرات",
+    "successTitle": "تم تحديث المطعم بنجاح",
+    "successDescription": "تم تحديث حساب {{restaurantName}}.",
+    "errorTitle": "خطأ في تحديث المطعم",
+    "genericError": "حدث خطأ أثناء تحديث حساب المطعم.",
+    "phonePlaceholder": "+1 XXX XXX XXXX"
+  },
+  "plans": {
+    "basic": "أساسي - مجاني",
+    "premium": "مميز - $29/شهر",
+    "enterprise": "متقدم - $99/شهر"
+  },
+  "meta": {
+    "title": "RestaurantOS - منصة حديثة لإدارة المطاعم",
+    "description": "قم بتبسيط عمليات مطعمك من خلال الإدارة متعددة المستأجرين ، ومنشئ القائمة العربية ، وطلب QR ، وتكامل WhatsApp. مثالي للمطاعم في الشرق الأوسط.",
+    "og": {
+      "title": "RestaurantOS - منصة حديثة لإدارة المطاعم",
+      "description": "منصة مطاعم شاملة مع دعم اللغة العربية وطلب QR وتكامل WhatsApp لمطاعم الشرق الأوسط."
+    }
+  },
+  "pricing": {
+    "title": "خطط الأسعار",
+    "description": "اختر الخطة الأنسب لمطعمك.",
+    "plans": {
+      "basic": {
+        "name": "مجاني",
+        "price": "مجاني",
+        "features": [
+          "حتى 10 عناصر قائمة",
+          "إنشاء كود QR",
+          "طلب عبر واتساب",
+          "تحليلات أساسية",
+          "دعم البريد الإلكتروني"
+        ],
+        "cta": "ابدأ الآن"
+      },
+      "premium": {
+        "name": "البداية",
+        "price": "15 دولار/شهر",
+        "features": [
+          "عناصر قائمة غير محدودة",
+          "تخصيص متقدم لكود QR",
+          "دعم أولوية",
+          "تحليلات متقدمة",
+          "إدارة ملاحظات العملاء",
+          "حسابات الموظفين",
+          "إزالة إعلان ROS"
+        ],
+        "cta": "ترقية الآن"
+      },
+      "enterprise": {
+        "name": "مميز",
+        "price": "29 دولار/شهر فوترة سنوية",
+        "features": [
+          "جميع ميزات البداية",
+          "علامة تجارية مخصصة",
+          "تكاملات مخصصة",
+          "ROS will be removed"
+        ],
+        "cta": "تواصل مع المبيعات"
+      },
+      "pos": {
+        "button": "View POS System Plan",
+        "description": "Integrated point of sale system development plan",
+        "title": "POS System"
+      }
+    },
+    "placeholder": "Pricing content will be here."
+  },
+  "contact": {
+    "title": "تواصل معنا",
+    "description": "تواصل معنا لأي استفسارات.",
+    "placeholder": "نموذج التواصل سيكون هنا.",
+    "formTitle": "أرسل لنا رسالة",
+    "nameLabel": "الاسم",
+    "namePlaceholder": "اسمك",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "بريدك الإلكتروني",
+    "subjectLabel": "الموضوع",
+    "subjectPlaceholder": "موضوع رسالتك",
+    "messageLabel": "الرسالة",
+    "messagePlaceholder": "رسالتك",
+    "submitButton": "إرسال الرسالة"
+  },
+  "analytics": {
+    "title": "لوحة التحليلات",
+    "description": "نظرة شاملة على أداء مطعمك",
+    "loading": "جاري تحميل التحليلات...",
+    "totalMenuViews": "إجمالي مشاهدات القائمة",
+    "totalRevenue": "إجمالي الإيرادات",
+    "menuViewsOverTime": "مشاهدات القائمة على مدار الوقت",
+    "popularItems": "الأصناف الأكثر طلباً",
+    "revenueOverTime": "الإيرادات على مدار الوقت",
+    "orderBreakdown": "توزيع الطلبات حسب النوع",
+    "avgOrderValue": "متوسط قيمة الطلب على مدار الوقت",
+    "customerFeedback": "تحليلات تقييمات العملاء",
+    "ratingDistribution": "توزيع التقييمات",
+    "avgRatingOverTime": "متوسط التقييم على مدار الوقت",
+    "newUsers": "المستخدمون الجدد",
+    "viewCount": "عدد المشاهدات",
+    "totalOrders": "إجمالي الطلبات",
+    "totalSales": "إجمالي المبيعات",
+    "orderCount": "عدد الطلبات",
+    "avgOrderValueLabel": "متوسط قيمة الطلب",
+    "rating": "التقييم",
+    "count": "العدد",
+    "totalFeedback": "إجمالي التقييمات",
+    "avgRating": "Average Rating",
+    "noFeedback": "No feedback yet",
+    "noPopularItems": "No popular items yet",
+    "noPopularItemsDescription": "Popular items will appear here once customers start ordering"
+  },
+  "footer": {
+    "quickLinks": "روابط سريعة",
+    "support": "الدعم",
+    "supportText": "احصل على المساعدة في إعداد مطعمك الرقمي.",
+    "allRights": "جميع الحقوق محفوظة"
+  },
+  "pos": {
+    "dashboard": {
+      "title": "نظام نقاط البيع",
+      "description": "إدارة الطلبات في الوقت الفعلي مع التحليلات المتقدمة",
+      "newOrders": "طلبات جديدة",
+      "preparing": "قيد التحضير",
+      "ready": "جاهز",
+      "completed": "مكتمل",
+      "orderQueue": "قائمة الطلبات",
+      "kitchenDisplay": "شاشة المطبخ",
+      "analytics": "التحليلات",
+      "tableManagement": "إدارة الطاولات",
+      "notifications": "الإشعارات",
+      "staff": "الموظفين",
+      "shifts": "الورديات",
+      "refresh": "تحديث",
+      "noOrders": "لا توجد طلبات حالياً",
+      "orderDetails": "تفاصيل الطلب",
+      "customerInfo": "بيانات العميل",
+      "readyForDelivery": "جاهز للتسليم",
+      "noPreparingOrders": "لا توجد طلبات قيد التحضير",
+      "approvalQueue": "قائمة الموافقات",
+      "pendingApproval": "في انتظار الموافقة",
+      "newOrder": "طلب جديد!",
+      "orderNumber": "رقم الطلب",
+      "newOrderNotification": "طلب جديد #{{orderNumber}} - {{totalAmount}} {{currency}}",
+      "orderUpdated": "تم تحديث الطلب",
+      "statusChanged": "تم تغيير الحالة إلى",
+      "loadError": "خطأ في تحميل طلبات نقاط البيع",
+      "updateError": "خطأ في تحديث حالة الطلب",
+      "online": "متصل",
+      "offline": "غير متصل",
+      "tableBadge": "طاولة #{{tableNumber}}"
+    },
+    "status": {
+      "new": "New",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "pending_approval": "Pending Approval"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "actions": {
+      "startPreparing": "Start Preparing",
+      "markReady": "Mark Ready",
+      "markCompleted": "Mark Completed",
+      "cancel": "Cancel",
+      "assign": "Assign",
+      "priority": "Priority",
+      "approve": "Approve",
+      "approveAll": "Approve All",
+      "modify": "Modify",
+      "reject": "Reject"
+    },
+    "analytics": {
+      "title": "POS Analytics",
+      "todayOrders": "Today's Orders",
+      "todayRevenue": "Today's Revenue",
+      "avgPrepTime": "Avg Prep Time",
+      "peakHours": "Peak Hours",
+      "staffPerformance": "Staff Performance",
+      "revenueChart": "Revenue Chart",
+      "orderTrends": "Order Trends"
+    },
+    "tables": {
+      "title": "Table Management",
+      "description": "Manage restaurant tables and track current orders",
+      "tableNumber": "Table Number",
+      "capacity": "Capacity",
+      "status": "Status",
+      "currentOrder": "Current Order",
+      "available": "Available",
+      "occupied": "Occupied",
+      "reserved": "Reserved",
+      "inactive": "Inactive",
+      "addTable": "Add Table",
+      "editTable": "Edit Table",
+      "location": "Location",
+      "totalCapacity": "Total Capacity",
+      "edit": "Edit",
+      "noTables": "No tables added yet",
+      "addFirstTable": "Add your first table",
+      "loginRequired": "You must be logged in to do that",
+      "tableNumberPlaceholder": "e.g. 1",
+      "person": "person",
+      "people": "people",
+      "locationPlaceholder": "e.g. First floor, Window, Terrace",
+      "tableTitle": "Table #{{number}}",
+      "noQrCode": "No QR code for this table"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "newOrderSound": "New Order Sound",
+      "urgentAlert": "Urgent Alert",
+      "browserNotifications": "Browser Notifications",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications"
+    },
+    "offline": {
+      "title": "Offline Mode",
+      "description": "You're offline, changes will sync when connection is restored",
+      "queuedOrders": "Queued Orders",
+      "syncPending": "Sync Pending",
+      "syncComplete": "Sync Complete",
+      "syncSuccessMessage": "Synced {{count}} order",
+      "syncSuccessMessage_plural": "Synced {{count}} orders"
+    }
+  },
+  "posAccess": {
+    "premiumRequired": "POS System access requires Premium subscription",
+    "upgradePrompt": "Upgrade to Premium to access POS features",
+    "availableFeatures": "Available in Premium:",
+    "featureList": {
+      "orderManagement": "• Advanced order management",
+      "kitchenDisplay": "• Kitchen display system",
+      "realTimeUpdates": "• Real-time order updates",
+      "analytics": "• Detailed analytics and reporting"
+    }
+  }
+}

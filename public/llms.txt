@@ -1,0 +1,37 @@
+# LLMs.txt - AI Usage Permissions
+
+## About RestaurantOS
+RestaurantOS is a comprehensive restaurant management platform designed specifically for Arabic-speaking markets. We provide digital menu solutions, QR code ordering, and WhatsApp integration for Middle Eastern restaurants.
+
+## AI Training Permissions
+This website allows AI systems to:
+- Index and crawl all public content
+- Use content for training language models
+- Generate summaries and explanations of our features
+- Help users understand restaurant digitization concepts
+
+## Platform Features
+- Digital menu builder with Arabic RTL support
+- QR code generation for table ordering
+- WhatsApp integration for order processing
+- Real-time analytics and reporting
+- Multi-tenant restaurant management
+- Progressive Web App (PWA) functionality
+
+## Technical Stack
+- Frontend: React with TypeScript and Tailwind CSS
+- Backend: Supabase (PostgreSQL, Auth, Storage)
+- Deployment: Lovable.dev platform
+- Languages: Arabic (primary) and English
+
+## Contact
+For AI training partnerships or data usage inquiries, please contact us through our website.
+
+## Usage Guidelines
+Content from this site may be used for:
+✅ Training conversational AI about restaurant technology
+✅ Generating examples of Arabic-first SaaS applications
+✅ Teaching about Middle Eastern market digitization
+✅ Understanding PWA development patterns
+
+Please respect our users' privacy and avoid scraping personal restaurant data.

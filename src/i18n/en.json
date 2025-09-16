@@ -1,0 +1,920 @@
+{
+  "meta": {
+    "title": "Digital Menu & POS Ordering System - Syria",
+    "description": "A lightweight, Arabic-first SaaS giving Syrian restaurants a unified digital menu with tap-to-order via QR/WhatsApp and a modern POS system for table service",
+    "og": {
+      "title": "Digital Menu & POS Ordering System - Syria", 
+      "description": "A lightweight, Arabic-first SaaS giving Syrian restaurants a unified digital menu with tap-to-order via QR/WhatsApp and a modern POS system for table service"
+    }
+  },
+  "analytics": {
+    "avgOrderValue": "Average Order Value Over Time",
+    "avgOrderValueLabel": "Average Order Value",
+    "avgRating": "Average Rating",
+    "avgRatingOverTime": "Average Rating Over Time",
+    "count": "Count",
+    "customerFeedback": "Customer Feedback Analytics",
+    "description": "Comprehensive overview of your restaurant's performance",
+    "loading": "Loading analytics...",
+    "menuViewsOverTime": "Menu Views Over Time",
+    "newUsers": "New Users",
+    "noFeedback": "No feedback yet",
+    "noPopularItems": "No popular items yet",
+    "noPopularItemsDescription": "Popular items will appear here once customers start ordering",
+    "orderBreakdown": "Order Breakdown by Type",
+    "orderCount": "Order Count",
+    "popularItems": "Most Popular Items",
+    "rating": "Rating",
+    "ratingDistribution": "Rating Distribution",
+    "revenueOverTime": "Revenue Over Time",
+    "title": "Analytics Dashboard",
+    "totalFeedback": "Total Feedback",
+    "totalMenuViews": "Total Menu Views",
+    "totalOrders": "Total Orders",
+    "totalRevenue": "Total Revenue",
+    "totalSales": "Total Sales",
+    "viewCount": "View Count"
+  },
+  "pos": {
+    "dashboard": {
+      "title": "POS System",
+      "description": "Real-time order management with advanced analytics",
+      "newOrders": "New Orders",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "completed": "Completed",
+      "orderQueue": "Order Queue",
+      "kitchenDisplay": "Kitchen Display",
+      "analytics": "Analytics",
+      "tableManagement": "Table Management",
+      "notifications": "Notifications",
+      "staff": "Staff",
+      "shifts": "Shifts",
+      "refresh": "Refresh",
+      "noOrders": "No orders currently",
+      "orderDetails": "Order Details",
+      "customerInfo": "Customer Info",
+      "readyForDelivery": "Ready for Delivery",
+      "noPreparingOrders": "No orders being prepared",
+      "approvalQueue": "Approval Queue",
+      "pendingApproval": "Pending Approval",
+      "newOrder": "New Order!",
+      "orderNumber": "Order Number",
+      "newOrderNotification": "New Order #{{orderNumber}} - {{totalAmount}} {{currency}}",
+      "orderUpdated": "Order Updated",
+      "statusChanged": "Status changed to",
+      "loadError": "Error loading POS orders",
+      "updateError": "Error updating order status",
+      "online": "Online",
+      "offline": "Offline",
+      "tableBadge": "Table #{{tableNumber}}"
+    },
+    "status": {
+      "new": "New",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "pending_approval": "Pending Approval"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "actions": {
+      "startPreparing": "Start Preparing",
+      "markReady": "Mark Ready",
+      "markCompleted": "Mark Completed",
+      "cancel": "Cancel",
+      "assign": "Assign",
+      "priority": "Priority",
+      "approve": "Approve",
+      "approveAll": "Approve All",
+      "modify": "Modify",
+      "reject": "Reject"
+    },
+    "analytics": {
+      "title": "POS Analytics",
+      "todayOrders": "Today's Orders",
+      "todayRevenue": "Today's Revenue",
+      "avgPrepTime": "Avg Prep Time",
+      "peakHours": "Peak Hours",
+      "staffPerformance": "Staff Performance",
+      "revenueChart": "Revenue Chart",
+      "orderTrends": "Order Trends"
+    },
+    "tables": {
+      "title": "Table Management",
+      "description": "Manage restaurant tables and track current orders",
+      "tableNumber": "Table Number",
+      "capacity": "Capacity",
+      "status": "Status",
+      "currentOrder": "Current Order",
+      "available": "Available",
+      "occupied": "Occupied",
+      "reserved": "Reserved",
+      "inactive": "Inactive",
+      "addTable": "Add Table",
+      "editTable": "Edit Table",
+      "location": "Location",
+      "totalCapacity": "Total Capacity",
+      "edit": "Edit",
+      "noTables": "No tables added yet",
+      "addFirstTable": "Add your first table",
+      "loginRequired": "You must be logged in to do that",
+      "tableNumberPlaceholder": "e.g. 1",
+      "person": "person",
+      "people": "people",
+      "locationPlaceholder": "e.g. First floor, Window, Terrace",
+      "tableTitle": "Table #{{number}}",
+      "noQrCode": "No QR code for this table"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "newOrderSound": "New Order Sound",
+      "urgentAlert": "Urgent Alert",
+      "browserNotifications": "Browser Notifications",
+      "emailNotifications": "Email Notifications",
+      "smsNotifications": "SMS Notifications"
+    },
+    "offline": {
+      "title": "Offline Mode",
+      "description": "You're offline, changes will sync when connection is restored",
+      "queuedOrders": "Queued Orders",
+      "syncPending": "Sync Pending",
+      "syncComplete": "Sync Complete",
+      "syncSuccessMessage": "Synced {{count}} order",
+      "syncSuccessMessage_plural": "Synced {{count}} orders"
+    }
+  },
+  "auth": {
+    "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Create New Account",
+    "dontHaveAccount": "Don't have an account?",
+    "email": "Email",
+    "emailLabel": "Email",
+    "fullName": "Full Name",
+    "fullNameLabel": "Full Name",
+    "fullNamePlaceholder": "e.g. John Doe",
+    "password": "Password",
+    "passwordLabel": "Password",
+    "signIn": "Sign In",
+    "signInButton": "Sign In",
+    "signInTab": "Sign In",
+    "signUp": "Sign Up",
+    "signUpButton": "Sign Up",
+    "signUpTab": "Sign Up",
+    "signingIn": "Signing in...",
+    "signingInButton": "Signing in...",
+    "signingUp": "Creating account...",
+    "signingUpButton": "Creating account...",
+    "subtitle": "Sign in or create an account to manage your restaurant",
+    "title": "Welcome to RestaurantOS",
+    "welcomeBack": "Welcome back"
+  },
+  "branding": {
+    "backToDashboard": "Back to Dashboard",
+    "color": {
+      "custom": "Or choose a custom color:",
+      "description": "Choose the primary color for the restaurant",
+      "preview": "Preview:",
+      "title": "Primary Color"
+    },
+    "colors": {
+      "calmTurquoise": "Calm Turquoise",
+      "classicBlue": "Classic Blue",
+      "elegantRed": "Elegant Red",
+      "luxuryGold": "Luxury Gold",
+      "modernPink": "Modern Pink",
+      "naturalGreen": "Natural Green",
+      "royalPurple": "Royal Purple",
+      "warmOrange": "Warm Orange"
+    },
+    "contrastWarning": {
+      "description": "This color may be hard to read on a white background. We recommend a contrast ratio of at least 4.5:1.",
+      "title": "Poor Contrast"
+    },
+    "description": "Customize restaurant logo and colors",
+    "error": "Error",
+    "loading": "Loading...",
+    "logo": {
+      "alt": "Restaurant Logo",
+      "description": "Upload restaurant logo to appear in the digital menu (200x200 pixels preferred)",
+      "select": "Choose New Logo",
+      "title": "Restaurant Logo",
+      "uploading": "Uploading..."
+    },
+    "logoPosition": {
+      "center": "Center",
+      "description": "Choose where the logo appears in the menu header.",
+      "left": "Left",
+      "right": "Right",
+      "title": "Logo Position"
+    },
+    "preview": {
+      "cart": {
+        "empty": "Cart Empty",
+        "send": "Send via WhatsApp"
+      },
+      "category": "Grills",
+      "description": "This is how the design will appear in the digital menu",
+      "item": {
+        "add": "Add +",
+        "description": "Grilled chicken with vegetables",
+        "name": "Shish Tawook",
+        "price": "50,000 L.L"
+      },
+      "menuTitle": "Digital Food Menu",
+      "title": "Design Preview"
+    },
+    "primaryColor": "Primary Color",
+    "restaurantName": "Restaurant Name",
+    "save": "Save Changes",
+    "saved": "Changes Saved",
+    "saving": "Saving...",
+    "secondaryColor": "Secondary Color",
+    "socialMedia": {
+      "description": "Add your social media page links.",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "title": "Social Media Links",
+      "twitter": "Twitter"
+    },
+    "tenantNotFound": "Restaurant data not found",
+    "title": "Branding",
+    "toast": {
+      "invalidImageDescription": "Please choose a valid image file",
+      "invalidImageTitle": "Error",
+      "logoUploadErrorDescription": "Error uploading logo",
+      "logoUploadErrorTitle": "Error",
+      "saveErrorDescription": "Error saving design",
+      "saveErrorTitle": "Error",
+      "saveSuccessDescription": "Restaurant design saved",
+      "saveSuccessTitle": "Success",
+      "tenantNotFoundDescription": "Restaurant data not found",
+      "tenantNotFoundTitle": "Error"
+    },
+    "uploadLogo": "Upload Logo"
+  },
+  "common": {
+    "activated": "Activated",
+    "active": "Active",
+    "add": "Add",
+    "available": "Available",
+    "back": "Back",
+    "callUs": "Call Us",
+    "cancel": "Cancel",
+    "category": "Category",
+    "close": "Close",
+    "confirm": "Confirm",
+    "create": "Create",
+    "currency": "S.P",
+    "deactivated": "Deactivated",
+    "delete": "Delete",
+    "description": "Description",
+    "edit": "Edit",
+    "error": "Error",
+    "error.genericMessage": "An unexpected error occurred. Please try again later.",
+    "error.genericTitle": "Something went wrong",
+    "export": "Export",
+    "feedback": "Feedback",
+    "genericError": "An error occurred, please try again",
+    "image": "Image",
+    "inactive": "Inactive",
+    "language": "Language",
+    "leave": "Leave",
+    "loading": "Loading...",
+    "menu": "Menu",
+    "name": "Name",
+    "phone": "Phone",
+    "notes": "Notes",
+    "table": "Table",
+    "next": "Next",
+    "no": "No",
+    "open": "Open",
+    "previous": "Previous",
+    "price": "Price",
+    "processing": "Processing...",
+    "required": "Required",
+    "save": "Save",
+    "saving": "Saving...",
+    "search": "Search",
+    "stay": "Stay",
+    "submit": "Submit",
+    "success": "Success",
+    "total": "Total",
+    "unavailable": "Unavailable",
+    "unsavedChanges": "Unsaved Changes",
+    "unsavedChangesDescription": "You have unsaved changes. Are you sure you want to leave?",
+    "update": "Update",
+    "upgrade": "Upgrade",
+    "view": "View",
+    "back": "Back",
+    "yes": "Yes"
+  },
+  "contact": {
+    "description": "Contact us for any inquiries.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your email",
+    "formTitle": "Send us a message",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Your message",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "placeholder": "Contact form will be here.",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Subject of your message",
+    "submitButton": "Send Message",
+    "title": "Contact Us"
+  },
+  "createTenantDialog": {
+    "addressLabel": "Address (optional)",
+    "addressPlaceholder": "Restaurant address",
+    "description": "Create a new restaurant account on the platform with subscription plan selection",
+    "errorTitle": "Error creating restaurant",
+    "genericError": "An error occurred while creating the restaurant account",
+    "ownerEmailLabel": "Owner Email",
+    "ownerNameLabel": "Owner Name",
+    "ownerNamePlaceholder": "Full name",
+    "passwordLabel": "Initial Password",
+    "phoneLabel": "Phone Number (optional)",
+    "phonePlaceholder": "+1 XXX XXX XXXX",
+    "restaurantNameLabel": "Restaurant Name",
+    "restaurantNamePlaceholder": "e.g. Damascus Gate",
+    "submitButton": "Create Restaurant",
+    "subscriptionPlanLabel": "Subscription Plan",
+    "successDescription": "{{restaurantName}} account created and login details sent to owner",
+    "successTitle": "Restaurant created successfully",
+    "title": "Add New Restaurant"
+  },
+  "cta": {
+    "dashboard": "Dashboard",
+    "infoCard": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "name": "Restaurant Name",
+      "plan": "Current Plan",
+      "status": "Status",
+      "title": "Restaurant Information"
+    },
+    "profile": {
+      "address": "Address",
+      "addressPlaceholder": "Enter restaurant address",
+      "deliveryFee": "Delivery Fee",
+      "deliveryFeePlaceholder": "Enter delivery fee",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your restaurant",
+      "error": "Failed to update profile",
+      "name": "Restaurant Name",
+      "namePlaceholder": "Enter restaurant name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter phone number",
+      "save": "Save Changes",
+      "saved": "Profile updated successfully!",
+      "saving": "Saving...",
+      "slug": "Menu Link",
+      "slugPlaceholder": "Enter custom link (optional)",
+      "title": "Restaurant Profile"
+    },
+    "quickStart": {
+      "steps": {
+        "menu": "Add menu categories and items",
+        "profile": "Complete your restaurant profile",
+        "share": "Share your menu with customers",
+        "theme": "Customize your theme colors"
+      },
+      "title": "Quick Start Guide"
+    },
+    "restaurantLogin": "Restaurant Login",
+    "shareableLink": {
+      "copied": "Link copied!",
+      "copy": "Copy Link",
+      "description": "Share this link with your customers to display your menu",
+      "qrCode": "QR Code",
+      "title": "Shareable Menu Link"
+    },
+    "subtitle": "Comprehensive platform for managing digital restaurant menus with direct WhatsApp integration for orders",
+    "theme": {
+      "accent": "Accent Color",
+      "background": "Background Color",
+      "card": "Card Color",
+      "error": "Failed to update theme",
+      "preview": "Preview",
+      "primary": "Primary Color",
+      "reset": "Reset to Default",
+      "save": "Save Theme",
+      "saved": "Theme updated successfully!",
+      "saving": "Saving...",
+      "secondary": "Secondary Color",
+      "title": "Theme Customization"
+    },
+    "title": "Get Started with Digital Restaurant Platform"
+  },
+  "dashboard": {
+    "restaurantOwner": "Restaurant Owner",
+    "setupInProgress": "Setting up dashboard...",
+    "superAdmin": "Super Admin",
+    "welcome": "Welcome"
+  },
+  "editTenantDialog": {
+    "addressLabel": "Address (optional)",
+    "addressPlaceholder": "Restaurant address",
+    "description": "Update restaurant information.",
+    "errorTitle": "Error updating restaurant",
+    "genericError": "An error occurred while updating the restaurant account.",
+    "phoneLabel": "Phone Number (optional)",
+    "phonePlaceholder": "+1 XXX XXX XXXX",
+    "restaurantNameLabel": "Restaurant Name",
+    "restaurantNamePlaceholder": "e.g. Damascus Gate",
+    "submitButton": "Save Changes",
+    "subscriptionPlanLabel": "Subscription Plan",
+    "successDescription": "{{restaurantName}} account updated.",
+    "successTitle": "Restaurant updated successfully",
+    "title": "Edit Restaurant"
+  },
+  "superAdmin": {
+    "title": "Super Admin Dashboard",
+    "welcome": "Welcome {{name}}",
+    "stats": {
+      "totalRestaurants": "Total Restaurants",
+      "activeCount": "{{count}} active",
+      "paidPlans": "Paid Plans",
+      "outOfTotal": "out of {{total}}",
+      "activeAccounts": "Active Accounts",
+      "activityPercentage": "{{percentage}}% active",
+      "analytics": "Analytics",
+      "analyticsDescription": "View detailed analytics",
+      "activeTenants": "Active Restaurants",
+      "totalRevenue": "Total Revenue",
+      "totalTenants": "Total Restaurants"
+    },
+    "tenantsManagement": {
+      "title": "Restaurant Management",
+      "description": "Manage restaurant accounts and subscription plans",
+      "addButton": "Add New Restaurant",
+      "exportAriaLabel": "Export restaurant data"
+    },
+    "filters": {
+      "searchPlaceholder": "Search by name or email...",
+      "status": {
+        "placeholder": "All Statuses",
+        "all": "All",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "plan": {
+        "placeholder": "All Plans",
+        "all": "All"
+      }
+    },
+    "noTenants": {
+      "title": "No Restaurants",
+      "description": "No restaurants found in the system"
+    },
+    "bulkActions": {
+      "title": "Bulk Actions",
+      "selectAll": "Select All ({{count}})",
+      "activate": "Activate Selected",
+      "deactivate": "Deactivate Selected",
+      "delete": "Delete Selected"
+    },
+    "errors": {
+      "fetchTenantsTitle": "Error Fetching Restaurants",
+      "fetchTenantsDescription": "Could not load restaurants list. Please try again.",
+      "bulkActionTitle": "Bulk Action Error",
+      "bulkActionDescription": "Could not perform bulk action. Please try again."
+    },
+    "tenants": {
+      "actions": "Actions",
+      "address": "Address",
+      "createdAt": "Created Date",
+      "edit": "Edit",
+      "name": "Restaurant Name",
+      "owner": "Owner",
+      "phone": "Phone",
+      "plan": "Plan",
+      "status": "Status",
+      "title": "Restaurant Management",
+      "view": "View"
+    },
+    "tenant": {
+      "email": "Email",
+      "owner": "Owner", 
+      "registrationDate": "Registration Date",
+      "viewMenu": "View Menu",
+      "viewPOS": "View POS"
+    },
+    "dashboard": {
+      "description": "Comprehensive management of all restaurants registered on the platform",
+      "title": "Super Admin Dashboard"
+    }
+  },
+  "plans": {
+    "basic": "Basic",
+    "premium": "Premium",
+    "enterprise": "Enterprise"
+  },
+  "header": {
+    "brand": "RestaurantOS",
+    "features": "Features",
+    "pricing": "Pricing",
+    "demo": "Demo",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "dashboard": "Dashboard",
+    "signOut": "Sign Out",
+    "switchLanguage": "Switch to Arabic",
+    "languageName": "AR"
+  },
+  "hero": {
+    "title": "Digital Menu Platform for Restaurants",
+    "subtitle": "Transform your restaurant into a complete digital experience with smart menus and WhatsApp ordering",
+    "getStarted": "Get Started",
+    "watchDemo": "Watch Demo"
+  },
+  "menuDemo": {
+    "title": "Try Our Interactive Menu",
+    "subtitle": "Experience how your customers will interact with your digital menu",
+    "cartTitle": "Cart",
+    "cartEmpty": "Cart is empty",
+    "total": "Total",
+    "whatsappButton": "Send Order via WhatsApp",
+    "dietary": {
+      "vegetarian": "Vegetarian",
+      "spicy": "Spicy",
+      "vegan": "Vegan",
+      "gluten-free": "Gluten-Free"
+    }
+  },
+  "features": {
+    "analytics": {
+      "description": "Track orders and most popular items",
+      "title": "Detailed Analytics"
+    },
+    "digitalMenu": {
+      "description": "Create beautiful interactive menus with images, descriptions, and prices",
+      "title": "Smart Digital Menus"
+    },
+    "multiLanguage": {
+      "description": "Interface in Arabic and English",
+      "title": "Multi-language Support"
+    },
+    "qrCode": {
+      "description": "Custom QR codes for each table for easy menu access",
+      "title": "Table QR Codes"
+    },
+    "realTimeUpdates": {
+      "description": "Update menus and prices in real-time",
+      "title": "Real-time Updates"
+    },
+    "subtitle": "Everything you need to manage your restaurant digitally",
+    "title": "Platform Features",
+    "whatsappOrders": {
+      "description": "Receive orders directly via WhatsApp without complex applications",
+      "title": "Direct WhatsApp Orders"
+    }
+  },
+  "footer": {
+    "allRights": "All rights reserved",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "supportText": "Get help setting up your digital restaurant."
+  },
+  "menu": {
+    "addCategory": "Add Category",
+    "addItem": "Add Item",
+    "categories": "Categories",
+    "categoryCreated": "Category created",
+    "categoryDeleted": "Category deleted",
+    "categoryDescription": "Add a new category like \"Grills\" or \"Appetizers\" to organize the food menu",
+    "categoryName": "Category Name",
+    "categoryPlaceholder": "e.g. Grills",
+    "categoryUpdated": "Category updated",
+    "createFirstCategory": "Create First Category",
+    "deleteCategory": "Delete Category",
+    "deleteItem": "Delete Item",
+    "displayOrder": "Display Order",
+    "editCategory": "Edit Category",
+    "editCategoryDescription": "Update category name",
+    "editItem": "Edit Item",
+    "itemCreated": "Item created",
+    "itemDeleted": "Item deleted",
+    "itemDescription": "Item Description",
+    "itemName": "Item Name",
+    "itemPrice": "Item Price",
+    "itemUpdated": "Item updated",
+    "items": "Items",
+    "management": "Menu Management",
+    "menuPreview": "Menu Preview",
+    "noCategories": "No categories",
+    "noImage": "No Image",
+    "noItems": "No items",
+    "preview": "Preview",
+    "customerReviews": "Customer Reviews", 
+    "categoriesReordered": "Categories reordered successfully",
+    "reviews": "reviews",
+    "noReviewsYet": "No reviews yet",
+    "encourageFeedback": "Be the first to review this restaurant!",
+    "toggleAvailability": "Toggle Availability",
+    "uploadImage": "Upload Image"
+  },
+  "posAccess": {
+    "premiumRequired": "POS System access requires Premium subscription",
+    "upgradePrompt": "Upgrade to Premium to access POS features",
+    "availableFeatures": "Available in Premium:",
+    "featureList": {
+      "orderManagement": "• Advanced order management",
+      "kitchenDisplay": "• Kitchen display system", 
+      "realTimeUpdates": "• Real-time order updates",
+      "analytics": "• Detailed analytics and reporting"
+    }
+  },
+  "pricing": {
+    "description": "Choose the best plan for your restaurant.",
+    "placeholder": "Pricing content will be here.",
+    "title": "Pricing Plans",
+    "plans": {
+      "basic": {
+        "name": "Free",
+        "price": "Free",
+        "features": [
+          "Up to 10 menu items",
+          "QR code generation",
+          "WhatsApp ordering",
+          "Basic analytics",
+          "Email support"
+        ],
+        "cta": "Get Started"
+      },
+      "premium": {
+        "name": "Starter",
+        "price": "$15/month",
+        "features": [
+          "Unlimited menu items",
+          "Advanced QR code customization",
+          "Priority support",
+          "Advanced analytics",
+          "Customer feedback management",
+          "Staff accounts",
+          "If paid yearly, ROS will be removed"
+        ],
+        "cta": "Upgrade Now"
+      },
+      "enterprise": {
+        "name": "Premium",
+        "price": "$29/month yearly billing",
+        "features": [
+          "All Starter features",
+          "Custom branding",
+          "Custom integrations",
+          "ROS will be removed"
+        ],
+        "cta": "Contact Sales"
+      },
+      "pos": {
+        "button": "View POS System Plan",
+        "description": "Integrated point of sale system development plan",
+        "title": "POS System"
+      }
+    }
+  },
+  "publicMenu": {
+    "addToCart": "Add to Cart",
+    "cart": "Cart",
+    "cartItems": "cart items",
+    "cartTitle": "Shopping Cart",
+    "categories": "Categories",
+    "checkLink": "Please check the link and try again",
+    "customerReviews": "Customer Reviews",
+    "delivery": "Delivery",
+    "emptyCart": "Cart is empty",
+    "errors.invalidPhone": "Restaurant phone number is invalid.",
+    "errors.orderProcessing": "Error processing your order. Please try again.",
+    "errors.phoneNotAvailable": "Restaurant phone number is not available for orders.",
+    "itemsInCart": "items in cart",
+    "menuItemImage": "Menu Item Image",
+    "menuLoadErrorDescription": "There was an error loading the menu",
+    "menuLoadErrorTitle": "Error",
+    "orderSummary": "Order Summary",
+    "orderType": "Order Type",
+    "orderType.whatsapp": "WhatsApp Order",
+    "phoneNotAvailable": "Phone number is not available",
+    "pickup": "Pickup",
+    "quantity": "Quantity",
+    "removeFromCart": "Remove from Cart",
+    "restaurantLogo": "Restaurant Logo",
+    "restaurantNotFound": "Restaurant not found",
+    "reviews": "reviews",
+    "sendOrder": "Send Order via WhatsApp",
+    "sendWhatsApp": "Send via WhatsApp",
+    "toast.orderSuccess": "Order sent via WhatsApp!",
+    "total": "Total",
+    "welcome": "Welcome to"
+  },
+  "qr": {
+    "actions": {
+      "download": "Download QR Code",
+      "preview": "Preview Menu",
+      "print": "Print QR Code",
+      "title": "Actions"
+    },
+    "card": {
+      "description": "Scan this code to access {{restaurantName}}'s menu",
+      "title": "QR Code"
+    },
+    "copyFailed": "Failed to copy link",
+    "copySuccess": "Link copied to clipboard",
+    "customizeColors": "Customize Colors",
+    "description": "Create custom QR codes for your restaurant tables. Customers can scan the code to access the digital menu directly.",
+    "download": "Download QR Code",
+    "downloadAll": "Download All Codes",
+    "downloadInstructions": "Click \"Download\" to save the QR code as an image, then print it and place it on the designated table.",
+    "downloadSuccess": "QR code downloaded successfully",
+    "foregroundColor": "Foreground Color",
+    "generateNewCode": "Generate New Code",
+    "generationFailed": "Failed to generate QR code",
+    "howToUse": "How to Use",
+    "instructions": {
+      "step1": {
+        "description": "Save or print the QR code at an appropriate size (preferably at least 5x5 cm)",
+        "title": "Print the Code"
+      },
+      "step2": {
+        "description": "Place the code on restaurant tables or near the entrance",
+        "title": "Position the Code"
+      },
+      "step3": {
+        "description": "Customers scan the code with their phone camera and order via WhatsApp",
+        "title": "Scan and Order"
+      },
+      "title": "How to Use"
+    },
+    "menuUrl": {
+      "description": "Customers can also access the menu directly via this link",
+      "title": "Menu Link"
+    },
+    "print": {
+      "instructionsLine1": "Scan this code with your phone camera",
+      "instructionsLine2": "to view the digital menu",
+      "subtitle": "Digital Menu",
+      "title": "QR Code"
+    },
+    "qrCodes": "QR Codes",
+    "sampleTable": "Table Number",
+    "sizeLabel": "Code size:",
+    "sizes": {
+      "large": "Large (300×300)",
+      "medium": "Medium (200×200)",
+      "small": "Small (150×150)",
+      "xlarge": "Extra Large (400×400)"
+    },
+    "tableNumber": "Table Number",
+    "tenantNotFound": "Restaurant data not found",
+    "tips": {
+      "tip1": "Make sure the code is clear when printing",
+      "tip2": "Place the code where customers can easily access it",
+      "tip3": "Save a digital copy of the code for future use",
+      "tip4": "You can create different sizes for different uses",
+      "title": "Important Tips"
+    },
+    "title": "QR Code Generator",
+    "yourMenuLink": "Your Menu Link"
+  },
+  "restaurant": {
+    "dashboardTitle": "{{restaurantName}}'s Dashboard",
+    "feedback": {
+      "description": "Review customer ratings and feedback.",
+      "modal": {
+        "title": "Rate Restaurant",
+        "submit": "Submit Rating",
+        "cancel": "Cancel",
+        "submitting": "Submitting..."
+      },
+      "rating": {
+        "required": "Rating is required"
+      },
+      "comment": "Comment",
+      "commentPlaceholder": "Share your thoughts about the food and service...",
+      "noFeedback": {
+        "description": "Customer feedback will appear here once submitted.",
+        "title": "No Feedback Yet"
+      },
+      "title": "Feedback"
+    },
+    "gettingStarted": {
+      "cta": "Start Building Your Menu Now",
+      "description": "Follow these steps to set up your digital restaurant menu.",
+      "step1": {
+        "description": "Start by adding categories like 'Grills' and 'Appetizers'.",
+        "title": "Create Menu Categories"
+      },
+      "step2": {
+        "description": "Add dishes with prices, photos, and descriptions.",
+        "title": "Add Menu Items"
+      },
+      "step3": {
+        "description": "Upload your restaurant's logo and choose your brand colors.",
+        "title": "Customize Branding"
+      },
+      "step4": {
+        "description": "Generate a QR code and place it on your restaurant tables.",
+        "title": "Print QR Code"
+      },
+      "title": "Quick Start Guide"
+    },
+    "infoCard": {
+      "address": "Address",
+      "name": "Restaurant Name",
+      "phone": "Phone Number",
+      "plan": "Subscription Plan",
+      "title": "Restaurant Information"
+    },
+    "noTenant": {
+      "contactAdmin": "Please contact the super admin to set up your restaurant account.",
+      "description": "No restaurant account is associated with this user.",
+      "welcome": "Welcome, {{name}}"
+    },
+    "profile": {
+      "address": "Address",
+      "addressPlaceholder": "Enter restaurant address",
+      "currency": "Currency",
+      "description": "Description",
+      "descriptionPlaceholder": "A short description of your restaurant.",
+      "menuSlug": "Menu Link",
+      "name": "Restaurant Name",
+      "namePlaceholder": "Enter restaurant name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 123 456 7890",
+      "saveChanges": "Save Changes",
+      "selectCurrency": "Select Currency",
+      "title": "Restaurant Profile",
+      "updateError": "Update Failed",
+      "updateSuccess": "Profile Updated",
+      "updateSuccessDescription": "Restaurant profile has been updated successfully.",
+      "updating": "Updating..."
+    },
+    "quickActions": {
+      "analytics": {
+        "button": "View Analytics",
+        "description": "View reports and sales analytics.",
+        "title": "Analytics"
+      },
+      "branding": {
+        "button": "Customize Branding",
+        "description": "Customize your restaurant's colors and logo.",
+        "title": "Branding & Logo"
+      },
+      "menu": {
+        "button": "Build Menu",
+        "description": "Add and edit menu items and categories.",
+        "title": "Menu Management"
+      },
+      "qr": {
+        "button": "Generate QR Code",
+        "description": "Download and print a QR code for your menu.",
+        "title": "QR Code"
+      },
+      "pos": {
+        "button": "View POS System Plan",
+        "description": "Integrated point of sale system development plan",
+        "title": "POS System"
+      }
+    },
+    "shareableLink": {
+      "description": "Share this link with your customers to display the digital menu.",
+      "title": "Shareable Menu Link",
+      "copyAriaLabel": "Copy link"
+    },
+    "theme": {
+      "accentColor": "Accent Color",
+      "advancedColors": "Advanced Color Settings",
+      "primaryColorDescription": "Main brand color",
+      "secondaryColorDescription": "Background and secondary elements color",
+      "accentColorDescription": "Accent and interactive elements color",
+      "description": "Customize the primary colors for your restaurant's site.",
+      "primaryColor": "Primary Color",
+      "resetToDefault": "Reset to Default",
+      "saveChanges": "Save Colors",
+      "secondaryColor": "Secondary Color",
+      "title": "Theme Customization",
+      "updateError": "Failed to update colors.",
+      "updateSuccess": "Colors Updated",
+      "updateSuccessDescription": "Restaurant colors have been updated successfully.",
+      "updating": "Updating..."
+    },
+    "toast": {
+      "copyErrorDescription": "Failed to copy link.",
+      "copyErrorTitle": "Error",
+      "copySuccessDescription": "Link copied to clipboard.",
+      "copySuccessTitle": "Copied",
+      "feedbackErrorDescription": "Could not load feedback. Please try again later.",
+      "feedbackErrorTitle": "Feedback Fetch Error",
+      "noTenantDescription": "There is no restaurant associated with your account.",
+      "noTenantTitle": "Restaurant Not Found"
+    },
+    "welcome": "Welcome, {{userName}} - Restaurant Dashboard"
+  }
+}
