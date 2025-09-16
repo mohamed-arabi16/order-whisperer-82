@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Suspense, lazy } from "react";
@@ -42,7 +42,7 @@ const App = (): JSX.Element => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-          <BrowserRouter>
+          <HashRouter>
             <ErrorBoundary>
               <Header />
               <FloatingLanguageSwitcher />
@@ -69,7 +69,7 @@ const App = (): JSX.Element => (
                   </Routes>
                 </Suspense>
               </ErrorBoundary>
-            </BrowserRouter>
+            </HashRouter>
           </TooltipProvider>
         </ThemeProvider>
       </AuthProvider>
