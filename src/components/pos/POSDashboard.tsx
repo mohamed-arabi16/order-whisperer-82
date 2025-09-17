@@ -218,8 +218,6 @@ export const POSDashboard: React.FC = () => {
           filter: `tenant_id=eq.${tenantId}`
         },
         (payload) => {
-          console.log('POSDashboard: Real-time subscription event received:', payload);
-          
           if (payload.eventType === 'INSERT') {
             const newOrder = payload.new as POSOrder;
             console.log('POSDashboard: New order inserted:', newOrder);
