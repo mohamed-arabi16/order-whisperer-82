@@ -47,7 +47,7 @@
     "callUs": "اتصل بنا",
     "feedback": "الملاحظات",
     "language": "اللغة",
-    "menu": "القائمة", 
+    "menu": "القائمة",
     "phone": "الهاتف",
     "notes": "ملاحظات",
     "table": "الطاولة",
@@ -176,65 +176,51 @@
     }
   },
   "restaurant": {
-    "profile": {
-      "title": "ملف المطعم",
+    "dashboardTitle": "لوحة تحكم {restaurantName}",
+    "welcome": "مرحباً، {userName}",
+    "infoCard": {
+      "title": "معلومات المطعم",
       "name": "اسم المطعم",
-      "namePlaceholder": "أدخل اسم المطعم",
-      "phone": "رقم الهاتف",
-      "phonePlaceholder": "+963 xxx xxx xxx",
       "address": "العنوان",
-      "addressPlaceholder": "أدخل عنوان المطعم",
-      "description": "الوصف",
-      "descriptionPlaceholder": "وصف مختصر عن مطعمك",
-      "menuSlug": "رابط القائمة",
-      "saveChanges": "حفظ التغييرات",
-      "updateSuccess": "تم تحديث الملف",
-      "updateSuccessDescription": "تم تحديث ملف المطعم بنجاح.",
-      "updateError": "فشل التحديث",
-      "updating": "جاري التحديث...",
-      "currency": "Currency",
-      "selectCurrency": "Select Currency"
+      "phone": "رقم الهاتف",
+      "plan": "الخطة"
     },
-    "theme": {
-      "title": "تخصيص الألوان",
-      "primaryColor": "اللون الأساسي",
-      "secondaryColor": "اللون الثانوي",
-      "accentColor": "لون التمييز",
-      "resetToDefault": "إعادة تعيين افتراضي",
-      "saveChanges": "حفظ الألوان",
-      "updateSuccess": "تم تحديث الألوان",
-      "updateSuccessDescription": "تم تحديث ألوان المطعم بنجاح.",
-      "updateError": "فشل تحديث الألوان",
-      "updating": "جاري التحديث...",
-      "advancedColors": "Advanced Color Settings",
-      "primaryColorDescription": "Main brand color",
-      "secondaryColorDescription": "Background and secondary elements color",
-      "accentColorDescription": "Accent and interactive elements color",
-      "description": "Customize the primary colors for your restaurant's site."
+    "shareableLink": {
+      "title": "رابط القائمة",
+      "description": "شارك هذا الرابط مع عملائك للوصول إلى قائمة طعامك",
+      "copyAriaLabel": "نسخ رابط القائمة"
     },
-    "dashboardTitle": "{{restaurantName}}'s Dashboard",
-    "feedback": {
-      "description": "Review customer ratings and feedback.",
-      "modal": {
-        "title": "Rate Restaurant",
-        "submit": "Submit Rating",
-        "cancel": "Cancel",
-        "submitting": "Submitting..."
+    "quickActions": {
+      "menu": {
+        "title": "إدارة القائمة",
+        "description": "إضافة وتعديل عناصر القائمة",
+        "button": "إدارة القائمة"
       },
-      "rating": {
-        "required": "Rating is required"
+      "branding": {
+        "title": "العلامة التجارية",
+        "description": "تخصيص مظهر وألوان مطعمك",
+        "button": "تخصيص التصميم"
       },
-      "comment": "Comment",
-      "commentPlaceholder": "Share your thoughts about the food and service...",
-      "noFeedback": {
-        "description": "Customer feedback will appear here once submitted.",
-        "title": "No Feedback Yet"
+      "qr": {
+        "title": "رموز QR",
+        "description": "إنشاء رموز QR للطاولات والقائمة",
+        "button": "إنشاء QR"
       },
-      "title": "Feedback"
+      "analytics": {
+        "title": "التقارير",
+        "description": "عرض إحصائيات المبيعات والطلبات",
+        "button": "عرض التقارير"
+      },
+      "pos": {
+        "title": "نظام نقاط البيع",
+        "description": "إدارة الطلبات والمدفوعات",
+        "button": "فتح نقاط البيع"
+      }
     },
     "gettingStarted": {
+      "title": "البدء",
+      "description": "اتبع هذه الخطوات لإعداد مطعمك",
       "cta": "Start Building Your Menu Now",
-      "description": "Follow these steps to set up your digital restaurant menu.",
       "step1": {
         "description": "Start by adding categories like 'Grills' and 'Appetizers'.",
         "title": "Create Menu Categories"
@@ -250,64 +236,82 @@
       "step4": {
         "description": "Generate a QR code and place it on your restaurant tables.",
         "title": "Print QR Code"
-      },
-      "title": "Quick Start Guide"
-    },
-    "infoCard": {
-      "address": "Address",
-      "name": "Restaurant Name",
-      "phone": "Phone Number",
-      "plan": "Subscription Plan",
-      "title": "Restaurant Information"
-    },
-    "noTenant": {
-      "contactAdmin": "Please contact the super admin to set up your restaurant account.",
-      "description": "No restaurant account is associated with this user.",
-      "welcome": "Welcome, {{name}}"
-    },
-    "quickActions": {
-      "analytics": {
-        "button": "View Analytics",
-        "description": "View reports and sales analytics.",
-        "title": "Analytics"
-      },
-      "branding": {
-        "button": "Customize Branding",
-        "description": "Customize your restaurant's colors and logo.",
-        "title": "Branding & Logo"
-      },
-      "menu": {
-        "button": "Build Menu",
-        "description": "Add and edit menu items and categories.",
-        "title": "Menu Management"
-      },
-      "qr": {
-        "button": "Generate QR Code",
-        "description": "Download and print a QR code for your menu.",
-        "title": "QR Code"
-      },
-      "pos": {
-        "button": "View POS System Plan",
-        "description": "Integrated point of sale system development plan",
-        "title": "POS System"
       }
     },
-    "shareableLink": {
-      "description": "Share this link with your customers to display the digital menu.",
-      "title": "Shareable Menu Link",
-      "copyAriaLabel": "Copy link"
+    "feedback": {
+      "title": "ملاحظات العملاء",
+      "description": "Review customer ratings and feedback.",
+      "modal": {
+        "title": "Rate Restaurant",
+        "submit": "Submit Rating",
+        "cancel": "Cancel",
+        "submitting": "Submitting..."
+      },
+      "rating": {
+        "required": "Rating is required"
+      },
+      "comment": "Comment",
+      "commentPlaceholder": "Share your thoughts about the food and service...",
+      "noFeedback": {
+        "description": "Customer feedback will appear here once submitted.",
+        "title": "No Feedback Yet"
+      }
+    },
+    "profile": {
+      "title": "الملف الشخصي",
+      "address": "Address",
+      "addressPlaceholder": "Enter restaurant address",
+      "currency": "Currency",
+      "description": "Description",
+      "descriptionPlaceholder": "A short description of your restaurant.",
+      "menuSlug": "Menu Link",
+      "name": "Restaurant Name",
+      "namePlaceholder": "Enter restaurant name",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 123 456 7890",
+      "saveChanges": "Save Changes",
+      "selectCurrency": "Select Currency",
+      "updateError": "Update Failed",
+      "updateSuccess": "Profile Updated",
+      "updateSuccessDescription": "Restaurant profile has been updated successfully.",
+      "updating": "Updating..."
     },
     "toast": {
-      "copyErrorDescription": "Failed to copy link.",
-      "copyErrorTitle": "Error",
-      "copySuccessDescription": "Link copied to clipboard.",
-      "copySuccessTitle": "Copied",
-      "feedbackErrorDescription": "Could not load feedback. Please try again later.",
-      "feedbackErrorTitle": "Feedback Fetch Error",
-      "noTenantDescription": "There is no restaurant associated with your account.",
-      "noTenantTitle": "Restaurant Not Found"
+      "feedbackErrorTitle": "خطأ في تحميل الملاحظات",
+      "feedbackErrorDescription": "تعذر تحميل ملاحظات العملاء",
+      "noTenantTitle": "لم يتم العثور على مطعم",
+      "noTenantDescription": "لم يتم العثور على مطعم مرتبط بحسابك",
+      "newOrder": {
+        "title": "طلب جديد!",
+        "description": "تم استلام طلب جديد بقيمة {price} {currency}"
+      },
+      "copySuccessTitle": "تم النسخ",
+      "copySuccessDescription": "تم نسخ الرابط بنجاح",
+      "copyErrorTitle": "فشل في النسخ",
+      "copyErrorDescription": "فشل في نسخ الرابط"
     },
-    "welcome": "Welcome, {{userName}} - Restaurant Dashboard"
+    "noTenant": {
+      "welcome": "مرحباً {name}",
+      "description": "لم يتم العثور على مطعم مرتبط بحسابك",
+      "contactAdmin": "يرجى التواصل مع الإدارة لإنشاء مطعم جديد"
+    },
+    "theme": {
+      "accentColor": "Accent Color",
+      "advancedColors": "Advanced Color Settings",
+      "primaryColorDescription": "Main brand color",
+      "secondaryColorDescription": "Background and secondary elements color",
+      "accentColorDescription": "Accent and interactive elements color",
+      "description": "Customize the primary colors for your restaurant's site.",
+      "primaryColor": "Primary Color",
+      "resetToDefault": "Reset to Default",
+      "saveChanges": "Save Colors",
+      "secondaryColor": "Secondary Color",
+      "title": "Theme Customization",
+      "updateError": "Failed to update colors.",
+      "updateSuccess": "Colors Updated",
+      "updateSuccessDescription": "Restaurant colors have been updated successfully.",
+      "updating": "Updating..."
+    }
   },
   "menu": {
     "management": "إدارة القائمة",
@@ -857,7 +861,14 @@
       "updateError": "خطأ في تحديث حالة الطلب",
       "online": "متصل",
       "offline": "غير متصل",
-      "tableBadge": "طاولة #{{tableNumber}}"
+      "tableBadge": "طاولة رقم {{tableNumber}}",
+      "tenantErrorTitle": "لم يتم العثور على معلومات المطعم",
+      "tenantErrorDescription": "لم نتمكن من العثور على المطعم المرتبط بحساب المستخدم الخاص بك.",
+      "tenantErrorHelp": "يرجى التواصل مع الدعم الفني للتأكد من أن حسابك مرتبط بشكل صحيح بمطعم.",
+      "live": "مباشر",
+      "reconnecting": "إعادة الاتصال...",
+      "connectionError": "خطأ في الاتصال",
+      "connecting": "جاري الاتصال..."
     },
     "status": {
       "new": "جديد",
@@ -952,78 +963,6 @@
       "kitchenDisplay": "• نظام عرض المطبخ",
       "realTimeUpdates": "• تحديثات الطلبات في الوقت الفعلي",
       "analytics": "• تحليلات وتقارير مفصلة"
-    }
-  },
-  "restaurant": {
-    "dashboardTitle": "لوحة تحكم {restaurantName}",
-    "welcome": "مرحباً، {userName}",
-    "infoCard": {
-      "title": "معلومات المطعم",
-      "name": "اسم المطعم",
-      "address": "العنوان",
-      "phone": "رقم الهاتف",
-      "plan": "الخطة"
-    },
-    "shareableLink": {
-      "title": "رابط القائمة",
-      "description": "شارك هذا الرابط مع عملائك للوصول إلى قائمة طعامك",
-      "copyAriaLabel": "نسخ رابط القائمة"
-    },
-    "quickActions": {
-      "menu": {
-        "title": "إدارة القائمة",
-        "description": "إضافة وتعديل عناصر القائمة",
-        "button": "إدارة القائمة"
-      },
-      "branding": {
-        "title": "العلامة التجارية",
-        "description": "تخصيص مظهر وألوان مطعمك",
-        "button": "تخصيص التصميم"
-      },
-      "qr": {
-        "title": "رموز QR",
-        "description": "إنشاء رموز QR للطاولات والقائمة",
-        "button": "إنشاء QR"
-      },
-      "analytics": {
-        "title": "التقارير",
-        "description": "عرض إحصائيات المبيعات والطلبات",
-        "button": "عرض التقارير"
-      },
-      "pos": {
-        "title": "نظام نقاط البيع",
-        "description": "إدارة الطلبات والمدفوعات",
-        "button": "فتح نقاط البيع"
-      }
-    },
-    "gettingStarted": {
-      "title": "البدء",
-      "description": "اتبع هذه الخطوات لإعداد مطعمك"
-    },
-    "feedback": {
-      "title": "ملاحظات العملاء"
-    },
-    "profile": {
-      "title": "الملف الشخصي"
-    },
-    "toast": {
-      "feedbackErrorTitle": "خطأ في تحميل الملاحظات",
-      "feedbackErrorDescription": "تعذر تحميل ملاحظات العملاء",
-      "noTenantTitle": "لم يتم العثور على مطعم",
-      "noTenantDescription": "لم يتم العثور على مطعم مرتبط بحسابك",
-      "newOrder": {
-        "title": "طلب جديد!",
-        "description": "تم استلام طلب جديد بقيمة {price} {currency}"
-      },
-      "copySuccessTitle": "تم النسخ",
-      "copySuccessDescription": "تم نسخ الرابط بنجاح",
-      "copyErrorTitle": "فشل في النسخ",
-      "copyErrorDescription": "فشل في نسخ الرابط"
-    },
-    "noTenant": {
-      "welcome": "مرحباً {name}",
-      "description": "لم يتم العثور على مطعم مرتبط بحسابك",
-      "contactAdmin": "يرجى التواصل مع الإدارة لإنشاء مطعم جديد"
     }
   }
 }

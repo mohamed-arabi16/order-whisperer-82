@@ -42,37 +42,24 @@ export interface StaffUser {
  * }} An object containing the staff members, loading state, and functions to manage them.
  */
 export const useStaff = () => {
-  const { user } = useAuth();
+  const { user, tenantId } = useAuth();
   const [staff, setStaff] = useState<StaffUser[]>([]);
   const [loading, setLoading] = useState(true);
 
   const loadStaff = async () => {
-    if (!user) return;
+    if (!tenantId) {
+      setStaff([]);
+      setLoading(false);
+      return;
+    }
 
     try {
       setLoading(true);
-      
-      // Get user's tenant ID
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('user_id', user.id)
-        .single();
-      
-      if (!profile) return;
-      
-      const { data: tenant } = await supabase
-        .from('tenants')
-        .select('id')
-        .eq('owner_id', profile.id)
-        .single();
-      
-      if (!tenant) return;
 
       const { data, error } = await supabase
         .from('staff_users')
         .select('*')
-        .eq('tenant_id', tenant.id)
+        .eq('tenant_id', tenantId)
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -91,38 +78,20 @@ export const useStaff = () => {
   };
 
   const createStaff = async (staffData: Partial<StaffUser>) => {
-    try {
-      // Get user's tenant ID
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('user_id', user!.id)
-        .single();
-      
-      if (!profile) {
-        toast.error('فشل في العثور على ملف المستخدم');
-        return null;
-      }
-      
-      const { data: tenant } = await supabase
-        .from('tenants')
-        .select('id')
-        .eq('owner_id', profile.id)
-        .single();
-      
-      if (!tenant) {
-        toast.error('فشل في العثور على بيانات المطعم');
-        return null;
-      }
+    if (!tenantId || !user) {
+      toast.error('لا يمكن إنشاء موظف بدون مطعم أو مستخدم نشط.');
+      return null;
+    }
 
+    try {
       const insertData = {
         staff_name: staffData.staff_name!,
         role: staffData.role!,
         pin_code: staffData.pin_code,
         is_active: staffData.is_active ?? true,
         permissions: staffData.permissions || {},
-        user_id: user!.id,
-        tenant_id: tenant.id
+        user_id: user.id,
+        tenant_id: tenantId
       };
 
       const { data, error } = await supabase
@@ -197,7 +166,7 @@ export const useStaff = () => {
 
   useEffect(() => {
     loadStaff();
-  }, [user]);
+  }, [tenantId]);
 
   return {
     staff,

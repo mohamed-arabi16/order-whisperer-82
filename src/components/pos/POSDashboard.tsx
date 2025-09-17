@@ -23,6 +23,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { RealtimeChannel } from '@supabase/supabase-js';
 import { POSAnalyticsTab } from "./POSAnalyticsTab";
 import { TableManagementTab } from "./TableManagementTab";
 import { NotificationManager } from "./NotificationManager";
@@ -70,18 +71,17 @@ interface POSOrder {
  */
 export const POSDashboard: React.FC = () => {
   const { t, isRTL, language } = useTranslation();
-  const { user, profile } = useAuth();
+  const { user, profile, tenantId, loading: authLoading } = useAuth();
   const [orders, setOrders] = useState<POSOrder[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('pending');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [subscriptionStatus, setSubscriptionStatus] = useState('loading');
   const [offlineOrders, setOfflineOrders] = useState<POSOrder[]>([]);
-  const [tenantId, setTenantId] = useState<string | null>(null);
   const [tablesMap, setTablesMap] = useState<Record<string, { table_number: string }>>({});
 
-  // Setup offline detection only; orders will load once tenantId is known
+  // Setup offline detection
   useEffect(() => {
-    // Setup offline detection
     const handleOnline = () => {
       setIsOnline(true);
       syncOfflineOrders();
@@ -96,35 +96,6 @@ export const POSDashboard: React.FC = () => {
       window.removeEventListener('offline', handleOffline);
     };
   }, []);
-
-  // Fetch tenant for the logged-in owner
-  useEffect(() => {
-    const fetchTenant = async () => {
-      if (!user) return;
-      console.log("POSDashboard: Fetching tenant for user:", user.id);
-      try {
-        const { data: profileRow } = await supabase
-          .from('profiles')
-          .select('id')
-          .eq('user_id', user.id)
-          .single();
-        if (!profileRow) {
-          console.log("POSDashboard: No profile found for user:", user.id);
-          return;
-        };
-        const { data: tenant } = await supabase
-          .from('tenants')
-          .select('id')
-          .eq('owner_id', profileRow.id)
-          .single();
-        console.log("POSDashboard: Fetched tenantId:", tenant?.id);
-        setTenantId(tenant?.id || null);
-      } catch (err) {
-        console.error('Error fetching tenant for POS:', err);
-      }
-    };
-    fetchTenant();
-  }, [user]);
 
   const playNotificationSound = useCallback(() => {
     try {
@@ -245,8 +216,14 @@ export const POSDashboard: React.FC = () => {
           }
         }
       )
-      .subscribe((status) => {
-          console.log('POSDashboard: Real-time subscription status:', status);
+      .subscribe((status, err) => {
+        if (err) {
+          console.error('Real-time subscription error:', err);
+          setSubscriptionStatus('error');
+        } else {
+          setSubscriptionStatus(status.toLowerCase());
+        }
+        console.log('POSDashboard: Real-time subscription status:', status);
       });
 
     return () => {
@@ -452,12 +429,32 @@ export const POSDashboard: React.FC = () => {
     </Card>
   );
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin">
           <RefreshCw className="w-8 h-8 text-primary" />
         </div>
+      </div>
+    );
+  }
+
+  if (!tenantId) {
+    return (
+      <div className="container mx-auto p-6 pt-24 text-center">
+        <Card className="max-w-md mx-auto">
+          <CardHeader>
+            <CardTitle className="text-2xl text-destructive">
+              {t('pos.dashboard.tenantErrorTitle')}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>{t('pos.dashboard.tenantErrorDescription')}</p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              {t('pos.dashboard.tenantErrorHelp')}
+            </p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -478,18 +475,47 @@ export const POSDashboard: React.FC = () => {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          {!isOnline && (
-            <Badge variant="destructive" className="flex items-center gap-1">
-              <WifiOff className="w-3 h-3" />
-              {t('pos.dashboard.offline')}
-            </Badge>
-          )}
-          {isOnline && (
-            <Badge variant="outline" className="flex items-center gap-1">
-              <Wifi className="w-3 h-3" />
-              {t('pos.dashboard.online')}
-            </Badge>
-          )}
+          {(() => {
+            let color = 'bg-gray-500';
+            let text = '...';
+            let icon = <WifiOff className="w-3 h-3" />;
+
+            if (!isOnline) {
+              color = 'bg-red-500';
+              text = t('pos.dashboard.offline');
+              icon = <WifiOff className="w-3 h-3" />;
+            } else {
+              switch (subscriptionStatus) {
+                case 'subscribed':
+                  color = 'bg-green-500';
+                  text = t('pos.dashboard.live');
+                  icon = <Wifi className="w-3 h-3" />;
+                  break;
+                case 'timed out':
+                  color = 'bg-yellow-500';
+                  text = t('pos.dashboard.reconnecting');
+                  icon = <RefreshCw className="w-3 h-3 animate-spin" />;
+                  break;
+                case 'channel_error':
+                case 'error':
+                  color = 'bg-red-500';
+                  text = t('pos.dashboard.connectionError');
+                  icon = <WifiOff className="w-3 h-3" />;
+                  break;
+                default:
+                  color = 'bg-gray-500';
+                  text = t('pos.dashboard.connecting');
+                  icon = <RefreshCw className="w-3 h-3 animate-spin" />;
+              }
+            }
+
+            return (
+              <Badge className={`${color} text-white flex items-center gap-1`}>
+                {icon}
+                {text}
+              </Badge>
+            );
+          })()}
           <Button onClick={loadOrders} variant="outline" size="sm">
             <RefreshCw className="w-4 h-4 mr-2" />
             {t('pos.dashboard.refresh')}
