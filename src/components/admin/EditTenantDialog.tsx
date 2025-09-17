@@ -40,6 +40,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * The Zod schema for the edit tenant form.
+ */
 const editTenantSchema = z.object({
   name: z.string().min(2, { message: "Restaurant name must be at least 2 characters." }),
   subscription_plan: z.enum(['basic', 'premium', 'enterprise']),

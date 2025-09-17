@@ -1,5 +1,9 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
+/**
+ * A skeleton loader for the public menu page.
+ * It displays a placeholder UI while the menu data is being fetched.
+ */
 export const MenuSkeleton = () => {
   return (
     <div className="min-h-screen bg-background">

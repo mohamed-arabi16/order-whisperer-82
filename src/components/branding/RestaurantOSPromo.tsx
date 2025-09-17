@@ -3,11 +3,19 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface RestaurantOSPromoProps
+ * @property {'free' | 'starter' | 'premium'} plan - The current subscription plan of the restaurant.
+ * @property {string} [className] - Optional additional CSS classes to apply to the component.
+ */
 interface RestaurantOSPromoProps {
   plan: 'free' | 'starter' | 'premium';
   className?: string;
 }
 
+/**
+ * A promotional banner for the RestaurantOS platform, displayed for non-premium users.
+ */
 export const RestaurantOSPromo: React.FC<RestaurantOSPromoProps> = ({ 
   plan, 
   className = "" 

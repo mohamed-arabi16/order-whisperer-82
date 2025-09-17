@@ -2,6 +2,17 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import { HamburgerMenu } from "./HamburgerMenu";
 
+/**
+ * @interface Tenant
+ * @property {string} name - The name of the tenant.
+ * @property {string} [logo_url] - The URL of the tenant's logo.
+ * @property {string} [address] - The address of the tenant.
+ * @property {string} [phone_number] - The phone number of the tenant.
+ * @property {string} [primary_color] - The primary color of the tenant's branding.
+ * @property {string} [branch_name] - The name of the tenant's branch.
+ * @property {string} [description] - A description of the tenant.
+ * @property {string} [logo_position] - The position of the tenant's logo.
+ */
 interface Tenant {
   name: string;
   logo_url?: string;
@@ -13,14 +24,19 @@ interface Tenant {
   logo_position?: string;
 }
 
+/**
+ * @interface RestaurantBrandingHeaderProps
+ * @property {Tenant} tenant - The tenant object.
+ * @property {() => void} [onFeedbackClick] - A callback function to be called when the feedback button is clicked.
+ */
 interface RestaurantBrandingHeaderProps {
   tenant: Tenant;
   onFeedbackClick?: () => void;
 }
 
 /**
- * Non-sticky restaurant branding header with logo, name, and hamburger menu.
- * This section scrolls away as the user scrolls down.
+ * A non-sticky header component that displays the restaurant's branding, including the logo and name.
+ * It also includes a hamburger menu for mobile navigation.
  */
 export const RestaurantBrandingHeader = ({ 
   tenant, 

@@ -4,6 +4,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "../LanguageSwitcher";
 
+/**
+ * @interface HamburgerMenuProps
+ * @property {string} [phoneNumber] - The phone number of the restaurant.
+ * @property {() => void} [onFeedbackClick] - A callback function to be called when the feedback button is clicked.
+ * @property {() => void} [onReviewsClick] - A callback function to be called when the reviews button is clicked.
+ */
 interface HamburgerMenuProps {
   phoneNumber?: string;
   onFeedbackClick?: () => void;
@@ -11,8 +17,8 @@ interface HamburgerMenuProps {
 }
 
 /**
- * Dropdown menu component for mobile-friendly navigation.
- * Contains language switcher, call button, and feedback button.
+ * A dropdown menu component that provides mobile-friendly navigation options.
+ * It includes a language switcher, a call button, and a feedback button.
  */
 export const HamburgerMenu = ({ phoneNumber, onFeedbackClick, onReviewsClick }: HamburgerMenuProps) => {
   const { t, isRTL } = useTranslation();

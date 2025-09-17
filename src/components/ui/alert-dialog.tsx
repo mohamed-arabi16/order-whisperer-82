@@ -4,10 +4,20 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
+/**
+ * A modal dialog that interrupts the user with important content and expects a response.
+ * This component is based on the Radix UI Alert Dialog primitive.
+ */
 const AlertDialog = AlertDialogPrimitive.Root;
 
+/**
+ * The button that opens the alert dialog.
+ */
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 
+/**
+ * A portal that renders the alert dialog's content in a new DOM node.
+ */
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
 
 /**

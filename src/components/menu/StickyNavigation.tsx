@@ -7,6 +7,13 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
+/**
+ * @interface Category
+ * @property {string} id - The unique identifier for the category.
+ * @property {string} name - The name of the category.
+ * @property {number} display_order - The display order of the category.
+ * @property {boolean} is_active - Whether the category is active.
+ */
 interface Category {
   id: string;
   name: string;
@@ -14,6 +21,15 @@ interface Category {
   is_active: boolean;
 }
 
+/**
+ * @interface StickyNavigationProps
+ * @property {Category[]} categories - An array of category objects.
+ * @property {string | null} activeCategory - The ID of the currently active category.
+ * @property {string} searchQuery - The current search query.
+ * @property {(query: string) => void} onSearchChange - A callback function to be called when the search query changes.
+ * @property {(categoryId: string) => void} onCategorySelect - A callback function to be called when a category is selected.
+ * @property {string} [phoneNumber] - The phone number of the restaurant.
+ */
 interface StickyNavigationProps {
   categories: Category[];
   activeCategory: string | null;
@@ -23,6 +39,10 @@ interface StickyNavigationProps {
   phoneNumber?: string;
 }
 
+/**
+ * A sticky navigation component that includes a search bar and a horizontal list of categories.
+ * It is used on the public menu page to allow users to filter and navigate the menu.
+ */
 export const StickyNavigation: React.FC<StickyNavigationProps> = ({
   categories,
   activeCategory,

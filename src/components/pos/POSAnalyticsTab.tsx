@@ -28,6 +28,15 @@ import {
   Activity
 } from "lucide-react";
 
+/**
+ * @interface AnalyticsData
+ * @property {number} todayOrders - The number of orders today.
+ * @property {number} todayRevenue - The revenue from today's orders.
+ * @property {string} avgPrepTime - The average preparation time for an order.
+ * @property {{ hour: number; orders: number }[]} peakHours - An array of peak hours and the number of orders during those hours.
+ * @property {{ date: string; orders: number; revenue: number }[]} orderTrends - An array of order trends over the last 7 days.
+ * @property {{ name: string; orders: number; avgTime: string }[]} staffPerformance - An array of staff performance data.
+ */
 interface AnalyticsData {
   todayOrders: number;
   todayRevenue: number;
@@ -37,6 +46,9 @@ interface AnalyticsData {
   staffPerformance: { name: string; orders: number; avgTime: string }[];
 }
 
+/**
+ * A component that displays analytics for the POS system.
+ */
 export const POSAnalyticsTab: React.FC = () => {
   const { t, isRTL } = useTranslation();
   const { user } = useAuth();

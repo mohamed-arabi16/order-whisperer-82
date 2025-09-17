@@ -3,6 +3,11 @@ import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A line that separates content.
+ * This component is based on the Radix UI Separator primitive.
+ * @see https://www.radix-ui.com/docs/primitives/components/separator
+ */
 const Separator = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>

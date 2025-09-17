@@ -14,11 +14,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+/**
+ * @interface DateRangePickerProps
+ * @extends React.ComponentProps<"div">
+ * @property {DateRange | undefined} date - The selected date range.
+ * @property {(date: DateRange | undefined) => void} onDateChange - A callback function that is called when the date range changes.
+ */
 interface DateRangePickerProps extends React.ComponentProps<"div"> {
   date: DateRange | undefined;
   onDateChange: (date: DateRange | undefined) => void;
 }
 
+/**
+ * A component that allows a user to select a range of dates.
+ * @param {DateRangePickerProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered date range picker component.
+ */
 export function DateRangePicker({
   className,
   date,

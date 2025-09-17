@@ -40,6 +40,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * The Zod schema for the create tenant form.
+ */
 const createTenantSchema = z.object({
   restaurantName: z.string().min(2, { message: "Restaurant name must be at least 2 characters." }),
   ownerName: z.string().min(2, { message: "Owner name must be at least 2 characters." }),

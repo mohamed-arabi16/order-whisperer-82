@@ -2,23 +2,45 @@ import { Component, ErrorInfo, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 
+/**
+ * @interface Props
+ * @property {ReactNode} children - The child components to render.
+ */
 interface Props {
   children: ReactNode;
 }
 
+/**
+ * @interface State
+ * @property {boolean} hasError - Whether an error has been caught.
+ */
 interface State {
   hasError: boolean;
 }
 
+/**
+ * A component that catches JavaScript errors anywhere in its child component tree,
+ * logs those errors, and displays a fallback UI instead of the component tree that crashed.
+ */
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
   };
 
+  /**
+   * A lifecycle method that is invoked after an error has been thrown by a descendant component.
+   * @param {Error} _ - The error that was thrown.
+   * @returns {State} An object to update the state.
+   */
   public static getDerivedStateFromError(_: Error): State {
     return { hasError: true };
   }
 
+  /**
+   * A lifecycle method that is invoked after an error has been thrown by a descendant component.
+   * @param {Error} error - The error that was thrown.
+   * @param {ErrorInfo} errorInfo - An object with a `componentStack` key containing information about which component threw the error.
+   */
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Enhanced error logging for debugging
     console.error("=== ERROR BOUNDARY CAUGHT ERROR ===");
@@ -29,6 +51,10 @@ class ErrorBoundary extends Component<Props, State> {
     console.error("=====================================");
   }
 
+  /**
+   * Renders the component.
+   * @returns {ReactNode} The rendered component.
+   */
   public render() {
     if (this.state.hasError) {
       return (

@@ -19,6 +19,14 @@ import {
   AlertTriangle
 } from "lucide-react";
 
+/**
+ * @interface NotificationPreferences
+ * @property {boolean} new_order_sound - Whether to play a sound for new orders.
+ * @property {boolean} urgent_order_alert - Whether to show an alert for urgent orders.
+ * @property {boolean} browser_notifications - Whether to show browser notifications.
+ * @property {boolean} email_notifications - Whether to send email notifications.
+ * @property {boolean} sms_notifications - Whether to send SMS notifications.
+ */
 interface NotificationPreferences {
   new_order_sound: boolean;
   urgent_order_alert: boolean;
@@ -27,6 +35,9 @@ interface NotificationPreferences {
   sms_notifications: boolean;
 }
 
+/**
+ * A component for managing notification preferences for the POS system.
+ */
 export const NotificationManager: React.FC = () => {
   const { t, isRTL } = useTranslation();
   const { user } = useAuth();

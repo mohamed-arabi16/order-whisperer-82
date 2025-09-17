@@ -3,10 +3,21 @@ import * as PopoverPrimitive from "@radix-ui/react-popover"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A popup that displays content in a layer above the main content.
+ * This component is based on the Radix UI Popover primitive.
+ * @see https://www.radix-ui.com/docs/primitives/components/popover
+ */
 const Popover = PopoverPrimitive.Root
 
+/**
+ * The button that toggles the popover.
+ */
 const PopoverTrigger = PopoverPrimitive.Trigger
 
+/**
+ * The content of the popover.
+ */
 const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>

@@ -11,6 +11,13 @@ export interface CartItem {
   notes?: string;
 }
 
+/**
+ * Represents the customer's information for an order.
+ * @property {string} name - The customer's name.
+ * @property {string} phone - The customer's phone number.
+ * @property {string} [tableNumber] - The table number for dine-in orders.
+ * @property {string} [deliveryAddress] - The delivery address for delivery orders.
+ */
 export interface CustomerInfo {
   name: string;
   phone: string;
@@ -18,6 +25,12 @@ export interface CustomerInfo {
   deliveryAddress?: string;
 }
 
+/**
+ * Defines the mode of an order (e.g., dine-in, takeaway).
+ * @property {string} id - The unique identifier for the order mode.
+ * @property {string} name - The display name of the order mode.
+ * @property {'dine_in' | 'takeaway' | 'delivery'} value - The value of the order mode.
+ */
 export interface OrderModeType {
   id: string;
   name: string;
