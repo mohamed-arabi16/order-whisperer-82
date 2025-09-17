@@ -210,8 +210,6 @@ export const POSDashboard: React.FC = () => {
           filter: `tenant_id=eq.${tenantId}`
         },
         (payload) => {
-          console.log('POS Order change:', payload);
-          
           if (payload.eventType === 'INSERT') {
             const newOrder = payload.new as POSOrder;
             setOrders(prev => [newOrder, ...prev]);
