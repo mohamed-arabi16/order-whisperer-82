@@ -376,7 +376,7 @@ const PublicMenu = (): JSX.Element => {
         const posOrderData = {
           tenant_id: tenant.id,
           order_number: orderNumber,
-          status: 'new', // All orders need approval first
+          status: 'pending_approval',
           items: cart as any, // Convert to JSON
           customer_info: finalCustomerInfo as any, // Convert to JSON
           total_amount: finalTotal,

@@ -24,6 +24,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { RealtimeChannel } from '@supabase/supabase-js';
+import { z } from 'zod';
 import { POSAnalyticsTab } from "./POSAnalyticsTab";
 import { TableManagementTab } from "./TableManagementTab";
 import { NotificationManager } from "./NotificationManager";
@@ -65,6 +66,25 @@ interface POSOrder {
   approved_at?: string;
 }
 
+const orderSchema = z.object({
+  id: z.string(),
+  order_number: z.string(),
+  status: z.enum(['pending_approval', 'new', 'preparing', 'ready', 'completed', 'cancelled']),
+  order_type: z.string(),
+  table_id: z.string().nullable().optional(),
+  customer_info: z.object({
+    name: z.string().optional(),
+    phone: z.string().optional(),
+  }).nullable().optional(),
+  items: z.array(z.any()),
+  total_amount: z.number(),
+  notes: z.string().nullable().optional(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  approved_by: z.string().nullable().optional(),
+  approved_at: z.string().nullable().optional(),
+});
+
 /**
  * The main dashboard for the Point of Sale (POS) system.
  * It provides a comprehensive view of orders, analytics, and management tools.
@@ -73,7 +93,8 @@ export const POSDashboard: React.FC = () => {
   const { t, isRTL, language } = useTranslation();
   const { user, profile, tenantId, loading: authLoading } = useAuth();
   const [orders, setOrders] = useState<POSOrder[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [ordersLoading, setOrdersLoading] = useState(true);
+  const [tablesLoading, setTablesLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('pending');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [subscriptionStatus, setSubscriptionStatus] = useState('loading');
@@ -132,8 +153,12 @@ export const POSDashboard: React.FC = () => {
   }, [tablesMap]);
 
   const loadOrders = useCallback(async () => {
+    if (!tenantId) {
+      setOrdersLoading(false);
+      return;
+    }
     try {
-      if (!tenantId) return;
+      setOrdersLoading(true);
       console.log("POSDashboard: Loading orders for tenantId:", tenantId);
       const { data, error } = await supabase
         .from('pos_orders')
@@ -143,19 +168,33 @@ export const POSDashboard: React.FC = () => {
         .limit(50);
 
       if (error) throw error;
-      console.log("POSDashboard: Raw orders fetched:", data);
-      setOrders((data || []) as POSOrder[]);
+
+      const validatedOrders = (data || []).map(order => {
+        const result = orderSchema.safeParse(order);
+        if (!result.success) {
+          console.error("Malformed order data received:", result.error.issues, "Original data:", order);
+          return null;
+        }
+        return result.data as POSOrder;
+      }).filter(Boolean) as POSOrder[];
+
+      console.log("POSDashboard: Validated orders fetched:", validatedOrders);
+      setOrders(validatedOrders);
     } catch (error) {
       console.error('Error loading orders:', error);
       toast.error(t('pos.dashboard.loadError'));
     } finally {
-      setLoading(false);
+      setOrdersLoading(false);
     }
   }, [tenantId, t]);
 
   const loadTables = useCallback(async () => {
+    if (!tenantId) {
+      setTablesLoading(false);
+      return;
+    }
     try {
-      if (!tenantId) return;
+      setTablesLoading(true);
       const { data, error } = await supabase
         .from('restaurant_tables')
         .select('id, table_number')
@@ -171,6 +210,8 @@ export const POSDashboard: React.FC = () => {
       setTablesMap(tableMap);
     } catch (error) {
       console.error('Error loading tables:', error);
+    } finally {
+      setTablesLoading(false);
     }
   }, [tenantId]);
 
@@ -189,28 +230,33 @@ export const POSDashboard: React.FC = () => {
           filter: `tenant_id=eq.${tenantId}`
         },
         (payload) => {
-          if (payload.eventType === 'INSERT') {
-            const newOrder = payload.new as POSOrder;
-            console.log('POSDashboard: New order inserted:', newOrder);
-            setOrders(prev => [newOrder, ...prev]);
+          const result = orderSchema.safeParse(payload.new);
+          if (!result.success) {
+            console.error("Malformed real-time order data received:", result.error.issues, "Original payload:", payload);
+            return;
+          }
+          const validatedOrder = result.data as POSOrder;
 
-            if (newOrder.table_id && !tablesMap[newOrder.table_id]) {
-              fetchAndCacheTable(newOrder.table_id);
+          if (payload.eventType === 'INSERT') {
+            console.log('POSDashboard: New order inserted:', validatedOrder);
+            setOrders(prev => [validatedOrder, ...prev]);
+
+            if (validatedOrder.table_id && !tablesMap[validatedOrder.table_id]) {
+              fetchAndCacheTable(validatedOrder.table_id);
             }
             
             toast.success(t('pos.dashboard.newOrderNotification', {
-              orderNumber: newOrder.order_number,
-              totalAmount: newOrder.total_amount,
+              orderNumber: validatedOrder.order_number,
+              totalAmount: validatedOrder.total_amount,
               currency: t('common.currency')
             }));
 
             playNotificationSound();
           } else if (payload.eventType === 'UPDATE') {
-            const updatedOrder = payload.new as POSOrder;
-            console.log('POSDashboard: Order updated:', updatedOrder);
+            console.log('POSDashboard: Order updated:', validatedOrder);
             setOrders(prev => 
               prev.map(order => 
-                order.id === updatedOrder.id ? updatedOrder : order
+                order.id === validatedOrder.id ? validatedOrder : order
               )
             );
           }
@@ -429,7 +475,9 @@ export const POSDashboard: React.FC = () => {
     </Card>
   );
 
-  if (authLoading || loading) {
+  const isLoading = authLoading || ordersLoading || tablesLoading;
+
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin">
