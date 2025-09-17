@@ -9,6 +9,16 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { InlineQuantityControls } from "./InlineQuantityControls";
 import { formatPrice } from "@/components/ui/currency-selector";
 
+/**
+ * @interface MenuItem
+ * @property {string} id - The unique identifier for the menu item.
+ * @property {string} name - The name of the menu item.
+ * @property {string | null} description - A description of the menu item.
+ * @property {number} price - The price of the menu item.
+ * @property {string | null} image_url - The URL of the menu item's image.
+ * @property {boolean} [is_featured] - Whether the menu item is featured.
+ * @property {string} [currency] - The currency of the menu item's price.
+ */
 interface MenuItem {
   id: string;
   name: string;
@@ -19,6 +29,17 @@ interface MenuItem {
   currency?: string;
 }
 
+/**
+ * @interface MenuItemCardProps
+ * @property {MenuItem} item - The menu item to display.
+ * @property {number} quantity - The quantity of the item in the cart.
+ * @property {boolean} isFavorite - Whether the item is marked as a favorite.
+ * @property {boolean} isAddingToCart - Whether the item is currently being added to the cart.
+ * @property {() => void} onAddToCart - A callback function to add the item to the cart.
+ * @property {() => void} onRemoveFromCart - A callback function to remove the item from the cart.
+ * @property {() => void} onToggleFavorite - A callback function to toggle the item's favorite status.
+ * @property {() => void} onViewDetails - A callback function to view the item's details.
+ */
 interface MenuItemCardProps {
   item: MenuItem;
   quantity: number;
@@ -30,6 +51,9 @@ interface MenuItemCardProps {
   onViewDetails: () => void;
 }
 
+/**
+ * A card component that displays a single menu item with its details and actions.
+ */
 export const MenuItemCard: React.FC<MenuItemCardProps> = ({
   item,
   quantity,

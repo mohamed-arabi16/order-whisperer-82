@@ -3,12 +3,26 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A provider for the tooltip component.
+ */
 const TooltipProvider = TooltipPrimitive.Provider
 
+/**
+ * A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
+ * This component is based on the Radix UI Tooltip primitive.
+ * @see https://www.radix-ui.com/docs/primitives/components/tooltip
+ */
 const Tooltip = TooltipPrimitive.Root
 
+/**
+ * The element that triggers the tooltip.
+ */
 const TooltipTrigger = TooltipPrimitive.Trigger
 
+/**
+ * The content of the tooltip.
+ */
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>

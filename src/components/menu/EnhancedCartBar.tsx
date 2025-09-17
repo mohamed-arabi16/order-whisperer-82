@@ -4,6 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 
+/**
+ * @interface CartItem
+ * @property {string} id - The unique identifier for the item.
+ * @property {string} name - The name of the item.
+ * @property {number} price - The price of the item.
+ * @property {number} quantity - The quantity of the item in the cart.
+ */
 interface CartItem {
   id: string;
   name: string;
@@ -11,6 +18,15 @@ interface CartItem {
   quantity: number;
 }
 
+/**
+ * @interface EnhancedCartBarProps
+ * @property {CartItem[]} cart - An array of items in the cart.
+ * @property {number} totalPrice - The total price of all items in the cart.
+ * @property {number} totalItems - The total number of items in the cart.
+ * @property {() => void} onShowCart - A function to be called when the cart bar is clicked.
+ * @property {string} [restaurantName] - The name of the restaurant.
+ * @property {any} cartAnimation - The animation controls for the cart bar.
+ */
 interface EnhancedCartBarProps {
   cart: CartItem[];
   totalPrice: number;
@@ -20,6 +36,10 @@ interface EnhancedCartBarProps {
   cartAnimation: any;
 }
 
+/**
+ * A bar that is displayed at the bottom of the screen when there are items in the cart.
+ * It shows the total number of items and the total price, and allows the user to open the cart drawer.
+ */
 export const EnhancedCartBar: React.FC<EnhancedCartBarProps> = ({
   cart,
   totalPrice,

@@ -3,6 +3,22 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { toast } from 'sonner';
 
+/**
+ * @interface Payment
+ * @property {string} id - The unique identifier for the payment.
+ * @property {string} tenant_id - The ID of the tenant the payment belongs to.
+ * @property {string} order_id - The ID of the order the payment is for.
+ * @property {'cash' | 'card' | 'digital'} payment_method - The payment method used.
+ * @property {number} amount - The amount of the payment.
+ * @property {number} [received_amount] - The amount of cash received from the customer.
+ * @property {number} change_amount - The amount of change given to the customer.
+ * @property {string} [processed_by] - The ID of the user who processed the payment.
+ * @property {'pending' | 'completed' | 'failed' | 'refunded'} payment_status - The status of the payment.
+ * @property {string} [transaction_reference] - A reference to the transaction.
+ * @property {string} [notes] - Any notes about the payment.
+ * @property {string} created_at - The timestamp when the payment was created.
+ * @property {string} updated_at - The timestamp when the payment was last updated.
+ */
 export interface Payment {
   id: string;
   tenant_id: string;
@@ -19,6 +35,17 @@ export interface Payment {
   updated_at: string;
 }
 
+/**
+ * A custom hook for managing payments.
+ * This hook provides functions to load, process, and refund payments.
+ * @returns {{
+ *   payments: Payment[],
+ *   loading: boolean,
+ *   loadPayments: () => Promise<void>,
+ *   processPayment: (paymentData: Partial<Payment>) => Promise<Payment | null>,
+ *   refundPayment: (id: string, refundAmount?: number) => Promise<boolean>
+ * }} An object containing the payments, loading state, and functions to manage payments.
+ */
 export const usePayments = () => {
   const { user } = useAuth();
   const [payments, setPayments] = useState<Payment[]>([]);

@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ButtonProps, buttonVariants } from "@/components/ui/button"
 
+/**
+ * A container for a set of pagination links.
+ */
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
     role="navigation"
@@ -14,6 +17,9 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
 )
 Pagination.displayName = "Pagination"
 
+/**
+ * A container for the pagination items.
+ */
 const PaginationContent = React.forwardRef<
   HTMLUListElement,
   React.ComponentProps<"ul">
@@ -26,6 +32,9 @@ const PaginationContent = React.forwardRef<
 ))
 PaginationContent.displayName = "PaginationContent"
 
+/**
+ * A single item in a pagination list.
+ */
 const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
@@ -34,11 +43,20 @@ const PaginationItem = React.forwardRef<
 ))
 PaginationItem.displayName = "PaginationItem"
 
+/**
+ * @typedef {object} PaginationLinkProps
+ * @property {boolean} [isActive] - Whether the link is active.
+ * @augments ButtonProps
+ * @augments React.ComponentProps<"a">
+ */
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<"a">
 
+/**
+ * A link to a page in a pagination list.
+ */
 const PaginationLink = ({
   className,
   isActive,
@@ -59,6 +77,9 @@ const PaginationLink = ({
 )
 PaginationLink.displayName = "PaginationLink"
 
+/**
+ * A link to the previous page in a pagination list.
+ */
 const PaginationPrevious = ({
   className,
   ...props
@@ -75,6 +96,9 @@ const PaginationPrevious = ({
 )
 PaginationPrevious.displayName = "PaginationPrevious"
 
+/**
+ * A link to the next page in a pagination list.
+ */
 const PaginationNext = ({
   className,
   ...props
@@ -91,6 +115,9 @@ const PaginationNext = ({
 )
 PaginationNext.displayName = "PaginationNext"
 
+/**
+ * An ellipsis to indicate that there are more pages.
+ */
 const PaginationEllipsis = ({
   className,
   ...props

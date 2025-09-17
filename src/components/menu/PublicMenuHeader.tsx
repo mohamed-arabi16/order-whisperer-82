@@ -13,6 +13,13 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "../LanguageSwitcher";
 
+/**
+ * @interface Category
+ * @property {string} id - The unique identifier for the category.
+ * @property {string} name - The name of the category.
+ * @property {number} display_order - The display order of the category.
+ * @property {boolean} is_active - Whether the category is active.
+ */
 interface Category {
   id: string;
   name: string;
@@ -20,6 +27,17 @@ interface Category {
   is_active: boolean;
 }
 
+/**
+ * @interface Tenant
+ * @property {string} name - The name of the tenant.
+ * @property {string} [logo_url] - The URL of the tenant's logo.
+ * @property {string} [address] - The address of the tenant.
+ * @property {string} [phone_number] - The phone number of the tenant.
+ * @property {string} [primary_color] - The primary color of the tenant's branding.
+ * @property {string} [branch_name] - The name of the tenant's branch.
+ * @property {string} [description] - A description of the tenant.
+ * @property {string} [logo_position] - The position of the tenant's logo.
+ */
 interface Tenant {
   name: string;
   logo_url?: string;
@@ -31,6 +49,15 @@ interface Tenant {
   logo_position?: string;
 }
 
+/**
+ * @interface PublicMenuHeaderProps
+ * @property {Tenant} tenant - The tenant object.
+ * @property {Category[]} categories - An array of category objects.
+ * @property {string} activeCategory - The ID of the currently active category.
+ * @property {string} searchQuery - The current search query.
+ * @property {(query: string) => void} onSearchChange - A callback function to be called when the search query changes.
+ * @property {(categoryId: string) => void} onCategorySelect - A callback function to be called when a category is selected.
+ */
 interface PublicMenuHeaderProps {
   tenant: Tenant;
   categories: Category[];

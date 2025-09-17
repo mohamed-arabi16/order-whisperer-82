@@ -4,7 +4,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 /**
- * The shape of the authentication context.
+ * @interface AuthContextType
+ * @property {User | null} user - The authenticated user object, or null if not authenticated.
+ * @property {Session | null} session - The current session object, or null if there is no session.
+ * @property {any} profile - The user's profile data from the database.
+ * @property {boolean} loading - True if the authentication state is currently being loaded.
+ * @property {(email: string, password: string, fullName: string, role?: string) => Promise<{ error: any }>} signUp - Function to sign up a new user.
+ * @property {(email: string, password: string) => Promise<{ error: any }>} signIn - Function to sign in a user.
+ * @property {() => Promise<{ error: any }>} signOut - Function to sign out the current user.
+ * @property {boolean} isAdmin - True if the current user has the 'super_admin' role.
+ * @property {boolean} isRestaurantOwner - True if the current user has the 'restaurant_owner' role.
  */
 interface AuthContextType {
   user: User | null;

@@ -3,6 +3,25 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { toast } from 'sonner';
 
+/**
+ * @interface Shift
+ * @property {string} id - The unique identifier for the shift.
+ * @property {string} tenant_id - The ID of the tenant the shift belongs to.
+ * @property {string} staff_user_id - The ID of the staff member who worked the shift.
+ * @property {string} shift_start - The timestamp when the shift started.
+ * @property {string} [shift_end] - The timestamp when the shift ended.
+ * @property {number} opening_cash - The amount of cash at the start of the shift.
+ * @property {number} [closing_cash] - The amount of cash at the end of the shift.
+ * @property {number} total_sales - The total sales during the shift.
+ * @property {number} total_orders - The total number of orders during the shift.
+ * @property {number} cash_payments - The total amount of cash payments during the shift.
+ * @property {number} card_payments - The total amount of card payments during the shift.
+ * @property {number} discounts_given - The total amount of discounts given during the shift.
+ * @property {string} [notes] - Any notes about the shift.
+ * @property {'open' | 'closed'} status - The status of the shift.
+ * @property {string} created_at - The timestamp when the shift was created.
+ * @property {string} updated_at - The timestamp when the shift was last updated.
+ */
 export interface Shift {
   id: string;
   tenant_id: string;
@@ -22,6 +41,19 @@ export interface Shift {
   updated_at: string;
 }
 
+/**
+ * A custom hook for managing staff shifts.
+ * This hook provides functions to load, open, close, and update shifts.
+ * @returns {{
+ *   shifts: Shift[],
+ *   currentShift: Shift | null,
+ *   loading: boolean,
+ *   loadShifts: () => Promise<void>,
+ *   openShift: (staffUserId: string, openingCash: number) => Promise<Shift | null>,
+ *   closeShift: (shiftId: string, closingCash: number, notes?: string) => Promise<boolean>,
+ *   updateShiftStats: (shiftId: string, stats: Partial<Shift>) => Promise<boolean>
+ * }} An object containing the shifts, current shift, loading state, and functions to manage shifts.
+ */
 export const useShifts = () => {
   const { user } = useAuth();
   const [shifts, setShifts] = useState<Shift[]>([]);

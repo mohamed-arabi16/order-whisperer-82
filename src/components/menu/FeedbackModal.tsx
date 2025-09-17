@@ -7,6 +7,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface FeedbackModalProps
+ * @property {boolean} isOpen - Whether the modal is open.
+ * @property {() => void} onClose - A callback function to close the modal.
+ * @property {string} tenantId - The ID of the tenant for whom the feedback is being submitted.
+ * @property {string} restaurantName - The name of the restaurant.
+ */
 interface FeedbackModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -14,6 +21,9 @@ interface FeedbackModalProps {
   restaurantName: string;
 }
 
+/**
+ * A modal component for users to submit feedback about a restaurant.
+ */
 export const FeedbackModal: React.FC<FeedbackModalProps> = ({
   isOpen,
   onClose,

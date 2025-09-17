@@ -3,12 +3,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface CurrencySelectorProps
+ * @property {string} value - The current value of the currency selector.
+ * @property {(currency: string) => void} onChange - A callback function that is called when the value changes.
+ * @property {boolean} [disabled=false] - Whether the currency selector is disabled.
+ */
 interface CurrencySelectorProps {
   value: string;
   onChange: (currency: string) => void;
   disabled?: boolean;
 }
 
+/**
+ * An array of supported currencies.
+ */
 const CURRENCIES = [
   { code: 'SYP', name: 'Syrian Pound', symbol: 'ل.س', nameAr: 'الليرة السورية' },
   { code: 'LBP', name: 'Lebanese Pound', symbol: 'ل.ل', nameAr: 'الليرة اللبنانية' },
@@ -21,6 +30,9 @@ const CURRENCIES = [
   { code: 'JOD', name: 'Jordanian Dinar', symbol: 'د.أ', nameAr: 'الدينار الأردني' },
 ];
 
+/**
+ * A component that allows the user to select a currency.
+ */
 export const CurrencySelector: React.FC<CurrencySelectorProps> = ({
   value,
   onChange,
@@ -51,11 +63,22 @@ export const CurrencySelector: React.FC<CurrencySelectorProps> = ({
   );
 };
 
+/**
+ * Returns the symbol for a given currency code.
+ * @param {string} currencyCode - The currency code.
+ * @returns {string} The symbol for the currency, or 'ل.س' if not found.
+ */
 export const getCurrencySymbol = (currencyCode: string): string => {
   const currency = CURRENCIES.find(c => c.code === currencyCode);
   return currency?.symbol || 'ل.س';
 };
 
+/**
+ * Formats a price with the appropriate currency symbol.
+ * @param {number} price - The price to format.
+ * @param {string} [currencyCode='SYP'] - The currency code to use.
+ * @returns {string} The formatted price string.
+ */
 export const formatPrice = (price: number, currencyCode: string = 'SYP'): string => {
   const symbol = getCurrencySymbol(currencyCode);
   return `${price.toLocaleString()} ${symbol}`;

@@ -11,6 +11,9 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 
+/**
+ * A skeleton loader for the public menu page, providing a placeholder UI while data is being fetched.
+ */
 const PublicMenuSkeleton = () => {
   return (
     <SidebarProvider>

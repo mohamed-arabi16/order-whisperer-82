@@ -12,6 +12,7 @@ This project is a comprehensive digital menu and ordering system designed for re
 - **WhatsApp Ordering**: Seamlessly integrates with WhatsApp for placing orders.
 - **Localization**: Supports English and Arabic, with an easily extensible translation system.
 - **Responsive Design**: The public menu and dashboards are designed to work on all devices.
+- **Point of Sale (POS) System**: A simple POS system for managing orders, tables, and staff.
 
 ## Tech Stack
 
@@ -87,3 +88,18 @@ The application should now be running on `http://localhost:5173`.
 - **Super Admin**: The first user created can be promoted to `super_admin` directly in the Supabase `profiles` table. This user can then access the super admin dashboard to create and manage new restaurant tenants.
 - **Restaurant Owner**: When a new tenant is created, a restaurant owner account is also created. This user can log in to manage their menu, customize their branding, and generate a QR code for their menu.
 - **Public Menu**: The public menu for each restaurant is accessible at `/menu/:slug`, where `:slug` is the unique slug generated for the restaurant.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev`: Runs the app in the development mode.
+- `npm run build`: Builds the app for production to the `dist` folder.
+- `npm run lint`: Lints the code using ESLint.
+- `npm run preview`: Serves the production build locally.
+
+## Documentation
+
+This repository is extensively documented using JSDoc comments. The documentation provides information about the purpose of each component, its props, and its usage. This makes it easier for new developers to understand the codebase and contribute to the project.
+
+You can generate a documentation website from the JSDoc comments using a tool like [JSDoc](https://jsdoc.app/).

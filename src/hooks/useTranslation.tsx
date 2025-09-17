@@ -4,9 +4,23 @@ import type { ReactNode } from "react";
 import arTranslations from "@/i18n/ar.json";
 import enTranslations from "@/i18n/en.json";
 
+/**
+ * @typedef {'ar' | 'en'} Language - The available languages for the application.
+ */
 type Language = "ar" | "en";
+/**
+ * @typedef {Record<string, any>} Translations - A dictionary of translations for a given language.
+ */
 type Translations = Record<string, any>;
 
+/**
+ * @interface TranslationContextType
+ * @property {Language} language - The currently selected language.
+ * @property {(lang: Language) => void} setLanguage - Function to change the current language.
+ * @property {(key: string, variables?: Record<string, string | number>) => string} t - Function to get a translated string for a given key.
+ * @property {(key: string) => string[]} t_array - Function to get a translated array of strings for a given key.
+ * @property {boolean} isRTL - True if the current language is right-to-left.
+ */
 interface TranslationContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -22,6 +36,10 @@ const translations: Record<Language, Translations> = {
   en: enTranslations as Translations,
 };
 
+/**
+ * @interface TranslationProviderProps
+ * @property {ReactNode} children - The child components that will have access to the translation context.
+ */
 interface TranslationProviderProps {
   children: ReactNode;
 }

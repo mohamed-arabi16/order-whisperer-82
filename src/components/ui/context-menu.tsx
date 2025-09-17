@@ -4,18 +4,41 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A context menu that appears on right-click or long-press.
+ * This component is based on the Radix UI Context Menu primitive.
+ * @see https://www.radix-ui.com/docs/primitives/components/context-menu
+ */
 const ContextMenu = ContextMenuPrimitive.Root
 
+/**
+ * The element that triggers the context menu.
+ */
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger
 
+/**
+ * A container for a group of context menu items.
+ */
 const ContextMenuGroup = ContextMenuPrimitive.Group
 
+/**
+ * A portal that renders the context menu's content in a new DOM node.
+ */
 const ContextMenuPortal = ContextMenuPrimitive.Portal
 
+/**
+ * A container for a submenu within a context menu.
+ */
 const ContextMenuSub = ContextMenuPrimitive.Sub
 
+/**
+ * A container for a group of radio items.
+ */
 const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
 
+/**
+ * The button that toggles the open state of a submenu.
+ */
 const ContextMenuSubTrigger = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger> & {
@@ -37,6 +60,9 @@ const ContextMenuSubTrigger = React.forwardRef<
 ))
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
 
+/**
+ * The content of a submenu.
+ */
 const ContextMenuSubContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.SubContent>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>
@@ -52,6 +78,9 @@ const ContextMenuSubContent = React.forwardRef<
 ))
 ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName
 
+/**
+ * The content of the context menu.
+ */
 const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
@@ -69,6 +98,9 @@ const ContextMenuContent = React.forwardRef<
 ))
 ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName
 
+/**
+ * An item within a context menu.
+ */
 const ContextMenuItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {
@@ -87,6 +119,9 @@ const ContextMenuItem = React.forwardRef<
 ))
 ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName
 
+/**
+ * A checkable item within a context menu.
+ */
 const ContextMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
@@ -111,6 +146,9 @@ const ContextMenuCheckboxItem = React.forwardRef<
 ContextMenuCheckboxItem.displayName =
   ContextMenuPrimitive.CheckboxItem.displayName
 
+/**
+ * A radio item within a context menu.
+ */
 const ContextMenuRadioItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.RadioItem>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>
@@ -133,6 +171,9 @@ const ContextMenuRadioItem = React.forwardRef<
 ))
 ContextMenuRadioItem.displayName = ContextMenuPrimitive.RadioItem.displayName
 
+/**
+ * A label within a context menu.
+ */
 const ContextMenuLabel = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label> & {
@@ -151,6 +192,9 @@ const ContextMenuLabel = React.forwardRef<
 ))
 ContextMenuLabel.displayName = ContextMenuPrimitive.Label.displayName
 
+/**
+ * A separator within a context menu.
+ */
 const ContextMenuSeparator = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>
@@ -163,6 +207,9 @@ const ContextMenuSeparator = React.forwardRef<
 ))
 ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName
 
+/**
+ * A keyboard shortcut to display next to a context menu item.
+ */
 const ContextMenuShortcut = ({
   className,
   ...props

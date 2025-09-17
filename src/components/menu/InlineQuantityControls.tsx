@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+/**
+ * @interface InlineQuantityControlsProps
+ * @property {number} quantity - The current quantity.
+ * @property {() => void} onIncrement - A function to be called when the quantity is incremented.
+ * @property {() => void} onDecrement - A function to be called when the quantity is decremented.
+ * @property {boolean} [isLoading=false] - Whether the controls are in a loading state.
+ */
 interface InlineQuantityControlsProps {
   quantity: number;
   onIncrement: () => void;
@@ -10,6 +17,10 @@ interface InlineQuantityControlsProps {
   isLoading?: boolean;
 }
 
+/**
+ * A set of controls for incrementing and decrementing a quantity,
+ * typically used for items in a shopping cart.
+ */
 export const InlineQuantityControls: React.FC<InlineQuantityControlsProps> = ({
   quantity,
   onIncrement,

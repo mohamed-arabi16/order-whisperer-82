@@ -3,6 +3,11 @@ import * as ProgressPrimitive from "@radix-ui/react-progress"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A component that displays an indicator showing the completion progress of a task.
+ * This component is based on the Radix UI Progress primitive.
+ * @see https://www.radix-ui.com/docs/primitives/components/progress
+ */
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>

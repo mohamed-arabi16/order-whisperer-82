@@ -29,6 +29,22 @@ import { NotificationManager } from "./NotificationManager";
 import StaffManagement from "./StaffManagement";
 import ShiftManagement from "./ShiftManagement";
 
+/**
+ * @interface POSOrder
+ * @property {string} id - The unique identifier for the order.
+ * @property {string} order_number - The order number.
+ * @property {'pending_approval' | 'new' | 'preparing' | 'ready' | 'completed' | 'cancelled'} status - The status of the order.
+ * @property {string} order_type - The type of the order.
+ * @property {string} [table_id] - The ID of the table for dine-in orders.
+ * @property {{ name?: string; phone?: string; }} [customer_info] - The customer's information.
+ * @property {any[]} items - An array of items in the order.
+ * @property {number} total_amount - The total amount of the order.
+ * @property {string} [notes] - Any notes for the order.
+ * @property {string} created_at - The timestamp when the order was created.
+ * @property {string} updated_at - The timestamp when the order was last updated.
+ * @property {string} [approved_by] - The ID of the user who approved the order.
+ * @property {string} [approved_at] - The timestamp when the order was approved.
+ */
 interface POSOrder {
   id: string;
   order_number: string;
@@ -48,6 +64,10 @@ interface POSOrder {
   approved_at?: string;
 }
 
+/**
+ * The main dashboard for the Point of Sale (POS) system.
+ * It provides a comprehensive view of orders, analytics, and management tools.
+ */
 export const POSDashboard: React.FC = () => {
   const { t, isRTL, language } = useTranslation();
   const { user, profile } = useAuth();

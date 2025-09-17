@@ -3,6 +3,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Clock, Star, Facebook, Instagram, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 
+/**
+ * @interface Tenant
+ * @property {string} id - The unique identifier for the tenant.
+ * @property {string} name - The name of the tenant.
+ * @property {string | null} address - The address of the tenant.
+ * @property {string | null} primary_color - The primary color of the tenant's branding.
+ * @property {string | null} description - A description of the tenant.
+ * @property {{ facebook?: string; instagram?: string; twitter?: string; } | null} social_media_links - The tenant's social media links.
+ */
 interface Tenant {
   id: string;
   name: string;
@@ -16,10 +25,17 @@ interface Tenant {
   } | null;
 }
 
+/**
+ * @interface RestaurantOverviewProps
+ * @property {Tenant} tenant - The tenant object.
+ */
 interface RestaurantOverviewProps {
   tenant: Tenant;
 }
 
+/**
+ * A component that displays an overview of a restaurant, including its name, description, address, and social media links.
+ */
 export const RestaurantOverview: React.FC<RestaurantOverviewProps> = ({
   tenant
 }) => {

@@ -8,6 +8,18 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Edit2, Trash2, GripVertical } from "lucide-react";
 
+/**
+ * @interface MenuItem
+ * @property {string} id - The unique identifier for the menu item.
+ * @property {string} name - The name of the menu item.
+ * @property {string} [description] - A description of the menu item.
+ * @property {number} price - The price of the menu item.
+ * @property {string} [image_url] - The URL of the menu item's image.
+ * @property {boolean} is_available - Whether the menu item is available.
+ * @property {string} category_id - The ID of the category the menu item belongs to.
+ * @property {number} display_order - The display order of the menu item.
+ * @property {string} created_at - The timestamp when the menu item was created.
+ */
 interface MenuItem {
   id: string;
   name: string;
@@ -20,6 +32,15 @@ interface MenuItem {
   created_at: string;
 }
 
+/**
+ * @interface SortableMenuItemProps
+ * @property {MenuItem} item - The menu item object.
+ * @property {(categoryId: string) => string} getCategoryName - A function to get the name of a category by its ID.
+ * @property {(price: number) => string} formatPrice - A function to format a price with a currency symbol.
+ * @property {(itemId: string, isAvailable: boolean) => void} onToggleAvailability - A callback function to be called when the item's availability is toggled.
+ * @property {(item: MenuItem) => void} onEdit - A callback function to be called when the item is edited.
+ * @property {(item: MenuItem) => void} onDelete - A callback function to be called when the item is deleted.
+ */
 interface SortableMenuItemProps {
   item: MenuItem;
   getCategoryName: (categoryId: string) => string;
@@ -29,6 +50,10 @@ interface SortableMenuItemProps {
   onDelete: (item: MenuItem) => void;
 }
 
+/**
+ * A sortable item component for a menu item.
+ * It displays the item's details and provides controls for editing, deleting, and toggling its availability.
+ */
 export const SortableMenuItem: React.FC<SortableMenuItemProps> = ({
   item,
   getCategoryName,

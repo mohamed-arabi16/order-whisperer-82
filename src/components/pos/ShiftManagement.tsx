@@ -12,6 +12,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Clock, DollarSign, Users, CalendarDays, Play, Square } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 
+/**
+ * A component for managing staff shifts, including opening, closing, and viewing shift history.
+ */
 export const ShiftManagement: React.FC = () => {
   const { t } = useTranslation();
   const { shifts, currentShift, loading, openShift, closeShift } = useShifts();

@@ -6,6 +6,14 @@ import { cn } from "@/lib/utils";
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;
 
+/**
+ * @typedef {object} ChartConfig - The configuration for a chart.
+ * @property {object} [k] - The key of the data series.
+ * @property {React.ReactNode} [k.label] - The label for the data series.
+ * @property {React.ComponentType} [k.icon] - An icon for the data series.
+ * @property {string} [k.color] - The color of the data series.
+ * @property {object} [k.theme] - Theme-specific colors for the data series.
+ */
 export type ChartConfig = {
   [k in string]: {
     label?: React.ReactNode;
@@ -16,6 +24,10 @@ export type ChartConfig = {
   );
 };
 
+/**
+ * @typedef {object} ChartContextProps - The props for the ChartContext.
+ * @property {ChartConfig} config - The configuration for the chart.
+ */
 type ChartContextProps = {
   config: ChartConfig;
 };
@@ -108,10 +120,15 @@ ${colorConfig
   );
 };
 
+/**
+ * A component that displays a tooltip for a chart.
+ * This component is based on the Recharts Tooltip primitive.
+ * @see https://recharts.org/en-US/api/Tooltip
+ */
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
 /**
- * A component for the content of a chart's tooltip.
+ * The content of a chart's tooltip.
  */
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
@@ -267,10 +284,15 @@ const ChartTooltipContent = React.forwardRef<
 );
 ChartTooltipContent.displayName = "ChartTooltip";
 
+/**
+ * A component that displays a legend for a chart.
+ * This component is based on the Recharts Legend primitive.
+ * @see https://recharts.org/en-US/api/Legend
+ */
 const ChartLegend = RechartsPrimitive.Legend;
 
 /**
- * A component for the content of a chart's legend.
+ * The content of a chart's legend.
  */
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
@@ -330,7 +352,13 @@ const ChartLegendContent = React.forwardRef<
 );
 ChartLegendContent.displayName = "ChartLegend";
 
-// Helper to extract item config from a payload.
+/**
+ * A helper function to extract the configuration for a chart item from a payload.
+ * @param {ChartConfig} config - The chart configuration.
+ * @param {unknown} payload - The payload from a Recharts event.
+ * @param {string} key - The key to look for in the payload.
+ * @returns {object | undefined} The configuration for the chart item, or undefined if not found.
+ */
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,

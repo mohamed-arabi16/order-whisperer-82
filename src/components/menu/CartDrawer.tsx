@@ -20,6 +20,18 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { CartItem, CustomerInfo, OrderModeType } from "@/lib/whatsapp";
 
+/**
+ * @interface CartDrawerProps
+ * @property {boolean} isOpen - Whether the drawer is open.
+ * @property {() => void} onClose - A callback function to close the drawer.
+ * @property {CartItem[]} cart - The items in the cart.
+ * @property {(itemId: string, newQuantity: number) => void} onUpdateQuantity - A callback function to update the quantity of an item in the cart.
+ * @property {(itemId: string, notes: string) => void} onUpdateItemNotes - A callback function to update the notes for an item in the cart.
+ * @property {(orderData: { orderType: OrderModeType; customerInfo?: CustomerInfo; orderNotes?: string; }) => void} onSubmitOrder - A callback function to submit the order.
+ * @property {string} restaurantName - The name of the restaurant.
+ * @property {number} deliveryFee - The delivery fee.
+ * @property {boolean} isProcessingOrder - Whether the order is currently being processed.
+ */
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -36,18 +48,29 @@ interface CartDrawerProps {
   isProcessingOrder: boolean;
 }
 
+/**
+ * An array of available order modes.
+ */
 const orderModes: OrderModeType[] = [
   { id: 'dine_in', name: 'صالة', value: 'dine_in' },
   { id: 'takeaway', name: 'سفري', value: 'takeaway' }, 
   { id: 'delivery', name: 'توصيل', value: 'delivery' },
 ];
 
+/**
+ * A mapping of order mode values to their corresponding icons.
+ */
 const orderModeIcons = {
   dine_in: Store,
   takeaway: Car,
   delivery: Truck,
 };
 
+/**
+ * A drawer component that displays the user's shopping cart.
+ * It allows the user to view their cart, update item quantities and notes, select an order mode,
+ * and submit their order.
+ */
 export const CartDrawer: React.FC<CartDrawerProps> = ({
   isOpen,
   onClose,

@@ -5,22 +5,41 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface FeedbackDisplayProps
+ * @property {string} tenantId - The ID of the tenant whose feedback is to be displayed.
+ */
 interface FeedbackDisplayProps {
   tenantId: string;
 }
 
+/**
+ * @interface FeedbackData
+ * @property {number} rating - The rating given in the feedback.
+ * @property {string} [comment] - The comment left in the feedback.
+ * @property {string} created_at - The timestamp when the feedback was created.
+ */
 interface FeedbackData {
   rating: number;
   comment?: string;
   created_at: string;
 }
 
+/**
+ * @interface FeedbackStats
+ * @property {number} averageRating - The average rating of the restaurant.
+ * @property {number} totalFeedback - The total number of feedback entries.
+ * @property {FeedbackData[]} recentComments - An array of recent comments.
+ */
 interface FeedbackStats {
   averageRating: number;
   totalFeedback: number;
   recentComments: FeedbackData[];
 }
 
+/**
+ * A component that displays feedback statistics and recent comments for a restaurant.
+ */
 export const RestaurantFeedbackDisplay: React.FC<FeedbackDisplayProps> = ({ tenantId }) => {
   const { t, isRTL } = useTranslation();
   const [feedbackStats, setFeedbackStats] = useState<FeedbackStats | null>(null);

@@ -5,6 +5,14 @@ import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
+/**
+ * @interface ToasterToast
+ * @extends ToastProps
+ * @property {string} id - The unique identifier for the toast.
+ * @property {React.ReactNode} [title] - The title of the toast.
+ * @property {React.ReactNode} [description] - The description of the toast.
+ * @property {ToastActionElement} [action] - An action element to display in the toast.
+ */
 type ToasterToast = ToastProps & {
   id: string;
   title?: React.ReactNode;
@@ -21,6 +29,10 @@ const actionTypes = {
 
 let count = 0;
 
+/**
+ * Generates a unique ID for a toast.
+ * @returns {string} A unique ID.
+ */
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER;
   return count.toString();
@@ -28,6 +40,20 @@ function genId() {
 
 type ActionType = typeof actionTypes;
 
+/**
+ * @typedef {object} Action - An action to be dispatched to the toast reducer.
+ * @property {ActionType["ADD_TOAST"]} type - The type of the action.
+ * @property {ToasterToast} toast - The toast to add.
+ * @union
+ * @property {ActionType["UPDATE_TOAST"]} type - The type of the action.
+ * @property {Partial<ToasterToast>} toast - The toast to update.
+ * @union
+ * @property {ActionType["DISMISS_TOAST"]} type - The type of the action.
+ * @property {ToasterToast["id"]} [toastId] - The ID of the toast to dismiss.
+ * @union
+ * @property {ActionType["REMOVE_TOAST"]} type - The type of the action.
+ * @property {ToasterToast["id"]} [toastId] - The ID of the toast to remove.
+ */
 type Action =
   | {
       type: ActionType["ADD_TOAST"];
@@ -46,12 +72,21 @@ type Action =
       toastId?: ToasterToast["id"];
     };
 
+/**
+ * @interface State
+ * @property {ToasterToast[]} toasts - The list of toasts.
+ */
 interface State {
   toasts: ToasterToast[];
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
+/**
+ * Adds a toast to the removal queue.
+ * After a delay, the toast will be removed from the state.
+ * @param {string} toastId - The ID of the toast to remove.
+ */
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return;
@@ -129,10 +164,22 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
+/**
+ * An array of listener functions that are called when the toast state changes.
+ * @type {Array<(state: State) => void>}
+ */
 const listeners: Array<(state: State) => void> = [];
 
+/**
+ * The in-memory state of the toasts.
+ * @type {State}
+ */
 let memoryState: State = { toasts: [] };
 
+/**
+ * Dispatches an action to the toast reducer and notifies listeners of the state change.
+ * @param {Action} action - The action to dispatch.
+ */
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action);
   listeners.forEach((listener) => {
@@ -140,6 +187,9 @@ function dispatch(action: Action) {
   });
 }
 
+/**
+ * @typedef {Omit<ToasterToast, "id">} Toast - A toast object without the 'id' property.
+ */
 type Toast = Omit<ToasterToast, "id">;
 
 /**

@@ -5,6 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface Category
+ * @property {string} id - The unique identifier for the category.
+ * @property {string} name - The name of the category.
+ * @property {number} display_order - The display order of the category.
+ * @property {boolean} is_active - Whether the category is active.
+ */
 interface Category {
   id: string;
   name: string;
@@ -12,6 +19,15 @@ interface Category {
   is_active: boolean;
 }
 
+/**
+ * @interface StickySearchHeaderProps
+ * @property {Category[]} categories - An array of category objects.
+ * @property {string} activeCategory - The ID of the currently active category.
+ * @property {string} searchQuery - The current search query.
+ * @property {(query: string) => void} onSearchChange - A callback function to be called when the search query changes.
+ * @property {(categoryId: string) => void} onCategorySelect - A callback function to be called when a category is selected.
+ * @property {string} [tableNumber] - The table number, if applicable.
+ */
 interface StickySearchHeaderProps {
   categories: Category[];
   activeCategory: string;

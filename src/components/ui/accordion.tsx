@@ -4,10 +4,14 @@ import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+/**
+ * A vertically stacked set of interactive headings that each reveal a section of content.
+ * This component is based on the Radix UI Accordion primitive.
+ */
 const Accordion = AccordionPrimitive.Root;
 
 /**
- * A vertically stacked set of interactive headings that each reveal a section of content.
+ * An item within an accordion. It contains a trigger and content.
  */
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,

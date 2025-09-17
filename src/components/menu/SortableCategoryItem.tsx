@@ -8,6 +8,14 @@ import { Label } from "@/components/ui/label";
 import { GripVertical, Edit2 } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
+/**
+ * @interface Category
+ * @property {string} id - The unique identifier for the category.
+ * @property {string} name - The name of the category.
+ * @property {number} display_order - The display order of the category.
+ * @property {boolean} is_active - Whether the category is active.
+ * @property {string} created_at - The timestamp when the category was created.
+ */
 interface Category {
   id: string;
   name: string;
@@ -16,6 +24,13 @@ interface Category {
   created_at: string;
 }
 
+/**
+ * @interface SortableCategoryItemProps
+ * @property {Category} category - The category object.
+ * @property {number} index - The index of the category in the list.
+ * @property {(categoryId: string, isActive: boolean) => void} onToggle - A callback function to be called when the category's active status is toggled.
+ * @property {(category: Category) => void} onEdit - A callback function to be called when the category is edited.
+ */
 interface SortableCategoryItemProps {
   category: Category;
   index: number;
@@ -23,6 +38,10 @@ interface SortableCategoryItemProps {
   onEdit: (category: Category) => void;
 }
 
+/**
+ * A sortable item component for a menu category.
+ * It displays the category's name, status, and provides controls for editing and toggling its active state.
+ */
 export const SortableCategoryItem = ({ 
   category, 
   index, 

@@ -7,11 +7,30 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+/**
+ * @typedef {UseEmblaCarouselType[1]} CarouselApi - The API for the Embla Carousel.
+ */
 type CarouselApi = UseEmblaCarouselType[1];
+/**
+ * @typedef {Parameters<typeof useEmblaCarousel>} UseCarouselParameters - The parameters for the useEmblaCarousel hook.
+ */
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
+/**
+ * @typedef {UseCarouselParameters[0]} CarouselOptions - The options for the Embla Carousel.
+ */
 type CarouselOptions = UseCarouselParameters[0];
+/**
+ * @typedef {UseCarouselParameters[1]} CarouselPlugin - A plugin for the Embla Carousel.
+ */
 type CarouselPlugin = UseCarouselParameters[1];
 
+/**
+ * @typedef {object} CarouselProps - Props for the Carousel component.
+ * @property {CarouselOptions} [opts] - Options for the Embla Carousel.
+ * @property {CarouselPlugin} [plugins] - Plugins for the Embla Carousel.
+ * @property {'horizontal' | 'vertical'} [orientation='horizontal'] - The orientation of the carousel.
+ * @property {(api: CarouselApi) => void} [setApi] - A function to get the Embla Carousel API.
+ */
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
@@ -19,6 +38,16 @@ type CarouselProps = {
   setApi?: (api: CarouselApi) => void;
 };
 
+/**
+ * @typedef {object} CarouselContextProps - The context for the Carousel component.
+ * @property {ReturnType<typeof useEmblaCarousel>[0]} carouselRef - A ref to the carousel element.
+ * @property {ReturnType<typeof useEmblaCarousel>[1]} api - The Embla Carousel API.
+ * @property {() => void} scrollPrev - A function to scroll to the previous item.
+ * @property {() => void} scrollNext - A function to scroll to the next item.
+ * @property {boolean} canScrollPrev - Whether the carousel can scroll to the previous item.
+ * @property {boolean} canScrollNext - Whether the carousel can scroll to the next item.
+ * @augments CarouselProps
+ */
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0];
   api: ReturnType<typeof useEmblaCarousel>[1];
