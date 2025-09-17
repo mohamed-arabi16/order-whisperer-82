@@ -106,6 +106,7 @@ const PublicMenu = (): JSX.Element => {
   useEffect(() => {
     const fetchData = async () => {
       if (!slug) return;
+      console.log("PublicMenu: Fetching data for slug:", slug, "and tableId:", tableId);
 
       setLoading(true);
       setError(null);
@@ -120,6 +121,8 @@ const PublicMenu = (): JSX.Element => {
 
         if (tenantError) throw tenantError;
         if (!tenantData) throw new Error('Restaurant not found');
+
+        console.log("PublicMenu: Fetched tenant:", tenantData.id);
 
         setTenant({
           ...tenantData,
@@ -382,11 +385,19 @@ const PublicMenu = (): JSX.Element => {
           notes: tableNumber ? `Ordered via table QR (Table ${tableNumber})` : 'Ordered via WhatsApp'
         };
 
-        const { error: posError } = await supabase
-          .from('pos_orders')
-          .insert(posOrderData);
+        console.log("PublicMenu: Creating POS order with data:", posOrderData);
 
-        if (posError) throw posError;
+        const { data, error: posError } = await supabase
+          .from('pos_orders')
+          .insert(posOrderData)
+          .select();
+
+        if (posError) {
+          console.error('PublicMenu: Error creating POS order:', posError);
+          throw posError;
+        }
+
+        console.log("PublicMenu: Successfully created POS order:", data);
 
         if (tableNumber) {
           toast.success(`تم إرسال طلب الطاولة ${tableNumber} بنجاح!`);
