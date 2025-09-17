@@ -101,18 +101,23 @@ export const POSDashboard: React.FC = () => {
   useEffect(() => {
     const fetchTenant = async () => {
       if (!user) return;
+      console.log("POSDashboard: Fetching tenant for user:", user.id);
       try {
         const { data: profileRow } = await supabase
           .from('profiles')
           .select('id')
           .eq('user_id', user.id)
           .single();
-        if (!profileRow) return;
+        if (!profileRow) {
+          console.log("POSDashboard: No profile found for user:", user.id);
+          return;
+        };
         const { data: tenant } = await supabase
           .from('tenants')
           .select('id')
           .eq('owner_id', profileRow.id)
           .single();
+        console.log("POSDashboard: Fetched tenantId:", tenant?.id);
         setTenantId(tenant?.id || null);
       } catch (err) {
         console.error('Error fetching tenant for POS:', err);
@@ -158,6 +163,7 @@ export const POSDashboard: React.FC = () => {
   const loadOrders = useCallback(async () => {
     try {
       if (!tenantId) return;
+      console.log("POSDashboard: Loading orders for tenantId:", tenantId);
       const { data, error } = await supabase
         .from('pos_orders')
         .select('*')
@@ -166,6 +172,7 @@ export const POSDashboard: React.FC = () => {
         .limit(50);
 
       if (error) throw error;
+      console.log("POSDashboard: Raw orders fetched:", data);
       setOrders((data || []) as POSOrder[]);
     } catch (error) {
       console.error('Error loading orders:', error);
@@ -198,6 +205,7 @@ export const POSDashboard: React.FC = () => {
 
   const subscribeToOrders = useCallback(() => {
     if (!tenantId) return () => {};
+    console.log("POSDashboard: Subscribing to orders for tenantId:", tenantId);
 
     const channel = supabase
       .channel('pos-orders-changes')
@@ -210,10 +218,11 @@ export const POSDashboard: React.FC = () => {
           filter: `tenant_id=eq.${tenantId}`
         },
         (payload) => {
-          console.log('POS Order change:', payload);
+          console.log('POSDashboard: Real-time subscription event received:', payload);
           
           if (payload.eventType === 'INSERT') {
             const newOrder = payload.new as POSOrder;
+            console.log('POSDashboard: New order inserted:', newOrder);
             setOrders(prev => [newOrder, ...prev]);
 
             if (newOrder.table_id && !tablesMap[newOrder.table_id]) {
@@ -229,6 +238,7 @@ export const POSDashboard: React.FC = () => {
             playNotificationSound();
           } else if (payload.eventType === 'UPDATE') {
             const updatedOrder = payload.new as POSOrder;
+            console.log('POSDashboard: Order updated:', updatedOrder);
             setOrders(prev => 
               prev.map(order => 
                 order.id === updatedOrder.id ? updatedOrder : order
@@ -237,7 +247,9 @@ export const POSDashboard: React.FC = () => {
           }
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+          console.log('POSDashboard: Real-time subscription status:', status);
+      });
 
     return () => {
       supabase.removeChannel(channel);
@@ -452,6 +464,9 @@ export const POSDashboard: React.FC = () => {
     );
   }
 
+  const pendingOrders = filterOrdersByStatus('pending_approval');
+  console.log("POSDashboard: Filtered pending orders:", pendingOrders);
+
   return (
     <div className="container mx-auto p-6 pt-24 space-y-6" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Header */}
@@ -494,7 +509,7 @@ export const POSDashboard: React.FC = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{filterOrdersByStatus('pending_approval').length}</p>
+            <p className="text-2xl font-bold">{pendingOrders.length}</p>
           </CardContent>
         </Card>
 
@@ -553,9 +568,9 @@ export const POSDashboard: React.FC = () => {
           <TabsTrigger value="pending" className="flex items-center gap-2">
             <Bell className="w-4 h-4" />
             {t('pos.dashboard.pendingApproval')}
-            {filterOrdersByStatus('pending_approval').length > 0 && (
+            {pendingOrders.length > 0 && (
               <Badge className="ml-2 bg-orange-500 text-white">
-                {filterOrdersByStatus('pending_approval').length}
+                {pendingOrders.length}
               </Badge>
             )}
           </TabsTrigger>
@@ -591,7 +606,7 @@ export const POSDashboard: React.FC = () => {
 
         <TabsContent value="pending" className="mt-6">
           <OrderList
-            orders={filterOrdersByStatus('pending_approval')}
+            orders={pendingOrders}
             title={t('pos.dashboard.pendingApproval')}
             noOrdersMessage={t('pos.dashboard.noPendingOrders')}
           />
