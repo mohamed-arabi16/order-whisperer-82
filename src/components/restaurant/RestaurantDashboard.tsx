@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -46,6 +47,7 @@ const RestaurantDashboard = (): JSX.Element => {
   const { profile } = useAuth();
   const { t, isRTL } = useTranslation();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [feedback, setFeedback] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -114,7 +116,7 @@ const RestaurantDashboard = (): JSX.Element => {
 
   useEffect(() => {
     if (tenant) {
-      setMenuUrl(`${window.location.origin}/menu/${tenant.slug}`);
+      setMenuUrl(`${window.location.origin}/#/menu/${tenant.slug}`);
     }
   }, [tenant]);
 
@@ -283,10 +285,10 @@ const RestaurantDashboard = (): JSX.Element => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           <Card
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
-            onClick={() => window.location.href = '/menu-management'}
+            onClick={() => navigate('/menu-management')}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                window.location.href = '/menu-management';
+                navigate('/menu-management');
               }
             }}
             role="button"
@@ -312,10 +314,10 @@ const RestaurantDashboard = (): JSX.Element => {
 
           <Card
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
-            onClick={() => window.location.href = '/branding'}
+            onClick={() => navigate('/branding')}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                window.location.href = '/branding';
+                navigate('/branding');
               }
             }}
             role="button"
@@ -341,10 +343,10 @@ const RestaurantDashboard = (): JSX.Element => {
 
           <Card
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
-            onClick={() => window.location.href = '/qr-code'}
+            onClick={() => navigate('/qr-code')}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                window.location.href = '/qr-code';  
+                navigate('/qr-code');  
               }
             }}
             role="button"
@@ -369,10 +371,10 @@ const RestaurantDashboard = (): JSX.Element => {
           </Card>
           <Card
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
-            onClick={() => window.location.href = '/analytics'}
+            onClick={() => navigate('/analytics')}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                window.location.href = '/analytics';
+                navigate('/analytics');
               }
             }}
             role="button"
@@ -400,7 +402,7 @@ const RestaurantDashboard = (): JSX.Element => {
             className="shadow-card hover:shadow-warm transition-smooth cursor-pointer"
             onClick={() => {
               if (tenant?.slug) {
-                window.location.href = `/pos-system/${tenant.slug}`;
+                navigate(`/pos-system/${tenant.slug}`);
               } else {
                 console.error('Unable to access POS system - no tenant slug found');
                 toast({
@@ -413,7 +415,7 @@ const RestaurantDashboard = (): JSX.Element => {
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 if (tenant?.slug) {
-                  window.location.href = `/pos-system/${tenant.slug}`;
+                  navigate(`/pos-system/${tenant.slug}`);
                 } else {
                   console.error('Unable to access POS system - no tenant slug found');
                   toast({

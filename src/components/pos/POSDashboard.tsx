@@ -334,7 +334,7 @@ export const POSDashboard: React.FC = () => {
               {t('pos.dashboard.tableBadge', { tableNumber: tablesMap[order.table_id].table_number })}
             </Badge>
           )}
-          <Badge variant="secondary">{t(`pos.orderTypes.${order.order_type}`, order.order_type)}</Badge>
+          <Badge variant="secondary">{t(`pos.orderTypes.${order.order_type}`) || order.order_type}</Badge>
         </div>
         <div className="text-sm text-muted-foreground">
           {new Date(order.created_at).toLocaleTimeString(language, {

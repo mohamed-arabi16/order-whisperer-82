@@ -76,7 +76,7 @@ const QRCodeGenerator: React.FC = () => {
     setLoading(true);
     
     try {
-      let menuUrl = `${window.location.origin}/menu/${tenant.slug}`;
+      let menuUrl = `${window.location.origin}/#/menu/${tenant.slug}`;
       
       if (qrType === 'table' && selectedTable) {
         const table = tables.find(t => t.id === selectedTable);
