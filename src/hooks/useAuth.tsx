@@ -8,6 +8,7 @@ import { toast } from "sonner";
  * @property {User | null} user - The authenticated user object, or null if not authenticated.
  * @property {Session | null} session - The current session object, or null if there is no session.
  * @property {any} profile - The user's profile data from the database.
+ * @property {string | null} tenantId - The ID of the tenant associated with the user.
  * @property {boolean} loading - True if the authentication state is currently being loaded.
  * @property {(email: string, password: string, fullName: string, role?: string) => Promise<{ error: any }>} signUp - Function to sign up a new user.
  * @property {(email: string, password: string) => Promise<{ error: any }>} signIn - Function to sign in a user.
@@ -19,6 +20,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   profile: any;
+  tenantId: string | null;
   loading: boolean;
   signUp: (
     email: string,
@@ -44,42 +46,91 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<any>(null);
+  const [tenantId, setTenantId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set up auth state listener
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
-
       if (session?.user) {
-        // Fetch user profile
-        setTimeout(async () => {
-          const { data: profileData } = await supabase
-            .from("profiles")
-            .select("*")
-            .eq("user_id", session.user.id)
-            .single();
-          setProfile(profileData);
-        }, 0);
+        const { data: profileData } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("user_id", session.user.id)
+          .single();
+        setProfile(profileData);
       } else {
         setProfile(null);
       }
-
       setLoading(false);
     });
 
-    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      setLoading(false);
+      if (session?.user) {
+        supabase
+          .from("profiles")
+          .select("*")
+          .eq("user_id", session.user.id)
+          .single()
+          .then(({ data }) => {
+            setProfile(data);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const resolveTenant = async () => {
+      if (!profile) {
+        setTenantId(null);
+        return;
+      }
+
+      // 1. Optimistically check for a tenant_id on the profile directly.
+      // This is the ideal case for staff members in the future.
+      if (profile.tenant_id) {
+        setTenantId(profile.tenant_id);
+        return;
+      }
+
+      // 2. Fallback for restaurant owners
+      if (profile.role === 'restaurant_owner') {
+        try {
+          const { data: tenant, error } = await supabase
+            .from('tenants')
+            .select('id')
+            .eq('owner_id', profile.id)
+            .single();
+
+          if (error) throw error;
+
+          setTenantId(tenant?.id || null);
+          if (!tenant?.id) {
+            console.warn("Restaurant owner profile found, but no tenant associated.");
+          }
+        } catch (err) {
+          console.error("Error resolving tenant for owner:", err);
+          setTenantId(null);
+        }
+        return;
+      }
+
+      // 3. Default to null if no tenant can be resolved
+      setTenantId(null);
+    };
+
+    resolveTenant();
+  }, [profile]);
 
   const signUp = async (
     email: string,
@@ -146,6 +197,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     session,
     profile,
+    tenantId,
     loading,
     signUp,
     signIn,

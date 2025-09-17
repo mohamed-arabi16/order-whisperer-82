@@ -67,7 +67,14 @@
       "updateError": "Error updating order status",
       "online": "Online",
       "offline": "Offline",
-      "tableBadge": "Table #{{tableNumber}}"
+      "tableBadge": "Table #{{tableNumber}}",
+      "tenantErrorTitle": "Tenant information not found",
+      "tenantErrorDescription": "We could not resolve the tenant for your user account.",
+      "tenantErrorHelp": "Please contact support to ensure your user is correctly associated with a tenant.",
+      "live": "Live",
+      "reconnecting": "Reconnecting...",
+      "connectionError": "Connection Error",
+      "connecting": "Connecting..."
     },
     "status": {
       "new": "New",
@@ -82,6 +89,10 @@
       "normal": "Normal",
       "high": "High",
       "urgent": "Urgent"
+    },
+    "orderTypes": {
+      "whatsapp": "WhatsApp",
+      "table": "Table"
     },
     "actions": {
       "startPreparing": "Start Preparing",
@@ -947,7 +958,11 @@
       "feedbackErrorDescription": "Could not load feedback. Please try again later.",
       "feedbackErrorTitle": "Feedback Fetch Error",
       "noTenantDescription": "There is no restaurant associated with your account.",
-      "noTenantTitle": "Restaurant Not Found"
+      "noTenantTitle": "Restaurant Not Found",
+      "newOrder": {
+        "title": "New Order!",
+        "description": "New order received for {price} {currency}"
+      }
     },
     "welcome": "Welcome, {{userName}} - Restaurant Dashboard"
   }
