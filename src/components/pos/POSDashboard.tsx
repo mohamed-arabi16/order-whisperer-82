@@ -153,13 +153,18 @@ export const POSDashboard: React.FC = () => {
   }, [tablesMap]);
 
   const loadOrders = useCallback(async () => {
+    console.log("POSDashboard: loadOrders called with tenantId:", tenantId);
+    
     if (!tenantId) {
+      console.log("POSDashboard: No tenantId available, skipping order load");
       setOrdersLoading(false);
       return;
     }
+    
     try {
       setOrdersLoading(true);
       console.log("POSDashboard: Loading orders for tenantId:", tenantId);
+      
       const { data, error } = await supabase
         .from('pos_orders')
         .select('*')
@@ -167,21 +172,30 @@ export const POSDashboard: React.FC = () => {
         .order('created_at', { ascending: false })
         .limit(50);
 
-      if (error) throw error;
+      if (error) {
+        console.error("POSDashboard: Error loading orders:", error);
+        throw error;
+      }
+
+      console.log("POSDashboard: Raw orders fetched:", data?.length || 0, "orders");
 
       const validatedOrders = (data || []).map(order => {
         const result = orderSchema.safeParse(order);
         if (!result.success) {
-          console.error("Malformed order data received:", result.error.issues, "Original data:", order);
+          console.error("POSDashboard: Malformed order data received:", result.error.issues, "Original data:", order);
           return null;
         }
         return result.data as POSOrder;
       }).filter(Boolean) as POSOrder[];
 
-      console.log("POSDashboard: Validated orders fetched:", validatedOrders);
+      console.log("POSDashboard: Validated orders loaded:", validatedOrders.length, "orders");
       setOrders(validatedOrders);
+      
+      if (validatedOrders.length === 0) {
+        console.log("POSDashboard: No orders found for tenant");
+      }
     } catch (error) {
-      console.error('Error loading orders:', error);
+      console.error('POSDashboard: Error loading orders:', error);
       toast.error(t('pos.dashboard.loadError'));
     } finally {
       setOrdersLoading(false);
@@ -216,7 +230,11 @@ export const POSDashboard: React.FC = () => {
   }, [tenantId]);
 
   const subscribeToOrders = useCallback(() => {
-    if (!tenantId) return () => {};
+    if (!tenantId) {
+      console.log("POSDashboard: No tenantId for real-time subscription");
+      return () => {};
+    }
+    
     console.log("POSDashboard: Subscribing to orders for tenantId:", tenantId);
 
     const channel = supabase
@@ -230,16 +248,26 @@ export const POSDashboard: React.FC = () => {
           filter: `tenant_id=eq.${tenantId}`
         },
         (payload) => {
+          console.log('POSDashboard: Real-time event received:', payload.eventType, payload);
+          
           const result = orderSchema.safeParse(payload.new);
           if (!result.success) {
-            console.error("Malformed real-time order data received:", result.error.issues, "Original payload:", payload);
+            console.error("POSDashboard: Malformed real-time order data received:", result.error.issues, "Original payload:", payload);
             return;
           }
           const validatedOrder = result.data as POSOrder;
 
           if (payload.eventType === 'INSERT') {
-            console.log('POSDashboard: New order inserted:', validatedOrder);
-            setOrders(prev => [validatedOrder, ...prev]);
+            console.log('POSDashboard: New order inserted via real-time:', validatedOrder);
+            setOrders(prev => {
+              // Check if order already exists to prevent duplicates
+              const exists = prev.some(order => order.id === validatedOrder.id);
+              if (exists) {
+                console.log('POSDashboard: Order already exists, skipping duplicate');
+                return prev;
+              }
+              return [validatedOrder, ...prev];
+            });
 
             if (validatedOrder.table_id && !tablesMap[validatedOrder.table_id]) {
               fetchAndCacheTable(validatedOrder.table_id);
@@ -253,7 +281,7 @@ export const POSDashboard: React.FC = () => {
 
             playNotificationSound();
           } else if (payload.eventType === 'UPDATE') {
-            console.log('POSDashboard: Order updated:', validatedOrder);
+            console.log('POSDashboard: Order updated via real-time:', validatedOrder);
             setOrders(prev => 
               prev.map(order => 
                 order.id === validatedOrder.id ? validatedOrder : order
@@ -264,15 +292,17 @@ export const POSDashboard: React.FC = () => {
       )
       .subscribe((status, err) => {
         if (err) {
-          console.error('Real-time subscription error:', err);
+          console.error('POSDashboard: Real-time subscription error:', err);
           setSubscriptionStatus('error');
+          toast.error('Real-time connection failed. Orders may not update automatically.');
         } else {
           setSubscriptionStatus(status.toLowerCase());
+          console.log('POSDashboard: Real-time subscription status:', status);
         }
-        console.log('POSDashboard: Real-time subscription status:', status);
       });
 
     return () => {
+      console.log("POSDashboard: Unsubscribing from real-time channel");
       supabase.removeChannel(channel);
     };
   }, [tenantId, t, tablesMap, fetchAndCacheTable, playNotificationSound]);
@@ -501,6 +531,20 @@ export const POSDashboard: React.FC = () => {
             <p className="mt-4 text-sm text-muted-foreground">
               {t('pos.dashboard.tenantErrorHelp')}
             </p>
+            <div className="space-y-2 text-sm text-muted-foreground mb-4 mt-4">
+              <p className="font-medium">Debug Info:</p>
+              <p>User: {user ? 'Authenticated' : 'Not authenticated'}</p>
+              <p>Profile: {profile ? `${profile.role} (${profile.id})` : 'No profile'}</p>
+              <p>Auth Loading: {authLoading ? 'Yes' : 'No'}</p>
+            </div>
+            <div className="flex gap-2 justify-center">
+              <Button onClick={() => window.location.reload()}>
+                {t('common.refresh')}
+              </Button>
+              <Button variant="outline" onClick={() => loadOrders()}>
+                Retry Load
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -521,6 +565,9 @@ export const POSDashboard: React.FC = () => {
           <p className="text-muted-foreground mt-1">
             {t('pos.dashboard.description')}
           </p>
+          <div className="text-xs text-muted-foreground mt-1">
+            Tenant: {tenantId} | Orders: {orders.length} | Status: {subscriptionStatus}
+          </div>
         </div>
         <div className="flex items-center gap-2">
           {(() => {

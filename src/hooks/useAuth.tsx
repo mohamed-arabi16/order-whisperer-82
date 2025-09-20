@@ -91,7 +91,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const resolveTenant = async () => {
+      console.log("useAuth: Resolving tenant for profile:", profile);
+      
       if (!profile) {
+        console.log("useAuth: No profile found, setting tenantId to null");
         setTenantId(null);
         return;
       }
@@ -99,12 +102,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // 1. Optimistically check for a tenant_id on the profile directly.
       // This is the ideal case for staff members in the future.
       if (profile.tenant_id) {
+        console.log("useAuth: Found tenant_id on profile:", profile.tenant_id);
         setTenantId(profile.tenant_id);
         return;
       }
 
       // 2. Fallback for restaurant owners
       if (profile.role === 'restaurant_owner') {
+        console.log("useAuth: Restaurant owner detected, looking up tenant...");
         try {
           const { data: tenant, error } = await supabase
             .from('tenants')
@@ -112,20 +117,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .eq('owner_id', profile.id)
             .single();
 
-          if (error) throw error;
+          if (error) {
+            console.error("useAuth: Error querying tenant:", error);
+            throw error;
+          }
 
-          setTenantId(tenant?.id || null);
-          if (!tenant?.id) {
-            console.warn("Restaurant owner profile found, but no tenant associated.");
+          const resolvedTenantId = tenant?.id || null;
+          console.log("useAuth: Resolved tenant for owner:", resolvedTenantId);
+          setTenantId(resolvedTenantId);
+          
+          if (!resolvedTenantId) {
+            console.warn("useAuth: Restaurant owner profile found, but no tenant associated.");
           }
         } catch (err) {
-          console.error("Error resolving tenant for owner:", err);
+          console.error("useAuth: Error resolving tenant for owner:", err);
           setTenantId(null);
         }
         return;
       }
 
-      // 3. Default to null if no tenant can be resolved
+      // 3. Handle super_admin role
+      if (profile.role === 'super_admin') {
+        console.log("useAuth: Super admin detected, setting tenantId to null");
+        setTenantId(null);
+        return;
+      }
+
+      // 4. Default to null if no tenant can be resolved
+      console.log("useAuth: No tenant resolution path matched, setting tenantId to null");
       setTenantId(null);
     };
 
