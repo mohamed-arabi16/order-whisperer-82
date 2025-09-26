@@ -32,7 +32,7 @@ const POSSystem = (): JSX.Element => {
           .from('tenants')
           .select('id, subscription_plan')
           .eq('slug', slug)
-          .single();
+          .maybeSingle();
 
         if (error) {
           console.error("POSSystem: Error fetching tenant:", error);
@@ -103,7 +103,7 @@ const POSSystem = (): JSX.Element => {
     return <Navigate to="/auth" replace />;
   }
 
-  if (!isAdmin && tenant?.subscription_plan !== 'premium') {
+  if (!isAdmin && tenant && tenant.subscription_plan !== 'premium') {
     return <Navigate to={`/pos-access/${slug}`} replace />;
   }
 
