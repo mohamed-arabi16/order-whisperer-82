@@ -50,48 +50,107 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+    
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!mounted) return;
+      
       setSession(session);
       setUser(session?.user ?? null);
+      
       if (session?.user) {
-        const { data: profileData } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("user_id", session.user.id)
-          .single();
-        setProfile(profileData);
+        try {
+          const { data: profileData, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("user_id", session.user.id)
+            .single();
+            
+          if (mounted) {
+            if (error) {
+              console.error("useAuth: Error fetching profile:", error);
+              setProfile(null);
+            } else {
+              setProfile(profileData);
+            }
+            setLoading(false);
+          }
+        } catch (err) {
+          if (mounted) {
+            console.error("useAuth: Profile fetch failed:", err);
+            setProfile(null);
+            setLoading(false);
+          }
+        }
       } else {
-        setProfile(null);
+        if (mounted) {
+          setProfile(null);
+          setLoading(false);
+        }
       }
-      setLoading(false);
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        supabase
-          .from("profiles")
-          .select("*")
-          .eq("user_id", session.user.id)
-          .single()
-          .then(({ data }) => {
-            setProfile(data);
-            setLoading(false);
-          });
-      } else {
+    // Add fallback timeout to ensure loading state is cleared
+    const fallbackTimeout = setTimeout(() => {
+      if (mounted && loading) {
+        console.warn("useAuth: Authentication loading timeout reached");
         setLoading(false);
       }
-    });
+    }, 15000); // 15 second fallback
 
-    return () => subscription.unsubscribe();
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        if (!mounted) return;
+        
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          return supabase
+            .from("profiles")
+            .select("*")
+            .eq("user_id", session.user.id)
+            .single()
+            .then(({ data, error }) => {
+              if (mounted) {
+                if (error) {
+                  console.error("useAuth: Error fetching profile on getSession:", error);
+                  setProfile(null);
+                } else {
+                  setProfile(data);
+                }
+                setLoading(false);
+              }
+            });
+        } else {
+          if (mounted) {
+            setLoading(false);
+          }
+        }
+      })
+      .catch((err) => {
+        if (mounted) {
+          console.error("useAuth: getSession failed:", err);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+      clearTimeout(fallbackTimeout);
+      subscription.unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
+    let mounted = true;
+    
     const resolveTenant = async () => {
       console.log("useAuth: Resolving tenant for profile:", profile);
+      
+      if (!mounted) return;
       
       if (!profile) {
         console.log("useAuth: No profile found, setting tenantId to null");
@@ -103,7 +162,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // This is the ideal case for staff members in the future.
       if (profile.tenant_id) {
         console.log("useAuth: Found tenant_id on profile:", profile.tenant_id);
-        setTenantId(profile.tenant_id);
+        if (mounted) setTenantId(profile.tenant_id);
         return;
       }
 
@@ -115,23 +174,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             .from('tenants')
             .select('id')
             .eq('owner_id', profile.id)
-            .single();
+            .maybeSingle(); // Use maybeSingle to handle no results gracefully
 
           if (error) {
             console.error("useAuth: Error querying tenant:", error);
-            throw error;
+            if (mounted) setTenantId(null);
+            return;
           }
 
           const resolvedTenantId = tenant?.id || null;
           console.log("useAuth: Resolved tenant for owner:", resolvedTenantId);
-          setTenantId(resolvedTenantId);
           
-          if (!resolvedTenantId) {
-            console.warn("useAuth: Restaurant owner profile found, but no tenant associated.");
+          if (mounted) {
+            setTenantId(resolvedTenantId);
+            
+            if (!resolvedTenantId) {
+              console.warn("useAuth: Restaurant owner profile found, but no tenant associated.");
+            }
           }
         } catch (err) {
           console.error("useAuth: Error resolving tenant for owner:", err);
-          setTenantId(null);
+          if (mounted) setTenantId(null);
         }
         return;
       }
@@ -139,16 +202,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // 3. Handle super_admin role
       if (profile.role === 'super_admin') {
         console.log("useAuth: Super admin detected, setting tenantId to null");
-        setTenantId(null);
+        if (mounted) setTenantId(null);
         return;
       }
 
       // 4. Default to null if no tenant can be resolved
       console.log("useAuth: No tenant resolution path matched, setting tenantId to null");
-      setTenantId(null);
+      if (mounted) setTenantId(null);
     };
 
-    resolveTenant();
+    // Add timeout for tenant resolution to prevent hanging
+    const tenantTimeout = setTimeout(() => {
+      if (mounted) {
+        console.warn("useAuth: Tenant resolution timeout, setting to null");
+        setTenantId(null);
+      }
+    }, 10000); // 10 second timeout
+
+    resolveTenant().finally(() => {
+      if (mounted) clearTimeout(tenantTimeout);
+    });
+
+    return () => {
+      mounted = false;
+      clearTimeout(tenantTimeout);
+    };
   }, [profile]);
 
   const signUp = async (
