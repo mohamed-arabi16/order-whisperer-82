@@ -11,7 +11,7 @@ import { useTranslation } from "@/hooks/useTranslation";
  */
 const POSSystem = (): JSX.Element => {
   const { slug } = useParams();
-  const { user, loading, isAdmin, tenantId } = useAuth();
+  const { user, loading, isAdmin, isRestaurantOwner, tenantId } = useAuth();
   const { t } = useTranslation();
   const [tenant, setTenant] = useState<{ id: string; subscription_plan: string; } | null>(null);
   const [checkingSubscription, setCheckingSubscription] = useState(true);
@@ -103,8 +103,14 @@ const POSSystem = (): JSX.Element => {
     return <Navigate to="/auth" replace />;
   }
 
-  if (!isAdmin && tenant && tenant.subscription_plan !== 'premium') {
-    return <Navigate to={`/pos-access/${slug}`} replace />;
+  if (!isAdmin && tenant) {
+    if (tenant.subscription_plan !== 'premium') {
+      return <Navigate to={`/pos-access/${slug}`} replace />;
+    }
+    // Only allow restaurant owners to access their own premium tenant
+    if (isRestaurantOwner && tenantId && tenant.id !== tenantId) {
+      return <Navigate to={`/dashboard`} replace />;
+    }
   }
 
   return (
